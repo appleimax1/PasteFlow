@@ -7,7 +7,7 @@ PasteFlow is a lightweight and convenient clipboard manager for macOS that allow
 ## Download & Installation
 
 1. Download the latest version of the app from this link:
-   👉 [**Download PasteFlow.dmg**](https://drive.google.com/file/d/1rZAei5TUTGBMoYfa5HPhKZuT1E5yv-48/view?usp=drive_link)
+   👉 [**Download PasteFlow (Google Drive Folder)**](https://drive.google.com/drive/folders/1VSYy-SQL9Ki0fQ7HM7v-K-Q0Ux-MfcyU?usp=sharing)
 2. Open the downloaded `.dmg` file and drag the application to your **Applications** folder.
 
 ### Bypassing macOS Gatekeeper (Security Warning)
@@ -41,6 +41,7 @@ You can customize these shortcuts at any time:
 
 ## Features
 
+* **Bilingual Interface**: Fully supports both **English** (default) and **Russian** languages. The interface language can be changed easily in the app preferences under the General tab.
 * **Clipboard History**: Stores history of text, links, and images. Fast search and paste in one click.
 * **Snippet Library**: Create folders and templates for frequently used text, commands, or links with macro support.
 * **App Exclusion List**: Specify applications from which the clipboard history should not be recorded (e.g., password managers).
@@ -54,7 +55,7 @@ PasteFlow — это легкий и удобный менеджер буфер�
 ## Скачивание и установка
 
 1. Скачайте последнюю версию приложения по ссылке:
-   👉 [**Скачать PasteFlow.dmg**](https://drive.google.com/file/d/1rZAei5TUTGBMoYfa5HPhKZuT1E5yv-48/view?usp=drive_link)
+   👉 [**Скачать PasteFlow (Папка Google Диск)**](https://drive.google.com/drive/folders/1VSYy-SQL9Ki0fQ7HM7v-K-Q0Ux-MfcyU?usp=sharing)
 2. Откройте загруженный файл `.dmg` и перетащите приложение в папку **Программы** (`Applications`).
 
 ### Обход предупреждения безопасности macOS (Gatekeeper)
@@ -88,6 +89,7 @@ sudo xattr -cr /Applications/PasteFlow.app
 
 ## Функционал приложения
 
+* **Двуязычный интерфейс**: Полная поддержка **английского** (по умолчанию) и **русского** языков. Язык интерфейса можно легко переключить в настройках приложения во вкладке «Основные».
 * **История копирования**: Хранение истории текстовых данных, ссылок и изображений. Быстрый поиск и вставка в один клик.
 * **Библиотека сниппетов**: Создание папок и шаблонов для часто используемых текстов, команд или ссылок с поддержкой макросов.
 * **Черный список приложений**: Возможность указать приложения, из которых буфер обмена не должен сохраняться (например, менеджеры паролей).
