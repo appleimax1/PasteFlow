@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21815" systemVersion="22A380" minimumToolsVersion="Xcode 9.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDClipboardEntry" representedClassName="CDClipboardEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="contentType" optional="YES" attributeType="String" defaultValueString="plainText" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isPinned" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="plainTextPreview" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rawContent" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sourceAppBundleID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceAppName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" syncable="YES"/>
+        <attribute name="charCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageWidth" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="imageHeight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rtfData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="pdfData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="fileURLsData" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    
+    <entity name="CDSnippetFolder" representedClassName="CDSnippetFolder" syncable="YES" codeGenerationType="class">
+        <attribute name="accentColorHex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sfSymbolName" optional="YES" attributeType="String" defaultValueString="folder.fill" syncable="YES"/>
+        <attribute name="sortOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" syncable="YES"/>
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDSnippetFolder" inverseName="parent" inverseEntity="CDSnippetFolder" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSnippetFolder" inverseName="children" inverseEntity="CDSnippetFolder" syncable="YES"/>
+        <relationship name="snippets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDSnippet" inverseName="folder" inverseEntity="CDSnippet" syncable="YES"/>
+    </entity>
+
+    <entity name="CDSnippet" representedClassName="CDSnippet" syncable="YES" codeGenerationType="class">
+        <attribute name="contentType" optional="YES" attributeType="String" defaultValueString="plainText" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="plainTextContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rawContent" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="shortcutTrigger" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" syncable="YES"/>
+        <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSnippetFolder" inverseName="snippets" inverseEntity="CDSnippetFolder" syncable="YES"/>
+    </entity>
+    
+    <elements>
+        <element name="CDClipboardEntry" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="CDSnippetFolder" positionX="180" positionY="-18" width="128" height="195"/>
+        <element name="CDSnippet" positionX="400" positionY="-18" width="128" height="195"/>
+    </elements>
+</model>

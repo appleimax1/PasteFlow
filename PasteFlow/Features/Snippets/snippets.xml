@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<folders>
+	<folder>
+		<title>Bitrix24</title>
+		<snippets>
+			<snippet>
+				<title>printable</title>
+				<content> &gt; printable</content>
+			</snippet>
+			<snippet>
+				<title>friendly</title>
+				<content> &gt; friendly</content>
+			</snippet>
+			<snippet>
+				<title>string</title>
+				<content> &gt; string</content>
+			</snippet>
+			<snippet>
+				<title>Уведомление по автоматизации</title>
+				<content>[URL=https://ССЫЛКА НА БИТРИКС/company/personal/bizproc/{=ЭЛЕМЕНТ:TaskId}/]НАЖМИТЕ СЮДА[/URL]&#10;</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>html</title>
+		<snippets>
+			<snippet>
+				<title>Перенос строки</title>
+				<content>&lt;br&gt;</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>BB-code</title>
+		<snippets>
+			<snippet>
+				<title>Жирный шрифт</title>
+				<content>[B] [/B]</content>
+			</snippet>
+			<snippet>
+				<title>Ссылка</title>
+				<content>[URL= ] [/URL]</content>
+			</snippet>
+			<snippet>
+				<title>Курсив</title>
+				<content>[I] [/I]</content>
+			</snippet>
+			<snippet>
+				<title>Подчеркнутый</title>
+				<content>[U] [/U]</content>
+			</snippet>
+			<snippet>
+				<title>Зачеркнутый</title>
+				<content>[S] [/S]</content>
+			</snippet>
+			<snippet>
+				<title>Цитата</title>
+				<content>&gt;&gt; </content>
+			</snippet>
+			<snippet>
+				<title>Размер текста</title>
+				<content>[SIZE=16]текст[/SIZE]</content>
+			</snippet>
+			<snippet>
+				<title>Цвет</title>
+				<content>[COLOR=#ff0000]текст[/COLOR]</content>
+			</snippet>
+			<snippet>
+				<title>Упоминуть сотрудника</title>
+				<content>[USER=id]Иван Иванов[/USER]</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>Шаблоны для задач</title>
+		<snippets>
+			<snippet>
+				<title>Контакт</title>
+				<content>=&quot;C_&quot;&amp;{{ID}}</content>
+			</snippet>
+			<snippet>
+				<title>Сделка</title>
+				<content>=&quot;D_&quot;&amp;{{ID}}</content>
+			</snippet>
+			<snippet>
+				<title>Компания</title>
+				<content>=&quot;CO_&quot;&amp;{{ID}}</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>macos</title>
+		<snippets>
+			<snippet>
+				<title>Разделитель в dock</title>
+				<content>defaults write com.apple.dock persistent-apps -array-add &apos;{&quot;tile-type&quot;=&quot;small-spacer-tile&quot;;}&apos;; killall Dock</content>
+			</snippet>
+			<snippet>
+				<title>Доп окно onlyoffice</title>
+				<content>open -na &quot;ONLYOFFICE&quot;</content>
+			</snippet>
+			<snippet>
+				<title>Star ollama</title>
+				<content>ollama serve</content>
+			</snippet>
+			<snippet>
+				<title>OpenWebUI</title>
+				<content>uvx open-webui serve</content>
+			</snippet>
+		</snippets>
+	</folder>
+	<folder>
+		<title>Модификаторы докуменов</title>
+		<snippets>
+			<snippet>
+				<title>Номер документа</title>
+				<content>{DocumentNumber}</content>
+			</snippet>
+			<snippet>
+				<title>Дата документа</title>
+				<content>{DocumentCreateTime}</content>
+			</snippet>
+			<snippet>
+				<title>Перенос строки</title>
+				<content>~Separator=3</content>
+			</snippet>
+			<snippet>
+				<title>Тотал сумм</title>
+				<content>{TotalSum}</content>
+			</snippet>
+			<snippet>
+				<title>Форм даты 01.01.2026</title>
+				<content>~d.m.Y</content>
+			</snippet>
+			<snippet>
+				<title>Форм даты 01.янв.2026</title>
+				<content>~j F Y</content>
+			</snippet>
+			<snippet>
+				<title>Название товара</title>
+				<content>{ProductsProductName}</content>
+			</snippet>
+			<snippet>
+				<title>Кол-во товара</title>
+				<content>{ProductsProductQuantity}</content>
+			</snippet>
+			<snippet>
+				<title>Текущий номер (перечисление)</title>
+				<content>{ProductsIndex}</content>
+			</snippet>
+		</snippets>
+	</folder>
+</folders>

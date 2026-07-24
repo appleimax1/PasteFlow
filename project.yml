@@ -1,0 +1,21 @@
+name: PasteFlow
+options:
+  bundleIdPrefix: com.pasteflow
+targets:
+  PasteFlow:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - path: PasteFlow
+    info:
+      path: PasteFlow/Info.plist
+      properties:
+        LSUIElement: true
+    settings:
+      base:
+        CODE_SIGN_ENTITLEMENTS: PasteFlow.entitlements
+        ENABLE_HARDENED_RUNTIME: YES
+        SWIFT_VERSION: 5.9
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
