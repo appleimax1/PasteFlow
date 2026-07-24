@@ -1,5 +1,9 @@
 # PasteFlow
 
+<p align="center">
+  <img src="PasteFlow/Assets.xcassets/AppIcon.appiconset/icon_128x128.png" width="128" height="128" alt="PasteFlow Logo">
+</p>
+
 [Russian version below / Русская версия ниже](#русская-версия)
 
 PasteFlow is a lightweight and convenient clipboard manager for macOS that allows you to keep track of your clipboard history and quickly manage text snippets (templates). The application runs directly from the macOS menu bar, keeping the interface clean and saving system resources.
