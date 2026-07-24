@@ -48,7 +48,6 @@ You can customize these shortcuts at any time:
 * **Bilingual Interface**: Fully supports both **English** (default) and **Russian** languages. The interface language can be changed easily in the app preferences under the General tab.
 * **Clipboard History**: Stores history of text, links, and images. Fast search and paste in one click.
 * **Snippet Library**: Create folders and templates for frequently used text, commands, or links with macro support.
-* **App Exclusion List**: Specify applications from which the clipboard history should not be recorded (e.g., password managers).
 
 ---
 
@@ -96,4 +95,4 @@ sudo xattr -cr /Applications/PasteFlow.app
 * **Двуязычный интерфейс**: Полная поддержка **английского** (по умолчанию) и **русского** языков. Язык интерфейса можно легко переключить в настройках приложения во вкладке «Основные».
 * **История копирования**: Хранение истории текстовых данных, ссылок и изображений. Быстрый поиск и вставка в один клик.
 * **Библиотека сниппетов**: Создание папок и шаблонов для часто используемых текстов, команд или ссылок с поддержкой макросов.
-* **Черный список приложений**: Возможность указать приложения, из которых буфер обмена не должен сохраняться (например, менеджеры паролей).
+
