@@ -22,7 +22,7 @@ struct HoverPreviewView: View {
                 Spacer()
                 
                 if entry.charCount > 0 {
-                    Text("\(entry.charCount) симв.")
+                    Text("\(entry.charCount) \("hover.chars".localized)")
                         .font(.system(size: 10, weight: .medium))
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -70,9 +70,9 @@ struct HoverPreviewView: View {
             
             // Подсказки
             HStack {
-                Label("Enter — вставить", systemImage: "return")
+                Label("hover.paste".localized, systemImage: "return")
                 Spacer()
-                Label("Shift+Enter — текст", systemImage: "text.quote")
+                Label("hover.plain_text".localized, systemImage: "text.quote")
             }
             .font(.system(size: 9))
             .foregroundColor(.secondary)

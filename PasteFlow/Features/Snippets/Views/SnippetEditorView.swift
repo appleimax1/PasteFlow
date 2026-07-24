@@ -8,11 +8,11 @@ struct SnippetEditorView: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Название сниппета")
+                    Text("snippets.snippet_name".localized)
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.secondary)
                     
-                    TextField("Например, Приветствие", text: Binding(
+                    TextField("snippets.name_placeholder".localized, text: Binding(
                         get: { snippet.title ?? "" },
                         set: { snippet.title = $0; save() }
                     ))
@@ -21,11 +21,11 @@ struct SnippetEditorView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Ключевое слово")
+                    Text("snippets.keyword".localized)
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.secondary)
                     
-                    TextField("например, ;;email", text: Binding(
+                    TextField("snippets.keyword_placeholder".localized, text: Binding(
                         get: { snippet.shortcutTrigger ?? "" },
                         set: { snippet.shortcutTrigger = $0; save() }
                     ))
@@ -36,7 +36,7 @@ struct SnippetEditorView: View {
             }
             
             VStack(alignment: .leading, spacing: 6) {
-                Text("Вставить динамический тег:")
+                Text("snippets.insert_tag".localized)
                     .font(.system(size: 11, weight: .bold))
                     .foregroundColor(.secondary)
                 
@@ -59,7 +59,7 @@ struct SnippetEditorView: View {
             }
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("Текст шаблона")
+                Text("snippets.template_text".localized)
                     .font(.system(size: 11, weight: .bold))
                     .foregroundColor(.secondary)
                 
@@ -79,12 +79,12 @@ struct SnippetEditorView: View {
             }
             
             VStack(alignment: .leading, spacing: 4) {
-                Label("Живой предпросмотр результата", systemImage: "sparkles")
+                Label("snippets.live_preview".localized, systemImage: "sparkles")
                     .font(.system(size: 11, weight: .bold))
                     .foregroundColor(.accentColor)
                 
                 ScrollView {
-                    Text(previewEvaluatedText.isEmpty ? "(Пустой сниппет)" : previewEvaluatedText)
+                    Text(previewEvaluatedText.isEmpty ? "snippets.empty_snippet".localized : previewEvaluatedText)
                         .font(.system(size: 11, design: .monospaced))
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .leading)

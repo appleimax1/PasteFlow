@@ -17,6 +17,7 @@
 		3B4E2CBFDB3B10F1314DA2F2 /* PasteFlow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51894FCD1114305C48DB28DD /* PasteFlow.xcdatamodeld */; };
 		3DC13E5527C68DDAF0916F5A /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */; };
 		46276E122A30E55AF33CF5B8 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9328CECAC63B41C34C5096B /* ClipboardHistoryView.swift */; };
+		4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D567CE49720903DDBC7AE73 /* LanguageManager.swift */; };
 		5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */; };
 		6F803702254E0FFBA9DF6456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F1665E3AD3BE8FFF57C4CE /* Assets.xcassets */; };
 		70C5616CB544DBC55E862E12 /* PopupRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F34A6D836F405BE4E7097 /* PopupRootView.swift */; };
@@ -50,6 +51,7 @@
 		611755D125A92D7E70D109E0 /* ExportImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportService.swift; sourceTree = "<group>"; };
 		6B0007E81E3EF2672DBE559A /* CDSnippetFolder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSnippetFolder+Extensions.swift"; sourceTree = "<group>"; };
 		6F7DE3743A4E0F38D8677A7A /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		7D567CE49720903DDBC7AE73 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		93D92D3ECA8D5FCF9554FEE1 /* CDClipboardEntry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDClipboardEntry+Extensions.swift"; sourceTree = "<group>"; };
 		997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		A0531E157B682EC5A4A4DCD0 /* SnippetEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetEditorView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				D7BDA2002A546FDA7C52CD29 /* AppExclusionFilter.swift */,
+				7D567CE49720903DDBC7AE73 /* LanguageManager.swift */,
 				5BEA5D549C0387A56B7E314A /* PasteEngine.swift */,
 				CBF5EF7958CCE4A5297DAD2E /* PlaceholderProcessor.swift */,
 				A6A8C6C7C404EC056E0A1F2E /* ShortcutManager.swift */,
@@ -300,6 +303,7 @@
 				5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */,
 				2775E51E626868E3097FE8FA /* ExportImportService.swift in Sources */,
 				06F406B3BCFE5085D4D6406A /* HoverPreviewView.swift in Sources */,
+				4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */,
 				FA888E199D06C4A841F4357E /* MenuBarController.swift in Sources */,
 				D947D918A749F13CBD24D97B /* PasteEngine.swift in Sources */,
 				3B4E2CBFDB3B10F1314DA2F2 /* PasteFlow.xcdatamodeld in Sources */,

@@ -2,15 +2,27 @@ import SwiftUI
 import ServiceManagement
 
 enum PreferenceTab: String, CaseIterable, Identifiable {
-    case general = "Основные"
-    case menu = "Меню и Вид"
-    case types = "Типы данных"
-    case exclusions = "Исключения"
-    case hotkeys = "Горячие клавиши"
-    case backup = "Резервные копии"
-    case help = "Инструкция"
+    case general
+    case menu
+    case types
+    case exclusions
+    case hotkeys
+    case backup
+    case help
     
     var id: String { rawValue }
+    
+    var title: String {
+        switch self {
+        case .general: return "tab.general".localized
+        case .menu: return "tab.menu".localized
+        case .types: return "tab.types".localized
+        case .exclusions: return "tab.exclusions".localized
+        case .hotkeys: return "tab.hotkeys".localized
+        case .backup: return "tab.backup".localized
+        case .help: return "tab.help".localized
+        }
+    }
     
     var iconName: String {
         switch self {
@@ -27,12 +39,13 @@ enum PreferenceTab: String, CaseIterable, Identifiable {
 
 struct PreferencesView: View {
     @State private var selectedTab: PreferenceTab = .general
+    @ObservedObject private var langManager = LanguageManager.shared
     
     var body: some View {
         HStack(spacing: 0) {
             // Left Sidebar
             VStack(alignment: .leading, spacing: 4) {
-                Text("Настройки")
+                Text("settings".localized)
                     .font(.system(size: 16, weight: .bold))
                     .padding(.horizontal, 16)
                     .padding(.top, 16)
@@ -46,7 +59,7 @@ struct PreferencesView: View {
                                 .foregroundColor(selectedTab == tab ? .white : .accentColor)
                                 .frame(width: 20)
                             
-                            Text(tab.rawValue)
+                            Text(tab.title)
                                 .font(.system(size: 13, weight: selectedTab == tab ? .semibold : .regular))
                                 .foregroundColor(selectedTab == tab ? .white : .primary)
                             
@@ -65,10 +78,10 @@ struct PreferencesView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("PasteFlow v1.2")
+                    Text("PasteFlow v1.3 global")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.secondary)
-                    Text("Умный менеджер буфера обмена")
+                    Text("app.smart_clipboard_manager".localized)
                         .font(.system(size: 9))
                         .foregroundColor(.secondary.opacity(0.8))
                 }
@@ -83,7 +96,7 @@ struct PreferencesView: View {
             // Right Detail Content Area
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text(selectedTab.rawValue)
+                    Text(selectedTab.title)
                         .font(.system(size: 20, weight: .bold))
                         .padding(.bottom, 4)
                     
@@ -120,19 +133,20 @@ struct GeneralPrefsTab: View {
     @AppStorage("PasteFlow.LaunchAtLogin") private var launchAtLogin = false
     
     @State private var showClearAlert = false
+    @ObservedObject private var langManager = LanguageManager.shared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Поведение приложения")
+                Text("general.app_behavior".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Toggle("Воспроизводить звук при вставке", isOn: $playSound)
+                    Toggle("general.play_sound".localized, isOn: $playSound)
                         .toggleStyle(CheckboxToggleStyle())
                     
-                    Toggle("Запускать PasteFlow при входе в систему", isOn: $launchAtLogin)
+                    Toggle("general.launch_at_login".localized, isOn: $launchAtLogin)
                         .toggleStyle(CheckboxToggleStyle())
                         .onChange(of: launchAtLogin) { newValue in
                             if #available(macOS 13.0, *) {
@@ -143,7 +157,7 @@ struct GeneralPrefsTab: View {
                                         try SMAppService.mainApp.unregister()
                                     }
                                 } catch {
-                                    print("Ошибка автозапуска: \(error)")
+                                    print("Autostart error: \(error)")
                                 }
                             }
                         }
@@ -153,29 +167,53 @@ struct GeneralPrefsTab: View {
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color(NSColor.controlBackgroundColor)))
             }
             
+            // Language Selection Section
             VStack(alignment: .leading, spacing: 12) {
-                Text("Хранение истории буфера обмена")
+                Text("general.language".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 12) {
                     HStack(spacing: 12) {
-                        Text("Максимальное количество элементов:")
+                        Text("general.interface_language".localized)
+                            .font(.system(size: 13))
+                        
+                        Picker("", selection: $langManager.currentLanguage) {
+                            Text("English").tag("en")
+                            Text("Русский").tag("ru")
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .frame(width: 150)
+                    }
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color(NSColor.controlBackgroundColor)))
+            }
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("general.history_storage".localized)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.secondary)
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(spacing: 12) {
+                        Text("general.max_items".localized)
                             .font(.system(size: 13))
                         
                         Picker("", selection: $maxHistorySize) {
-                            Text("10 элементов").tag(10)
-                            Text("20 элементов").tag(20)
-                            Text("40 элементов").tag(40)
-                            Text("50 элементов").tag(50)
-                            Text("100 элементов").tag(100)
-                            Text("200 элементов").tag(200)
+                            Text("general.items_10".localized).tag(10)
+                            Text("general.items_20".localized).tag(20)
+                            Text("general.items_40".localized).tag(40)
+                            Text("general.items_50".localized).tag(50)
+                            Text("general.items_100".localized).tag(100)
+                            Text("general.items_200".localized).tag(200)
                         }
                         .pickerStyle(MenuPickerStyle())
                         .frame(width: 150)
                     }
                     
-                    Text("Самые старые незакреплённые записи буфера будут автоматически удаляться при превышении указанного лимита.")
+                    Text("general.limit_desc".localized)
                         .font(.system(size: 11))
                         .foregroundColor(.secondary)
                         .lineSpacing(2)
@@ -186,23 +224,23 @@ struct GeneralPrefsTab: View {
             }
             
             VStack(alignment: .leading, spacing: 12) {
-                Text("Управление данными")
+                Text("general.data_management".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Очистить историю буфера")
+                            Text("general.clear_history_title".localized)
                                 .font(.system(size: 12, weight: .semibold))
-                            Text("Удаляет все незакреплённые элементы из истории буфера обмена. Закреплённые элементы сохранятся.")
+                            Text("general.clear_history_desc".localized)
                                 .font(.system(size: 10))
                                 .foregroundColor(.secondary)
                         }
                         
                         Spacer()
                         
-                        Button("Очистить историю") {
+                        Button("general.clear_history_btn".localized) {
                             showClearAlert = true
                         }
                         .buttonStyle(BorderedButtonStyle())
@@ -216,12 +254,12 @@ struct GeneralPrefsTab: View {
         }
         .alert(isPresented: $showClearAlert) {
             Alert(
-                title: Text("Очистить историю буфера обмена?"),
-                message: Text("Вы уверены, что хотите удалить все незакреплённые элементы из истории буфера? Это действие нельзя будет отменить."),
-                primaryButton: .destructive(Text("Очистить")) {
+                title: Text("general.clear_history_confirm_title".localized),
+                message: Text("general.clear_history_confirm_desc".localized),
+                primaryButton: .destructive(Text("general.clear".localized)) {
                     ClipboardHistoryManager.shared.clearHistory()
                 },
-                secondaryButton: .cancel(Text("Отмена"))
+                secondaryButton: .cancel(Text("general.cancel".localized))
             )
         }
     }
@@ -235,20 +273,20 @@ struct MenuPrefsTab: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Оформление списка элементов")
+                Text("menu.list_appearance".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 14) {
                     HStack(spacing: 12) {
-                        Text("Группировать элементы в подпапки:")
+                        Text("menu.group_subfolders".localized)
                             .font(.system(size: 13))
                         
                         Picker("", selection: $folderGroupingSize) {
-                            Text("Отключено (единый список)").tag(0)
-                            Text("По 10 элементов в папке").tag(10)
-                            Text("По 20 элементов в папке").tag(20)
-                            Text("По 30 элементов в папке").tag(30)
+                            Text("menu.group_disabled".localized).tag(0)
+                            Text("menu.group_10".localized).tag(10)
+                            Text("menu.group_20".localized).tag(20)
+                            Text("menu.group_30".localized).tag(30)
                         }
                         .pickerStyle(MenuPickerStyle())
                         .frame(width: 220)
@@ -256,7 +294,7 @@ struct MenuPrefsTab: View {
                     
                     Divider()
                     
-                    Toggle("Показывать всплывающую карточку предпросмотра при наведении", isOn: $showTooltips)
+                    Toggle("menu.show_preview".localized, isOn: $showTooltips)
                         .toggleStyle(CheckboxToggleStyle())
                 }
                 .padding(14)
@@ -278,20 +316,20 @@ struct TypesPrefsTab: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Поддерживаемые типы данных буфера обмена")
+                Text("types.supported_types".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Toggle("Обычный текст (Plain Text)", isOn: $enableText)
+                    Toggle("types.plain_text".localized, isOn: $enableText)
                         .toggleStyle(CheckboxToggleStyle())
-                    Toggle("Форматированный текст (RTF / HTML)", isOn: $enableRTF)
+                    Toggle("types.rich_text".localized, isOn: $enableRTF)
                         .toggleStyle(CheckboxToggleStyle())
-                    Toggle("Изображения (PNG / JPEG / TIFF)", isOn: $enableImages)
+                    Toggle("types.images".localized, isOn: $enableImages)
                         .toggleStyle(CheckboxToggleStyle())
-                    Toggle("Документы PDF", isOn: $enablePDF)
+                    Toggle("types.pdf".localized, isOn: $enablePDF)
                         .toggleStyle(CheckboxToggleStyle())
-                    Toggle("Файлы и папки Finder", isOn: $enableFiles)
+                    Toggle("types.files".localized, isOn: $enableFiles)
                         .toggleStyle(CheckboxToggleStyle())
                 }
                 .padding(14)
@@ -309,11 +347,11 @@ struct ExclusionsPrefsTab: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Черный список приложений")
+            Text("exclusions.blacklist".localized)
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(.secondary)
             
-            Text("Скопированный контент из указанных приложений будет автоматически игнорироваться для защиты паролей и конфиденциальных данных.")
+            Text("exclusions.desc".localized)
                 .font(.system(size: 11))
                 .foregroundColor(.secondary)
                 .lineSpacing(2)
@@ -340,10 +378,10 @@ struct ExclusionsPrefsTab: View {
                 .cornerRadius(6)
                 
                 HStack {
-                    TextField("Идентификатор (например, com.1password.1password)", text: $newBundleID)
+                    TextField("exclusions.bundle_placeholder".localized, text: $newBundleID)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    Button("Добавить") {
+                    Button("exclusions.add".localized) {
                         let trimmed = newBundleID.trimmingCharacters(in: .whitespacesAndNewlines)
                         if !trimmed.isEmpty {
                             filter.addExclusion(trimmed)
@@ -368,14 +406,13 @@ struct HotkeysPrefsTab: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Глобальные комбинации клавиш")
+                Text("hotkeys.global_shortcuts".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(spacing: 12) {
-                    // Option + Cmd + V: История буфера обмена
                     HotkeyRecorderRow(
-                        label: "История буфера обмена (всплывающее меню):",
+                        label: "hotkeys.history_popup".localized,
                         display: shortcutMgr.mainHotkeyDisplay,
                         isRecording: recordingTarget == 0,
                         onStartRecord: { startRecording(target: 0) },
@@ -384,9 +421,8 @@ struct HotkeysPrefsTab: View {
                     
                     Divider()
                     
-                    // Option + Cmd + H: Настройки программы
                     HotkeyRecorderRow(
-                        label: "Настройки приложения (окно настроек):",
+                        label: "hotkeys.app_settings".localized,
                         display: shortcutMgr.historyHotkeyDisplay,
                         isRecording: recordingTarget == 1,
                         onStartRecord: { startRecording(target: 1) },
@@ -395,9 +431,8 @@ struct HotkeysPrefsTab: View {
                     
                     Divider()
                     
-                    // Option + Cmd + S: Библиотека сниппетов
                     HotkeyRecorderRow(
-                        label: "Библиотека сниппетов (всплывающее меню):",
+                        label: "hotkeys.snippets_popup".localized,
                         display: shortcutMgr.snippetsHotkeyDisplay,
                         isRecording: recordingTarget == 2,
                         onStartRecord: { startRecording(target: 2) },
@@ -408,7 +443,7 @@ struct HotkeysPrefsTab: View {
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color(NSColor.controlBackgroundColor)))
             }
             
-            Text("Нажмите на сочетание клавиш и зажмите нужную комбинацию на клавиатуре.")
+            Text("hotkeys.record_desc".localized)
                 .font(.system(size: 11))
                 .foregroundColor(.secondary)
         }
@@ -475,7 +510,7 @@ struct HotkeyRecorderRow: View {
             
             HStack(spacing: 8) {
                 Button(action: onStartRecord) {
-                    Text(isRecording ? "Нажмите клавиши..." : display)
+                    Text(isRecording ? "hotkeys.press_keys".localized : display)
                         .font(.system(size: 12, weight: .bold, design: .monospaced))
                         .padding(.horizontal, 12)
                         .padding(.vertical, 5)
@@ -493,7 +528,7 @@ struct HotkeyRecorderRow: View {
                         .foregroundColor(.secondary)
                 }
                 .buttonStyle(PlainButtonStyle())
-                .help("Сбросить на значение по умолчанию")
+                .help("hotkeys.reset_tooltip".localized)
             }
         }
     }
@@ -508,18 +543,18 @@ struct SnippetsPrefsTab: View {
         VStack(alignment: .leading, spacing: 20) {
             // Импорт из XML
             VStack(alignment: .leading, spacing: 12) {
-                Text("Импорт из XML")
+                Text("backup.import_xml".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Выберите XML-файл экспорта сниппетов. Все папки и сниппеты будут автоматически добавлены в вашу библиотеку PasteFlow.")
+                    Text("backup.import_xml_desc".localized)
                         .font(.system(size: 11))
                         .foregroundColor(.secondary)
                         .lineSpacing(2)
                     
                     Button(action: importClipyXML) {
-                        Label("Импортировать сниппеты (XML)...", systemImage: "doc.badge.plus")
+                        Label("backup.import_xml_btn".localized, systemImage: "doc.badge.plus")
                     }
                 }
                 .padding(14)
@@ -529,23 +564,23 @@ struct SnippetsPrefsTab: View {
             
             // Резервное копирование PasteFlow
             VStack(alignment: .leading, spacing: 12) {
-                Text("Резервное копирование PasteFlow (JSON)")
+                Text("backup.backup_json".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Экспортируйте библиотеку сниппетов PasteFlow в файл JSON или восстановите её из копии.")
+                    Text("backup.backup_json_desc".localized)
                         .font(.system(size: 11))
                         .foregroundColor(.secondary)
                         .lineSpacing(2)
                     
                     HStack(spacing: 12) {
                         Button(action: exportSnippetsJSON) {
-                            Label("Экспорт в JSON...", systemImage: "square.and.arrow.up")
+                            Label("backup.export_json_btn".localized, systemImage: "square.and.arrow.up")
                         }
                         
                         Button(action: importSnippetsJSON) {
-                            Label("Импорт из JSON...", systemImage: "square.and.arrow.down")
+                            Label("backup.import_json_btn".localized, systemImage: "square.and.arrow.down")
                         }
                     }
                 }
@@ -568,12 +603,12 @@ struct SnippetsPrefsTab: View {
         openPanel.allowedContentTypes = [.xml, .plainText]
         openPanel.canChooseFiles = true
         openPanel.canChooseDirectories = false
-        openPanel.message = "Выберите XML-файл экспорта сниппетов"
+        openPanel.message = "backup.select_xml_msg".localized
         openPanel.begin { result in
             if result == .OK, let url = openPanel.url, let data = try? Data(contentsOf: url) {
                 let success = ExportImportService.shared.importClipyXML(data: data, context: viewContext)
                 DispatchQueue.main.async {
-                    statusMessage = success ? "Сниппеты успешно импортированы!" : "Ошибка чтения формата XML."
+                    statusMessage = success ? "backup.success_xml".localized : "backup.error_xml".localized
                 }
             }
         }
@@ -583,7 +618,7 @@ struct SnippetsPrefsTab: View {
         let fetchRequest: NSFetchRequest<CDSnippetFolder> = NSFetchRequest(entityName: "CDSnippetFolder")
         guard let folders = try? viewContext.fetch(fetchRequest),
               let data = ExportImportService.shared.exportSnippets(folders: folders) else {
-            statusMessage = "Сниппеты для экспорта не найдены."
+            statusMessage = "backup.error_no_snippets".localized
             return
         }
         
@@ -594,7 +629,7 @@ struct SnippetsPrefsTab: View {
             if result == .OK, let url = savePanel.url {
                 try? data.write(to: url)
                 DispatchQueue.main.async {
-                    statusMessage = "Сниппеты успешно экспортированы в \(url.lastPathComponent)."
+                    statusMessage = "backup.success_export_json".localized + url.lastPathComponent
                 }
             }
         }
@@ -609,7 +644,7 @@ struct SnippetsPrefsTab: View {
             if result == .OK, let url = openPanel.url, let data = try? Data(contentsOf: url) {
                 let success = ExportImportService.shared.importSnippetsJSON(data: data, context: viewContext)
                 DispatchQueue.main.async {
-                    statusMessage = success ? "Сниппеты успешно импортированы." : "Ошибка чтения файла JSON."
+                    statusMessage = success ? "backup.success_import_json".localized : "backup.error_json".localized
                 }
             }
         }
@@ -620,18 +655,17 @@ struct SnippetsPrefsTab: View {
 struct HelpPrefsTab: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            // Раздел: Потребность и Назначение
             VStack(alignment: .leading, spacing: 8) {
-                Text("Какую проблему решает PasteFlow?")
+                Text("help.problem_title".localized)
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.accentColor)
                 
-                Text("Стандартный буфер обмена macOS умеет хранить только одну скопированную запись. При каждом новом копировании (Cmd+C) старые данные бесследно стираются. Это крайне неудобно при работе с несколькими фрагментами текста, кодом, изображениями или ссылками.")
+                Text("help.problem_desc1".localized)
                     .font(.system(size: 12))
                     .foregroundColor(.primary)
                     .lineSpacing(4)
                 
-                Text("PasteFlow решает эту проблему, сохраняя историю вашего буфера обмена в фоновом режиме и предоставляя к ней мгновенный доступ в любой момент.")
+                Text("help.problem_desc2".localized)
                     .font(.system(size: 12))
                     .foregroundColor(.primary)
                     .lineSpacing(4)
@@ -640,41 +674,40 @@ struct HelpPrefsTab: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(RoundedRectangle(cornerRadius: 10).fill(Color(NSColor.controlBackgroundColor)))
             
-            // Раздел: Функционал
             VStack(alignment: .leading, spacing: 12) {
-                Text("Ключевой функционал:")
+                Text("help.features_title".localized)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.secondary)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HelpFeatureRow(
                         icon: "clock.arrow.2.circlepath",
-                        title: "История буфера обмена",
-                        description: "Хранит тексты, изображения, форматированный текст и файлы. Размер истории легко настраивается во вкладке «Основные»."
+                        title: "help.feat_hist_title".localized,
+                        description: "help.feat_hist_desc".localized
                     )
                     
                     Divider()
                     
                     HelpFeatureRow(
                         icon: "eye.fill",
-                        title: "Интеллектуальное превью",
-                        description: "При наведении курсора на элемент истории открывается плавающее окно предпросмотра с полным содержимым."
+                        title: "help.feat_prev_title".localized,
+                        description: "help.feat_prev_desc".localized
                     )
                     
                     Divider()
                     
                     HelpFeatureRow(
                         icon: "folder.fill",
-                        title: "Умная группировка",
-                        description: "Элементы автоматически разбиваются на папки истории (например, по 10 или 20 элементов) для экономии места на экране."
+                        title: "help.feat_group_title".localized,
+                        description: "help.feat_group_desc".localized
                     )
                     
                     Divider()
                     
                     HelpFeatureRow(
                         icon: "doc.on.doc.fill",
-                        title: "Библиотека сниппетов",
-                        description: "Создавайте шаблоны часто используемых текстов и вставляйте их в один клик через меню сниппетов."
+                        title: "help.feat_snip_title".localized,
+                        description: "help.feat_snip_desc".localized
                     )
                 }
             }

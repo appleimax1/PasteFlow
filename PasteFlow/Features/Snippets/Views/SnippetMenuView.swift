@@ -19,7 +19,7 @@ struct SnippetMenuView: View {
                     .foregroundColor(.secondary)
                     .font(.system(size: 13))
                 
-                TextField("Поиск в сниппетах...", text: $searchText)
+                TextField("popup.search_snippets".localized, text: $searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .font(.system(size: 12))
                 
@@ -45,9 +45,9 @@ struct SnippetMenuView: View {
                     Image(systemName: "doc.text.fill")
                         .font(.system(size: 32))
                         .foregroundColor(.secondary.opacity(0.5))
-                    Text("Сниппеты отсутствуют")
+                    Text("popup.snippets_empty".localized)
                         .font(.system(size: 13, weight: .semibold))
-                    Text("Используйте Менеджер сниппетов в окне настроек для создания шаблонов или импорта из XML.")
+                    Text("popup.snippets_empty_desc".localized)
                         .font(.system(size: 11))
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -76,7 +76,7 @@ struct SnippetMenuView: View {
                                 HStack(spacing: 6) {
                                     Image(systemName: folder.sfSymbolName ?? "folder.fill")
                                         .foregroundColor(.accentColor)
-                                    Text(folder.name ?? "Сниппеты")
+                                    Text(folder.name ?? "popup.snippets".localized)
                                         .font(.system(size: 13, weight: .bold))
                                 }
                                 .foregroundColor(.primary)
@@ -117,7 +117,7 @@ struct SnippetRow: View {
                 .foregroundColor(.accentColor)
             
             VStack(alignment: .leading, spacing: 2) {
-                Text(snippet.title ?? "Без названия")
+                Text(snippet.title ?? "snippets.untitled".localized)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.primary)
                 

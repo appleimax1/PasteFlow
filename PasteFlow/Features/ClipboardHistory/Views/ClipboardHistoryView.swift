@@ -27,7 +27,7 @@ struct ClipboardHistoryView: View {
                     .foregroundColor(.secondary)
                     .font(.system(size: 13))
                 
-                TextField("Поиск в истории...", text: $searchText)
+                TextField("popup.search_history".localized, text: $searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .font(.system(size: 12))
                 
@@ -53,7 +53,7 @@ struct ClipboardHistoryView: View {
                     Image(systemName: "clipboard")
                         .font(.system(size: 32))
                         .foregroundColor(.secondary.opacity(0.6))
-                    Text(searchText.isEmpty ? "История пуста" : "Ничего не найдено")
+                    Text(searchText.isEmpty ? "popup.history_empty".localized : "popup.nothing_found".localized)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.secondary)
                     Spacer()
@@ -85,7 +85,7 @@ struct ClipboardHistoryView: View {
                                     HStack(spacing: 6) {
                                         Image(systemName: "folder.fill")
                                             .foregroundColor(.accentColor)
-                                        Text("История \(groupIndex * folderGroupingSize + 1) - \(min((groupIndex + 1) * folderGroupingSize, filteredEntries.count))")
+                                        Text(String(format: "popup.history_folder_range".localized, groupIndex * folderGroupingSize + 1, min((groupIndex + 1) * folderGroupingSize, filteredEntries.count)))
                                             .font(.system(size: 13, weight: .bold))
                                     }
                                     .foregroundColor(.primary)
@@ -180,17 +180,17 @@ struct ClipboardHistoryView: View {
         )
         .contextMenu {
             Button(action: { PasteEngine.shared.paste(entry: entry) }) {
-                Label("Вставить", systemImage: "doc.on.clipboard")
+                Label("popup.paste".localized, systemImage: "doc.on.clipboard")
             }
             Button(action: { PasteEngine.shared.paste(entry: entry, asPlainText: true) }) {
-                Label("Вставить как обычный текст", systemImage: "text.quote")
+                Label("popup.paste_plain".localized, systemImage: "text.quote")
             }
             Divider()
             Button(action: { ClipboardHistoryManager.shared.togglePin(entry) }) {
-                Label(entry.isPinned ? "Открепить" : "Закрепить наверху", systemImage: entry.isPinned ? "pin.slash" : "pin")
+                Label(entry.isPinned ? "popup.unpin".localized : "popup.pin".localized, systemImage: entry.isPinned ? "pin.slash" : "pin")
             }
             Button(role: .destructive, action: { ClipboardHistoryManager.shared.deleteEntry(entry) }) {
-                Label("Удалить", systemImage: "trash")
+                Label("popup.delete".localized, systemImage: "trash")
             }
         }
         .onDrag {

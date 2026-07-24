@@ -108,7 +108,7 @@ class MenuBarController: ObservableObject {
             backing: .buffered,
             defer: false)
         window.center()
-        window.title = "Настройки PasteFlow"
+        window.title = "menu.title_preferences".localized
         window.setFrameAutosaveName("PasteFlowPreferencesWindow")
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(
@@ -135,7 +135,7 @@ class MenuBarController: ObservableObject {
             backing: .buffered,
             defer: false)
         window.center()
-        window.title = "Менеджер сниппетов"
+        window.title = "menu.title_snippets".localized
         window.setFrameAutosaveName("PasteFlowSnippetManagerWindow")
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(

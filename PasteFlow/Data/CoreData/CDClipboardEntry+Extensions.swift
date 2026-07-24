@@ -48,18 +48,18 @@ extension CDClipboardEntry {
         if contentType == "image" {
             let w = Int(imageWidth)
             let h = Int(imageHeight)
-            return w > 0 && h > 0 ? "Image (\(w)×\(h))" : "Image"
+            return w > 0 && h > 0 ? "\("core.image".localized) (\(w)×\(h))" : "core.image".localized
         }
         if contentType == "file" {
             let urls = fileURLs
             if urls.count == 1 {
                 return urls[0].lastPathComponent
             } else if urls.count > 1 {
-                return "\(urls.count) Files (\(urls[0].lastPathComponent), ...)"
+                return String(format: "core.files".localized, urls.count, urls[0].lastPathComponent)
             }
-            return "File"
+            return "core.file".localized
         }
-        return "Clipboard Item"
+        return "core.clipboard_item".localized
     }
     
     var timeFormatted: String {

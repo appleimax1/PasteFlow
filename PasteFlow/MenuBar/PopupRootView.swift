@@ -8,8 +8,8 @@ struct PopupRootView: View {
             // Header Bar with Segmented Control
             HStack {
                 Picker("", selection: $controller.selectedTab) {
-                    Label("История", systemImage: "clock").tag(0)
-                    Label("Сниппеты", systemImage: "square.grid.2x2").tag(1)
+                    Label("popup.history".localized, systemImage: "clock").tag(0)
+                    Label("popup.snippets".localized, systemImage: "square.grid.2x2").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
@@ -32,7 +32,7 @@ struct PopupRootView: View {
             // Bottom Toolbar
             HStack(spacing: 12) {
                 Button(action: { controller.openPreferences() }) {
-                    Label("Настройки", systemImage: "gearshape.fill")
+                    Label("popup.settings".localized, systemImage: "gearshape.fill")
                         .font(.system(size: 11, weight: .medium))
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -41,7 +41,7 @@ struct PopupRootView: View {
                 Spacer()
                 
                 Button(action: { controller.openSnippetManager() }) {
-                    Label("Сниппеты", systemImage: "square.and.pencil")
+                    Label("popup.snippets".localized, systemImage: "square.and.pencil")
                         .font(.system(size: 11, weight: .medium))
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -55,7 +55,7 @@ struct PopupRootView: View {
                         .foregroundColor(.secondary)
                 }
                 .buttonStyle(PlainButtonStyle())
-                .help("Завершить PasteFlow")
+                .help("popup.quit_tooltip".localized)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)

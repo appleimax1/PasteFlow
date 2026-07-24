@@ -16,11 +16,11 @@ struct SnippetLibraryView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedFolder) {
-                Section(header: Text("Папки").font(.system(size: 11, weight: .bold))) {
+                Section(header: Text("snippets.folders".localized).font(.system(size: 11, weight: .bold))) {
                     ForEach(folders) { folder in
                         NavigationLink(value: folder) {
                             HStack {
-                                Label(folder.name ?? "Новая папка", systemImage: folder.sfSymbolName ?? "folder.fill")
+                                Label(folder.name ?? "snippets.new_folder".localized, systemImage: folder.sfSymbolName ?? "folder.fill")
                                 Spacer()
                                 Text("\(folder.snippetsArray.count)")
                                     .font(.system(size: 10, weight: .bold))
@@ -31,29 +31,29 @@ struct SnippetLibraryView: View {
                         }
                         .contextMenu {
                             Button(role: .destructive, action: { deleteFolder(folder) }) {
-                                Label("Удалить папку", systemImage: "trash")
+                                Label("snippets.delete_folder".localized, systemImage: "trash")
                             }
                         }
                     }
                 }
             }
             .listStyle(SidebarListStyle())
-            .navigationTitle("Папки сниппетов")
+            .navigationTitle("snippets.folders_title".localized)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: addFolder) {
-                        Label("Новая папка", systemImage: "folder.badge.plus")
+                        Label("snippets.new_folder".localized, systemImage: "folder.badge.plus")
                     }
                 }
             }
         } content: {
             if let folder = selectedFolder {
                 List(selection: $selectedSnippet) {
-                    Section(header: Text(folder.name ?? "Сниппеты в папке").font(.system(size: 11, weight: .bold))) {
+                    Section(header: Text(folder.name ?? "snippets.snippets_in_folder".localized).font(.system(size: 11, weight: .bold))) {
                         ForEach(folder.snippetsArray) { snippet in
                             NavigationLink(value: snippet) {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text(snippet.title ?? "Без названия")
+                                    Text(snippet.title ?? "snippets.untitled".localized)
                                         .font(.system(size: 12, weight: .medium))
                                     if let trigger = snippet.shortcutTrigger, !trigger.isEmpty {
                                         Text(trigger)
@@ -64,18 +64,18 @@ struct SnippetLibraryView: View {
                             }
                             .contextMenu {
                                 Button(role: .destructive, action: { deleteSnippet(snippet) }) {
-                                    Label("Удалить сниппет", systemImage: "trash")
+                                    Label("snippets.delete_snippet".localized, systemImage: "trash")
                                 }
                             }
                         }
                     }
                 }
                 .listStyle(PlainListStyle())
-                .navigationTitle(folder.name ?? "Сниппеты")
+                .navigationTitle(folder.name ?? "popup.snippets".localized)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button(action: { addSnippet(in: folder) }) {
-                            Label("Новый сниппет", systemImage: "plus")
+                            Label("snippets.new_snippet".localized, systemImage: "plus")
                         }
                     }
                 }
@@ -85,7 +85,7 @@ struct SnippetLibraryView: View {
                     Image(systemName: "folder")
                         .font(.system(size: 32))
                         .foregroundColor(.secondary.opacity(0.5))
-                    Text("Выберите или создайте папку")
+                    Text("snippets.select_folder_prompt".localized)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.secondary)
                     Spacer()
@@ -100,7 +100,7 @@ struct SnippetLibraryView: View {
                     Image(systemName: "doc.text")
                         .font(.system(size: 36))
                         .foregroundColor(.secondary.opacity(0.5))
-                    Text("Выберите сниппет для редактирования")
+                    Text("snippets.select_snippet_prompt".localized)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.secondary)
                     Spacer()
@@ -122,7 +122,8 @@ struct SnippetLibraryView: View {
     }
     
     private func addFolder() {
-        let folder = SnippetManager.shared.createFolder(name: "Новая папка \(folders.count + 1)")
+        let nameFormat = "snippets.default_folder_name".localized
+        let folder = SnippetManager.shared.createFolder(name: String(format: nameFormat, folders.count + 1))
         selectedFolder = folder
     }
     
@@ -134,7 +135,7 @@ struct SnippetLibraryView: View {
     }
     
     private func addSnippet(in folder: CDSnippetFolder) {
-        let snippet = SnippetManager.shared.createSnippet(in: folder, title: "Новый сниппет", content: "Привет {CLIPBOARD}")
+        let snippet = SnippetManager.shared.createSnippet(in: folder, title: "snippets.default_snippet_name".localized, content: "snippets.default_snippet_content".localized)
         selectedSnippet = snippet
     }
     
