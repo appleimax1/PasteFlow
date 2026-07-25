@@ -29,10 +29,7 @@ Once executed, the app will open without issues.
 
 ## Hotkeys
 
-Global hotkeys allow instant access to PasteFlow features from any application:
-
-* **`Shift + Cmd + H`** — Open the main clipboard history popup menu (default).
-* **Text Assistant, Snippets & Preferences** — Fully customizable hotkeys in Settings (can be assigned to any key combination or left unassigned).
+Global hotkeys allow instant access to PasteFlow features.
 
 ### Customization & Unassigning Shortcuts
 You can customize or clear hotkeys at any time:
@@ -81,10 +78,7 @@ sudo xattr -cr /Applications/PasteFlow.app
 
 ## Управление горячими клавишами
 
-Глобальные комбинации клавиш обеспечивают мгновенный доступ к функциям PasteFlow из любого приложения:
-
-* **`Shift + Cmd + H`** — Открыть главное всплывающее окно истории буфера обмена (по умолчанию).
-* **Проверка текста, Сниппеты и Настройки** — Полностью настраиваемые горячие клавиши в настройках программы (можно назначить любую комбинацию или оставить неназначенным).
+Глобальные комбинации клавиш обеспечивают мгновенный доступ к функциям PasteFlow.
 
 ### Кастомизация и отмена горячих клавиш
 Вы можете в любой момент изменить или отменить комбинации клавиш под свои предпочтения:
