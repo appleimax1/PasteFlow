@@ -29,11 +29,17 @@ Once executed, the app will open without issues.
 
 ## Hotkeys
 
-### Customization & Optional Shortcuts
+Global hotkeys allow instant access to PasteFlow features from any application:
+
+* **`Shift + Cmd + H`** — Open the main clipboard history popup menu (default).
+* **Text Assistant, Snippets & Preferences** — Fully customizable hotkeys in Settings (can be assigned to any key combination or left unassigned).
+
+### Customization & Unassigning Shortcuts
 You can customize or clear hotkeys at any time:
-1. Open the application settings.
+1. Open application Settings.
 2. Go to the **Hotkeys** tab.
-3. Click on the shortcut recording field for the respective action, press your key combination, or click the **✕** button to unassign the hotkey.
+3. Click on the shortcut recording field for the desired action and press your key combination.
+4. To unassign a shortcut and make it optional, click the **✕** button next to it.
 
 ---
 
@@ -75,10 +81,15 @@ sudo xattr -cr /Applications/PasteFlow.app
 
 ## Управление горячими клавишами
 
-### Опциональность и кастомизация
-Вы можете в любой момент изменить или полностью отменить комбинации клавиш:
-1. Перейдите в настройки программы во вкладку **Горячие клавиши**.
-2. Нажмите на поле ввода горячей клавиши и зажмите нужную комбинацию на клавиатуре.
+Глобальные комбинации клавиш обеспечивают мгновенный доступ к функциям PasteFlow из любого приложения:
+
+* **`Shift + Cmd + H`** — Открыть главное всплывающее окно истории буфера обмена (по умолчанию).
+* **Проверка текста, Сниппеты и Настройки** — Полностью настраиваемые горячие клавиши в настройках программы (можно назначить любую комбинацию или оставить неназначенным).
+
+### Кастомизация и отмена горячих клавиш
+Вы можете в любой момент изменить или отменить комбинации клавиш под свои предпочтения:
+1. Откройте настройки программы и перейдите во вкладку **Горячие клавиши**.
+2. Нажмите на поле ввода для нужного действия и зажмите комбинацию на клавиатуре.
 3. Чтобы сделать вызов опциональным и отменить сочетание клавиш, нажмите на значок **✕** рядом с ним.
 
 ---
