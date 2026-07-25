@@ -21,6 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ShortcutManager.shared.onTriggerSnippetsHotkey = { [weak self] in
             self?.menuBarController?.showPopover(nil, tab: 1)
         }
+        ShortcutManager.shared.onTriggerTextAssistantHotkey = { [weak self] in
+            self?.menuBarController?.openTextAssistant()
+        }
         
         ShortcutManager.shared.startMonitoring()
         

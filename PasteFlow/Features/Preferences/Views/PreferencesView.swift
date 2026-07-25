@@ -7,6 +7,7 @@ enum PreferenceTab: String, CaseIterable, Identifiable {
     case types
     case exclusions
     case hotkeys
+    case textAssistant
     case backup
     case help
     
@@ -19,6 +20,7 @@ enum PreferenceTab: String, CaseIterable, Identifiable {
         case .types: return "tab.types".localized
         case .exclusions: return "tab.exclusions".localized
         case .hotkeys: return "tab.hotkeys".localized
+        case .textAssistant: return "tab.text_assistant".localized
         case .backup: return "tab.backup".localized
         case .help: return "tab.help".localized
         }
@@ -31,6 +33,7 @@ enum PreferenceTab: String, CaseIterable, Identifiable {
         case .types: return "doc.on.doc.fill"
         case .exclusions: return "hand.raised.fill"
         case .hotkeys: return "keyboard.fill"
+        case .textAssistant: return "checkmark.bubble.fill"
         case .backup: return "arrow.triangle.2.circlepath.circle.fill"
         case .help: return "questionmark.circle.fill"
         }
@@ -78,7 +81,7 @@ struct PreferencesView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("PasteFlow v1.3 global")
+                    Text("PasteFlow v1.4")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.secondary)
                     Text("app.smart_clipboard_manager".localized)
@@ -111,6 +114,8 @@ struct PreferencesView: View {
                         ExclusionsPrefsTab()
                     case .hotkeys:
                         HotkeysPrefsTab()
+                    case .textAssistant:
+                        TextAssistantPrefsTab()
                     case .backup:
                         SnippetsPrefsTab()
                     case .help:
@@ -398,9 +403,10 @@ struct ExclusionsPrefsTab: View {
 }
 
 // MARK: - Горячие клавиши
+// MARK: - Горячие клавиши
 struct HotkeysPrefsTab: View {
     @ObservedObject private var shortcutMgr = ShortcutManager.shared
-    @State private var recordingTarget: Int? = nil // 0: Main/History, 1: Preferences, 2: Snippets
+    @State private var recordingTarget: Int? = nil // 0: Main/History, 1: Preferences, 2: Snippets, 3: Text Assistant
     @State private var eventMonitor: Any?
     
     var body: some View {
@@ -416,6 +422,7 @@ struct HotkeysPrefsTab: View {
                         display: shortcutMgr.mainHotkeyDisplay,
                         isRecording: recordingTarget == 0,
                         onStartRecord: { startRecording(target: 0) },
+                        onClear: { shortcutMgr.clearMainHotkey() },
                         onReset: { resetHotkey(target: 0) }
                     )
                     
@@ -426,6 +433,7 @@ struct HotkeysPrefsTab: View {
                         display: shortcutMgr.historyHotkeyDisplay,
                         isRecording: recordingTarget == 1,
                         onStartRecord: { startRecording(target: 1) },
+                        onClear: { shortcutMgr.clearHistoryHotkey() },
                         onReset: { resetHotkey(target: 1) }
                     )
                     
@@ -436,7 +444,19 @@ struct HotkeysPrefsTab: View {
                         display: shortcutMgr.snippetsHotkeyDisplay,
                         isRecording: recordingTarget == 2,
                         onStartRecord: { startRecording(target: 2) },
+                        onClear: { shortcutMgr.clearSnippetsHotkey() },
                         onReset: { resetHotkey(target: 2) }
+                    )
+                    
+                    Divider()
+                    
+                    HotkeyRecorderRow(
+                        label: "hotkeys.text_assistant".localized,
+                        display: shortcutMgr.textAssistantHotkeyDisplay,
+                        isRecording: recordingTarget == 3,
+                        onStartRecord: { startRecording(target: 3) },
+                        onClear: { shortcutMgr.clearTextAssistantHotkey() },
+                        onReset: { resetHotkey(target: 3) }
                     )
                 }
                 .padding(14)
@@ -465,6 +485,8 @@ struct HotkeysPrefsTab: View {
                         shortcutMgr.saveHistoryHotkey(keyCode: keyCode, modifiers: flags)
                     } else if target == 2 {
                         shortcutMgr.saveSnippetsHotkey(keyCode: keyCode, modifiers: flags)
+                    } else if target == 3 {
+                        shortcutMgr.saveTextAssistantHotkey(keyCode: keyCode, modifiers: flags)
                     }
                     recordingTarget = nil
                     stopRecordingMonitor()
@@ -477,12 +499,15 @@ struct HotkeysPrefsTab: View {
     
     private func resetHotkey(target: Int) {
         let optCmd = NSEvent.ModifierFlags([.command, .option])
+        let shiftCmd = NSEvent.ModifierFlags([.command, .shift])
         if target == 0 {
-            shortcutMgr.saveMainHotkey(keyCode: 9, modifiers: optCmd) // ⌥⌘V
+            shortcutMgr.saveMainHotkey(keyCode: 4, modifiers: shiftCmd) // ⇧⌘H
         } else if target == 1 {
-            shortcutMgr.saveHistoryHotkey(keyCode: 4, modifiers: optCmd) // ⌥⌘H
+            shortcutMgr.clearHistoryHotkey() // Не назначено
         } else if target == 2 {
             shortcutMgr.saveSnippetsHotkey(keyCode: 1, modifiers: optCmd) // ⌥⌘S
+        } else if target == 3 {
+            shortcutMgr.saveTextAssistantHotkey(keyCode: 40, modifiers: optCmd) // ⌥⌘K
         }
     }
     
@@ -499,6 +524,7 @@ struct HotkeyRecorderRow: View {
     let display: String
     let isRecording: Bool
     let onStartRecord: () -> Void
+    let onClear: () -> Void
     let onReset: () -> Void
     
     var body: some View {
@@ -522,6 +548,14 @@ struct HotkeyRecorderRow: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 
+                Button(action: onClear) {
+                    Image(systemName: "multiply")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .help("hotkeys.clear_tooltip".localized)
+                
                 Button(action: onReset) {
                     Image(systemName: "arrow.counterclockwise")
                         .font(.system(size: 11))
@@ -530,6 +564,45 @@ struct HotkeyRecorderRow: View {
                 .buttonStyle(PlainButtonStyle())
                 .help("hotkeys.reset_tooltip".localized)
             }
+        }
+    }
+}
+
+// MARK: - Настройки Проверки Текста
+struct TextAssistantPrefsTab: View {
+    @AppStorage("PasteFlow.ClearTextAssistantOnClose") private var clearOnClose = false
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("text_assistant.pref_title".localized)
+                    .font(.system(size: 13, weight: .bold))
+                    .foregroundColor(.accentColor)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("text_assistant.pref_behavior_label".localized)
+                        .font(.system(size: 12, weight: .semibold))
+                    
+                    Picker("", selection: $clearOnClose) {
+                        Text("text_assistant.pref_option_keep".localized)
+                            .tag(false)
+                        
+                        Text("text_assistant.pref_option_clear".localized)
+                            .tag(true)
+                    }
+                    .pickerStyle(RadioGroupPickerStyle())
+                    .labelsHidden()
+                }
+                
+                Text("text_assistant.pref_desc".localized)
+                    .font(.system(size: 11))
+                    .foregroundColor(.secondary)
+                    .lineSpacing(3)
+                    .padding(.top, 4)
+            }
+            .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color(NSColor.controlBackgroundColor)))
         }
     }
 }
@@ -708,6 +781,14 @@ struct HelpPrefsTab: View {
                         icon: "doc.on.doc.fill",
                         title: "help.feat_snip_title".localized,
                         description: "help.feat_snip_desc".localized
+                    )
+                    
+                    Divider()
+                    
+                    HelpFeatureRow(
+                        icon: "checkmark.bubble.fill",
+                        title: "help.feat_text_title".localized,
+                        description: "help.feat_text_desc".localized
                     )
                 }
             }

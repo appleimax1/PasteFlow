@@ -146,4 +146,9 @@ class MenuBarController: ObservableObject {
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
     }
+    
+    func openTextAssistant() {
+        closePopover(nil)
+        TextAssistantWindowController.shared.showWindow()
+    }
 }

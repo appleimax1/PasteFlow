@@ -20,6 +20,7 @@ class LanguageManager: ObservableObject {
             "tab.types": "Data Types",
             "tab.exclusions": "Exclusions",
             "tab.hotkeys": "Hotkeys",
+            "tab.text_assistant": "Text Assistant",
             "tab.backup": "Backups",
             "tab.help": "Help",
             "settings": "Settings",
@@ -165,7 +166,32 @@ class LanguageManager: ObservableObject {
             
             // MenuBar controller
             "menu.title_preferences": "PasteFlow Preferences",
-            "menu.title_snippets": "Snippet Manager"
+            "menu.title_snippets": "Snippet Manager",
+            
+            // Text Assistant & Hotkeys
+            "hotkeys.text_assistant": "Spellcheck & Punctuation assistant:",
+            "hotkeys.unassigned": "Unassigned",
+            "hotkeys.clear_tooltip": "Clear shortcut",
+            "menu.text_assistant": "Spellcheck & Punctuation...",
+            "text_assistant.title": "Spellcheck & Punctuation",
+            "text_assistant.title_short": "Spellcheck",
+            "text_assistant.input_placeholder": "Enter or paste text here...",
+            "text_assistant.result_placeholder": "Corrected text will appear here...",
+            "text_assistant.check_btn": "Check Text",
+            "text_assistant.copy_btn": "Copy Result",
+            "text_assistant.paste_input_btn": "Paste from Clipboard",
+            "text_assistant.replace_active_btn": "Replace in App",
+            "text_assistant.clear_btn": "Clear",
+            "text_assistant.stats": "%d chars • %d words • %d fixes",
+            "text_assistant.hints": "💡 Click any highlighted correction to revert to original word",
+            "text_assistant.replaced_toast": "✓ Inserted into active app!",
+            "text_assistant.pref_title": "Text Assistant Settings",
+            "text_assistant.pref_behavior_label": "Behavior of input text on closing window:",
+            "text_assistant.pref_option_keep": "Keep entered text across window calls",
+            "text_assistant.pref_option_clear": "Clear input text upon closing window (Esc)",
+            "text_assistant.pref_desc": "Select whether PasteFlow should remember previously entered text or clear it when closing the window with Esc.",
+            "help.feat_text_title": "Spellcheck & Punctuation",
+            "help.feat_text_desc": "Quick spellcheck & punctuation analysis. You can assign your custom hotkey to trigger this feature in the Hotkeys tab in Settings. 100% local checking, interactive edit reverting on click, and fast copying via Cmd+Enter."
         ],
         "ru": [
             // Tabs
@@ -174,6 +200,7 @@ class LanguageManager: ObservableObject {
             "tab.types": "Типы данных",
             "tab.exclusions": "Исключения",
             "tab.hotkeys": "Горячие клавиши",
+            "tab.text_assistant": "Проверка текста",
             "tab.backup": "Резервные копии",
             "tab.help": "Инструкция",
             "settings": "Настройки",
@@ -231,6 +258,9 @@ class LanguageManager: ObservableObject {
             "hotkeys.history_popup": "История буфера обмена (всплывающее меню):",
             "hotkeys.app_settings": "Настройки приложения (окно настроек):",
             "hotkeys.snippets_popup": "Библиотека сниппетов (всплывающее меню):",
+            "hotkeys.text_assistant": "Проверка орфографии и пунктуации:",
+            "hotkeys.unassigned": "Не назначено",
+            "hotkeys.clear_tooltip": "Очистить сочетание",
             "hotkeys.record_desc": "Нажмите на сочетание клавиш и зажмите нужную комбинацию на клавиатуре.",
             "hotkeys.press_keys": "Нажмите клавиши...",
             "hotkeys.reset_tooltip": "Сбросить на значение по умолчанию",
@@ -317,9 +347,29 @@ class LanguageManager: ObservableObject {
             "core.files": "Файлов: %d (%@, ...)",
             "core.clipboard_item": "Элемент буфера",
             
-            // MenuBar controller
+            // MenuBar controller & Text Assistant
             "menu.title_preferences": "Настройки PasteFlow",
-            "menu.title_snippets": "Менеджер сниппетов"
+            "menu.title_snippets": "Менеджер сниппетов",
+            "menu.text_assistant": "Проверка орфографии и пунктуации...",
+            "text_assistant.title": "Проверка текста",
+            "text_assistant.title_short": "Проверка",
+            "text_assistant.input_placeholder": "Введите или вставьте текст для проверки...",
+            "text_assistant.result_placeholder": "Результат проверки появится здесь...",
+            "text_assistant.check_btn": "Проверить текст",
+            "text_assistant.copy_btn": "Скопировать результат",
+            "text_assistant.paste_input_btn": "Вставить из буфера",
+            "text_assistant.replace_active_btn": "Заменить в приложении",
+            "text_assistant.clear_btn": "Очистить",
+            "text_assistant.stats": "%d симв. • %d слов • %d исправлений",
+            "text_assistant.hints": "💡 Кликните на подсвеченную правку, чтобы вернуть исходное слово",
+            "text_assistant.replaced_toast": "✓ Текст вставлен в приложение!",
+            "text_assistant.pref_title": "Настройки проверки текста",
+            "text_assistant.pref_behavior_label": "Поведение исходного текста при закрытии окна:",
+            "text_assistant.pref_option_keep": "Сохранять заполненный текст при каждом вызове окна",
+            "text_assistant.pref_option_clear": "Очищать исходный текст при закрытии окна (через Esc)",
+            "text_assistant.pref_desc": "Выберите, должен ли PasteFlow запоминать ранее введенный текст или очищать его при закрытии окна клавишей Esc.",
+            "help.feat_text_title": "Проверка орфографии и пунктуации",
+            "help.feat_text_desc": "Быстрый анализ текста на орфографию и пунктуацию. Для запуска вы можете назначить свои горячие клавиши в разделе «Горячие клавиши» в настройках. 100% локальная проверка, интерактивная отмена правок по клику и быстрое копирование по Cmd+Enter."
         ]
     ]
     

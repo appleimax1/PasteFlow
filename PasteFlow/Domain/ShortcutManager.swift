@@ -4,27 +4,37 @@ import Carbon
 class ShortcutManager: ObservableObject {
     static let shared = ShortcutManager()
     
-    @Published var mainHotkeyDisplay: String = "⌥⌘V"
-    @Published var historyHotkeyDisplay: String = "⌥⌘H"
+    @Published var mainHotkeyDisplay: String = "⇧⌘H"
+    @Published var historyHotkeyDisplay: String = "hotkeys.unassigned".localized
     @Published var snippetsHotkeyDisplay: String = "⌥⌘S"
+    @Published var textAssistantHotkeyDisplay: String = "⌥⌘K"
     
-    @Published var mainKeyCode: UInt16 = 9
-    @Published var mainModifiers: UInt = NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.option.rawValue
+    // Main history popup (ID 1) - default ⇧⌘H (keyCode 4, Shift+Cmd)
+    @Published var mainKeyCode: UInt16 = 4
+    @Published var mainModifiers: UInt = NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.shift.rawValue
     
-    @Published var historyKeyCode: UInt16 = 4
-    @Published var historyModifiers: UInt = NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.option.rawValue
+    // Preferences (ID 2) - default Unassigned (keyCode 0, modifiers 0)
+    @Published var historyKeyCode: UInt16 = 0
+    @Published var historyModifiers: UInt = 0
     
+    // Snippets (ID 3) - default ⌥⌘S (keyCode 1, Opt+Cmd)
     @Published var snippetsKeyCode: UInt16 = 1
     @Published var snippetsModifiers: UInt = NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.option.rawValue
+    
+    // Text Assistant (ID 4) - default ⌥⌘K (keyCode 40, Opt+Cmd)
+    @Published var textAssistantKeyCode: UInt16 = 40
+    @Published var textAssistantModifiers: UInt = NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.option.rawValue
     
     private var mainHotKeyRef: EventHotKeyRef?
     private var historyHotKeyRef: EventHotKeyRef?
     private var snippetsHotKeyRef: EventHotKeyRef?
-    private var eventHandlerRefs: [EventHandlerRef] = [] // Храним ВСЕ обработчики
+    private var textAssistantHotKeyRef: EventHotKeyRef?
+    private var eventHandlerRefs: [EventHandlerRef] = []
     
     var onTriggerMainHotkey: (() -> Void)?
     var onTriggerHistoryHotkey: (() -> Void)?
     var onTriggerSnippetsHotkey: (() -> Void)?
+    var onTriggerTextAssistantHotkey: (() -> Void)?
     
     init() {
         loadHotkeys()
@@ -43,10 +53,15 @@ class ShortcutManager: ObservableObject {
             snippetsKeyCode = snipCode
             snippetsModifiers = UInt(UserDefaults.standard.integer(forKey: "PasteFlow.SnippetsModifiers"))
         }
+        if let textCode = UserDefaults.standard.object(forKey: "PasteFlow.TextAssistantKeyCode") as? UInt16 {
+            textAssistantKeyCode = textCode
+            textAssistantModifiers = UInt(UserDefaults.standard.integer(forKey: "PasteFlow.TextAssistantModifiers"))
+        }
         
         mainHotkeyDisplay = formatDisplay(keyCode: mainKeyCode, modifierFlags: NSEvent.ModifierFlags(rawValue: mainModifiers))
         historyHotkeyDisplay = formatDisplay(keyCode: historyKeyCode, modifierFlags: NSEvent.ModifierFlags(rawValue: historyModifiers))
         snippetsHotkeyDisplay = formatDisplay(keyCode: snippetsKeyCode, modifierFlags: NSEvent.ModifierFlags(rawValue: snippetsModifiers))
+        textAssistantHotkeyDisplay = formatDisplay(keyCode: textAssistantKeyCode, modifierFlags: NSEvent.ModifierFlags(rawValue: textAssistantModifiers))
     }
     
     func saveMainHotkey(keyCode: UInt16, modifiers: NSEvent.ModifierFlags) {
@@ -76,6 +91,31 @@ class ShortcutManager: ObservableObject {
         registerGlobalHotkeys()
     }
     
+    func saveTextAssistantHotkey(keyCode: UInt16, modifiers: NSEvent.ModifierFlags) {
+        textAssistantKeyCode = keyCode
+        textAssistantModifiers = modifiers.rawValue
+        UserDefaults.standard.set(keyCode, forKey: "PasteFlow.TextAssistantKeyCode")
+        UserDefaults.standard.set(modifiers.rawValue, forKey: "PasteFlow.TextAssistantModifiers")
+        textAssistantHotkeyDisplay = formatDisplay(keyCode: keyCode, modifierFlags: modifiers)
+        registerGlobalHotkeys()
+    }
+    
+    func clearMainHotkey() {
+        saveMainHotkey(keyCode: 0, modifiers: [])
+    }
+    
+    func clearHistoryHotkey() {
+        saveHistoryHotkey(keyCode: 0, modifiers: [])
+    }
+    
+    func clearSnippetsHotkey() {
+        saveSnippetsHotkey(keyCode: 0, modifiers: [])
+    }
+    
+    func clearTextAssistantHotkey() {
+        saveTextAssistantHotkey(keyCode: 0, modifiers: [])
+    }
+    
     func startMonitoring() {
         registerGlobalHotkeys()
     }
@@ -101,6 +141,8 @@ class ShortcutManager: ObservableObject {
                     ShortcutManager.shared.onTriggerHistoryHotkey?()
                 } else if hotKeyID.id == 3 {
                     ShortcutManager.shared.onTriggerSnippetsHotkey?()
+                } else if hotKeyID.id == 4 {
+                    ShortcutManager.shared.onTriggerTextAssistantHotkey?()
                 }
             }
             return noErr
@@ -111,16 +153,28 @@ class ShortcutManager: ObservableObject {
         }
         
         // 1. Main Hotkey (ID 1)
-        let mainID = EventHotKeyID(signature: OSType(1111), id: 1)
-        RegisterEventHotKey(UInt32(mainKeyCode), carbonModifiers(from: mainModifiers), mainID, GetEventDispatcherTarget(), 0, &mainHotKeyRef)
+        if mainKeyCode != 0 && mainModifiers != 0 {
+            let mainID = EventHotKeyID(signature: OSType(1111), id: 1)
+            RegisterEventHotKey(UInt32(mainKeyCode), carbonModifiers(from: mainModifiers), mainID, GetEventDispatcherTarget(), 0, &mainHotKeyRef)
+        }
         
-        // 2. History Hotkey (ID 2)
-        let historyID = EventHotKeyID(signature: OSType(2222), id: 2)
-        RegisterEventHotKey(UInt32(historyKeyCode), carbonModifiers(from: historyModifiers), historyID, GetEventDispatcherTarget(), 0, &historyHotKeyRef)
+        // 2. History / Preferences Hotkey (ID 2)
+        if historyKeyCode != 0 && historyModifiers != 0 {
+            let historyID = EventHotKeyID(signature: OSType(2222), id: 2)
+            RegisterEventHotKey(UInt32(historyKeyCode), carbonModifiers(from: historyModifiers), historyID, GetEventDispatcherTarget(), 0, &historyHotKeyRef)
+        }
         
         // 3. Snippets Hotkey (ID 3)
-        let snippetsID = EventHotKeyID(signature: OSType(3333), id: 3)
-        RegisterEventHotKey(UInt32(snippetsKeyCode), carbonModifiers(from: snippetsModifiers), snippetsID, GetEventDispatcherTarget(), 0, &snippetsHotKeyRef)
+        if snippetsKeyCode != 0 && snippetsModifiers != 0 {
+            let snippetsID = EventHotKeyID(signature: OSType(3333), id: 3)
+            RegisterEventHotKey(UInt32(snippetsKeyCode), carbonModifiers(from: snippetsModifiers), snippetsID, GetEventDispatcherTarget(), 0, &snippetsHotKeyRef)
+        }
+        
+        // 4. Text Assistant Hotkey (ID 4)
+        if textAssistantKeyCode != 0 && textAssistantModifiers != 0 {
+            let textAssistantID = EventHotKeyID(signature: OSType(4444), id: 4)
+            RegisterEventHotKey(UInt32(textAssistantKeyCode), carbonModifiers(from: textAssistantModifiers), textAssistantID, GetEventDispatcherTarget(), 0, &textAssistantHotKeyRef)
+        }
     }
     
     private func unregisterGlobalHotkeys() {
@@ -135,6 +189,10 @@ class ShortcutManager: ObservableObject {
         if let ref = snippetsHotKeyRef {
             UnregisterEventHotKey(ref)
             snippetsHotKeyRef = nil
+        }
+        if let ref = textAssistantHotKeyRef {
+            UnregisterEventHotKey(ref)
+            textAssistantHotKeyRef = nil
         }
         // Снять ВСЕ EventHandler-ы, предотвращая утечки
         eventHandlerRefs.forEach { RemoveEventHandler($0) }
@@ -152,6 +210,10 @@ class ShortcutManager: ObservableObject {
     }
     
     func formatDisplay(keyCode: UInt16, modifierFlags: NSEvent.ModifierFlags) -> String {
+        if keyCode == 0 && modifierFlags.isEmpty {
+            return "hotkeys.unassigned".localized
+        }
+        
         var str = ""
         if modifierFlags.contains(.control) { str += "⌃" }
         if modifierFlags.contains(.option) { str += "⌥" }

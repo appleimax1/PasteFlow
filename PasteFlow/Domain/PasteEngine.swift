@@ -73,9 +73,9 @@ class PasteEngine {
         }
     }
     
-    /// Вставляет произвольный текст (сниппет) в приложение, которое было активно до открытия попапа.
-    func paste(text: String) {
-        let target = targetApp
+    /// Вставляет произвольный текст (сниппет или результат проверки) в указанное или ранее активное приложение.
+    func paste(text: String, targetApp specifiedTarget: NSRunningApplication? = nil) {
+        let target = specifiedTarget ?? targetApp
         
         // Закрыть попап через MenuBarController
         if let delegate = NSApp.delegate as? AppDelegate {

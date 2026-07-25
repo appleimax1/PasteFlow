@@ -6,7 +6,7 @@
 
 [Russian version below / Русская версия ниже](#русская-версия)
 
-PasteFlow is a lightweight and convenient clipboard manager for macOS that allows you to keep track of your clipboard history and quickly manage text snippets (templates). The application runs directly from the macOS menu bar, keeping the interface clean and saving system resources.
+PasteFlow is a lightweight, powerful, and convenient clipboard manager and text assistant for macOS. It allows you to track your clipboard history, manage text templates/snippets, and instantly perform local spellchecking and punctuation correction. The application runs natively in the macOS menu bar, preserving system resources and keeping your workflow clean.
 
 ## Download & Installation
 
@@ -29,31 +29,35 @@ Once executed, the app will open without issues.
 
 ## Hotkeys
 
-The following hotkeys are used by default to access key features:
+The following hotkeys are available for fast global access:
 
-* **`Shift + Cmd + V`** — Open the main clipboard history popup.
-* **`Shift + Cmd + B`** — Open the snippets popup tab for quick template insertion.
-* **`Shift + Cmd + H`** — Open the application settings.
+* **`Shift + Cmd + H`** — Open the main clipboard history popup menu (default).
+* **Text Assistant & Preferences** — Customizable hotkeys in Settings (can be assigned to any shortcut or left unassigned).
 
-### Customization
-You can customize these shortcuts at any time:
-1. Go to the application settings (**`Shift + Cmd + H`**).
-2. Click on the hotkey recording field for the respective action.
-3. Press your new key combination on the keyboard to automatically save it.
+### Customization & Optional Shortcuts
+You can customize or clear hotkeys at any time:
+1. Open the application settings.
+2. Go to the **Hotkeys** tab.
+3. Click on the shortcut recording field for the respective action, press your key combination, or click the **✕** button to unassign the hotkey.
 
 ---
 
-## Features
+## Key Features
 
 * **Bilingual Interface**: Fully supports both **English** (default) and **Russian** languages. The interface language can be changed easily in the app preferences under the General tab.
-* **Clipboard History**: Stores history of text, links, and images. Fast search and paste in one click.
+* **Clipboard History**: Stores history of text, links, RTF, PDF, and images. Fast search and paste in one click.
 * **Snippet Library**: Create folders and templates for frequently used text, commands, or links with macro support.
+* **Text Assistant (Spellcheck & Punctuation)**: 
+  * 100% local, offline text checking engine.
+  * **Interactive Corrections**: Click any highlighted fix in the result pane to revert that specific word to the original text ("keep as is").
+  * **In-Window Shortcuts**: Press **`Cmd + Enter`** (`⌘↵`) to copy the result instantly with visual green feedback, or press **`Esc`** to close the window.
+  * **Flexible Close Settings**: Configure in Preferences whether to keep the entered text across window calls or automatically clear it when closing via `Esc`.
 
 ---
 
 ## Русская версия
 
-PasteFlow — это легкий и удобный менеджер буфера обмена для macOS, который позволяет отслеживать историю копирования и быстро управлять сниппетами (шаблонами текста). Приложение работает из статус-бара macOS, не перегружая интерфейс и экономя ресурсы системы.
+PasteFlow — это легкий, мощный и удобный менеджер буфера обмена и помощник по проверке текста для macOS. Он позволяет хранить историю копирования, управлять библиотекой сниппетов (шаблонов текста) и мгновенно выполнять локальную проверку орфографии и пунктуации. Приложение работает из статус-бара macOS, не перегружая интерфейс и экономя ресурсы системы.
 
 ## Скачивание и установка
 
@@ -76,23 +80,26 @@ sudo xattr -cr /Applications/PasteFlow.app
 
 ## Управление горячими клавишами
 
-Для быстрого доступа к функциям приложения используются следующие горячие клавиши по умолчанию:
+Для быстрого вызова функций приложения используются глобальные сочетания клавиш:
 
-* **`Shift + Cmd + V`** — Открыть главное окно истории буфера обмена.
-* **`Shift + Cmd + B`** — Открыть вкладку с вашими сниппетами для быстрой вставки шаблонов.
-* **`Shift + Cmd + H`** — Открыть окно настроек приложения.
+* **`Shift + Cmd + H`** — Открыть главное окно истории буфера обмена (по умолчанию).
+* **Проверка текста и Настройки** — Настраиваемые сочетания клавиш в настройках программы (можно назначить любую комбинацию или оставить неназначенным).
 
-### Персонализация
-Вы можете в любой момент изменить стандартные сочетания клавиш под себя. Для этого:
-1. Перейдите в настройки программы (**`Shift + Cmd + H`**).
-2. Нажмите на поле ввода горячей клавиши для соответствующей функции.
-3. Нажмите новое сочетание клавиш на клавиатуре, и оно автоматически сохранится.
+### Опциональность и кастомизация
+Вы можете в любой момент изменить или полностью отменить комбинации клавиш:
+1. Перейдите в настройки программы во вкладку **Горячие клавиши**.
+2. Нажмите на поле ввода горячей клавиши и зажмите нужную комбинацию на клавиатуре.
+3. Чтобы сделать вызов опциональным и отменить сочетание клавиш, нажмите на значок **✕** рядом с ним.
 
 ---
 
-## Функционал приложения
+## Ключевой функционал приложения
 
-* **Двуязычный интерфейс**: Полная поддержка **английского** (по умолчанию) и **русского** языков. Язык интерфейса можно легко переключить в настройках приложения во вкладке «Основные».
-* **История копирования**: Хранение истории текстовых данных, ссылок и изображений. Быстрый поиск и вставка в один клик.
+* **Двуязычный интерфейс**: Полная поддержка **английского** (по умолчанию) и **русского** языков. Язык интерфейса переключается во вкладке «Основные».
+* **История копирования**: Хранение истории текстовых данных, ссылок, форматированного текста и изображений. Быстрый поиск и вставка в один клик.
 * **Библиотека сниппетов**: Создание папок и шаблонов для часто используемых текстов, команд или ссылок с поддержкой макросов.
-
+* **Проверка текста (Орфография и Пунктуация)**:
+  * 100% локальный движок проверки текста, работающий без интернета.
+  * **Интерактивная отмена правок**: Кликните на любое подсвеченное исправление в правом окне, чтобы вернуть исходное слово («оставить как есть»).
+  * **Навигация и горячие клавиши**: Нажмите **`Cmd + Enter`** (`⌘↵`) для мгновенного копирования результата в буфер обмена с визуальной индикацией или клавишу **`Esc`** для закрытия окна.
+  * **Гибкие настройки сценария**: В настройках можно выбрать: сохранять ли введенный текст при каждом вызове окна или автоматически очищать его при закрытии окна клавишей `Esc`.

@@ -30,19 +30,34 @@ struct PopupRootView: View {
             Divider()
             
             // Bottom Toolbar
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 Button(action: { controller.openPreferences() }) {
                     Label("popup.settings".localized, systemImage: "gearshape.fill")
                         .font(.system(size: 11, weight: .medium))
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
                 .buttonStyle(PlainButtonStyle())
                 .foregroundColor(.primary)
                 
                 Spacer()
                 
+                Button(action: { controller.openTextAssistant() }) {
+                    Label("text_assistant.title_short".localized, systemImage: "checkmark.bubble")
+                        .font(.system(size: 11, weight: .medium))
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .foregroundColor(.accentColor)
+                
+                Spacer()
+                
                 Button(action: { controller.openSnippetManager() }) {
                     Label("popup.snippets".localized, systemImage: "square.and.pencil")
                         .font(.system(size: 11, weight: .medium))
+                        .lineLimit(1)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
                 .buttonStyle(PlainButtonStyle())
                 .foregroundColor(.accentColor)
