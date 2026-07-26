@@ -1,0 +1,8 @@
+#ifndef HUNVISAPI_H_
+#define HUNVISAPI_H_
+
+#ifndef LIBHUNSPELL_DLL_EXPORTED
+#define LIBHUNSPELL_DLL_EXPORTED
+#endif
+
+#endif

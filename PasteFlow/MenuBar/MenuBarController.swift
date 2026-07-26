@@ -10,7 +10,6 @@ class MenuBarController: ObservableObject {
     private var workspaceObserver: Any?
     
     /// Приложение, активное ДО открытия попапа.
-    /// Обновляется через NSWorkspace уведомления — более надёжно, чем одноразовый снимок.
     private(set) var previousApplication: NSRunningApplication?
     
     private var preferencesWindow: NSWindow?
@@ -19,13 +18,23 @@ class MenuBarController: ObservableObject {
     init() {
         popover = NSPopover()
         popover.contentSize = NSSize(width: 350, height: 470)
-        // .semitransient: закрывается при клике вне, но не требует NSApp.activate()
         popover.behavior = .semitransient
         popover.animates = true
 
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "PasteFlow")
+            let symbolImage = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "PasteFlow")
+                           ?? NSImage(systemSymbolName: "clipboard", accessibilityDescription: "PasteFlow")
+                           ?? NSImage(systemSymbolName: "doc.on.doc", accessibilityDescription: "PasteFlow")
+            if let img = symbolImage {
+                img.isTemplate = true
+                img.size = NSSize(width: 18, height: 18)
+                button.image = img
+            } else {
+                button.title = "📋"
+            }
+            button.imagePosition = .imageOnly
+            button.toolTip = "PasteFlow"
             button.action = #selector(togglePopoverAction(_:))
             button.target = self
         }
@@ -44,12 +53,10 @@ class MenuBarController: ObservableObject {
         ) { [weak self] notification in
             guard let self else { return }
             let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication
-            // Не перезаписывать, если активировался PasteFlow
             if app?.bundleIdentifier != Bundle.main.bundleIdentifier {
                 self.previousApplication = app
             }
         }
-        // Инициализируем текущим фронтальным приложением
         previousApplication = NSWorkspace.shared.frontmostApplication
     }
 
@@ -66,8 +73,12 @@ class MenuBarController: ObservableObject {
             self.selectedTab = tab
         }
         
+        if popover.isShown {
+            NSApp.activate(ignoringOtherApps: true)
+            return
+        }
+        
         if let button = statusItem.button {
-            // Запоминаем активное приложение до того, как PasteFlow получит фокус
             let currentApp = NSWorkspace.shared.frontmostApplication
             if currentApp?.bundleIdentifier != Bundle.main.bundleIdentifier {
                 previousApplication = currentApp
@@ -90,7 +101,6 @@ class MenuBarController: ObservableObject {
             NSEvent.removeMonitor(eventMonitor)
             self.eventMonitor = nil
         }
-        // Не сбрасывать previousApplication здесь — PasteEngine может обратиться к нему после закрытия
     }
     
     func openPreferences() {

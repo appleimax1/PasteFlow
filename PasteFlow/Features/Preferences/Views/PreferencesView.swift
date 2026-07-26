@@ -81,7 +81,7 @@ struct PreferencesView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("PasteFlow v1.4")
+                    Text("PasteFlow v1.5")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.secondary)
                     Text("app.smart_clipboard_manager".localized)

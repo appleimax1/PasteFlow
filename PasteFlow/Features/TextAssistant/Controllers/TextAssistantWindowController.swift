@@ -4,6 +4,7 @@ import SwiftUI
 class TextAssistantPanel: NSPanel {
     var onEscapePressed: (() -> Void)?
     var onCmdEnterPressed: (() -> Void)?
+    var onEnterPressed: (() -> Void)?
     
     override func cancelOperation(_ sender: Any?) {
         onEscapePressed?()
@@ -12,12 +13,12 @@ class TextAssistantPanel: NSPanel {
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         if event.type == .keyDown {
             let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
-            // Cmd + Enter (keyCode 36 = Return)
+            // Cmd + Enter (keyCode 36 = Return) -> Копировать результат
             if flags == .command && event.keyCode == 36 {
                 onCmdEnterPressed?()
                 return true
             }
-            // Esc (keyCode 53)
+            // Esc (keyCode 53) -> Закрыть
             if event.keyCode == 53 {
                 onEscapePressed?()
                 return true
@@ -32,6 +33,7 @@ class TextAssistantWindowController: NSWindowController {
     
     private var panel: TextAssistantPanel?
     private var onCopyAction: (() -> Void)?
+    private var onCheckAction: (() -> Void)?
     
     convenience init() {
         let window = TextAssistantPanel(
@@ -58,6 +60,9 @@ class TextAssistantWindowController: NSWindowController {
         window.onCmdEnterPressed = { [weak self] in
             self?.onCopyAction?()
         }
+        window.onEnterPressed = { [weak self] in
+            self?.onCheckAction?()
+        }
     }
     
     func showWindow() {
@@ -83,6 +88,9 @@ class TextAssistantWindowController: NSWindowController {
             window.onCmdEnterPressed = { [weak self] in
                 self?.onCopyAction?()
             }
+            window.onEnterPressed = { [weak self] in
+                self?.onCheckAction?()
+            }
             
             self.window = window
             self.panel = window
@@ -94,6 +102,9 @@ class TextAssistantWindowController: NSWindowController {
             },
             onRegisterCopyHandler: { [weak self] copyHandler in
                 self?.onCopyAction = copyHandler
+            },
+            onRegisterCheckHandler: { [weak self] checkHandler in
+                self?.onCheckAction = checkHandler
             }
         )
         

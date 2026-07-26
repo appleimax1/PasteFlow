@@ -20,6 +20,7 @@ xcuserdata/
 *.app
 *.zip
 *.tar.gz
+*.o
 
 # Temporary / Swap files
 *.swp

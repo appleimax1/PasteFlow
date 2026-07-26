@@ -1,0 +1,7 @@
+#ifndef HUNVERSION_H_
+#define HUNVERSION_H_
+
+#define HUNSPELL_VERSION "1.7.2"
+#define HUNSPELL_VERSION_STRING "1.7.2"
+
+#endif

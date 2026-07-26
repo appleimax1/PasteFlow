@@ -44,18 +44,30 @@ class ShortcutManager: ObservableObject {
         if let mainCode = UserDefaults.standard.object(forKey: "PasteFlow.MainKeyCode") as? UInt16 {
             mainKeyCode = mainCode
             mainModifiers = UInt(UserDefaults.standard.integer(forKey: "PasteFlow.MainModifiers"))
+        } else {
+            UserDefaults.standard.set(mainKeyCode, forKey: "PasteFlow.MainKeyCode")
+            UserDefaults.standard.set(mainModifiers, forKey: "PasteFlow.MainModifiers")
         }
+        
         if let histCode = UserDefaults.standard.object(forKey: "PasteFlow.HistoryKeyCode") as? UInt16 {
             historyKeyCode = histCode
             historyModifiers = UInt(UserDefaults.standard.integer(forKey: "PasteFlow.HistoryModifiers"))
         }
+        
         if let snipCode = UserDefaults.standard.object(forKey: "PasteFlow.SnippetsKeyCode") as? UInt16 {
             snippetsKeyCode = snipCode
             snippetsModifiers = UInt(UserDefaults.standard.integer(forKey: "PasteFlow.SnippetsModifiers"))
+        } else {
+            UserDefaults.standard.set(snippetsKeyCode, forKey: "PasteFlow.SnippetsKeyCode")
+            UserDefaults.standard.set(snippetsModifiers, forKey: "PasteFlow.SnippetsModifiers")
         }
+        
         if let textCode = UserDefaults.standard.object(forKey: "PasteFlow.TextAssistantKeyCode") as? UInt16 {
             textAssistantKeyCode = textCode
             textAssistantModifiers = UInt(UserDefaults.standard.integer(forKey: "PasteFlow.TextAssistantModifiers"))
+        } else {
+            UserDefaults.standard.set(textAssistantKeyCode, forKey: "PasteFlow.TextAssistantKeyCode")
+            UserDefaults.standard.set(textAssistantModifiers, forKey: "PasteFlow.TextAssistantModifiers")
         }
         
         mainHotkeyDisplay = formatDisplay(keyCode: mainKeyCode, modifierFlags: NSEvent.ModifierFlags(rawValue: mainModifiers))
@@ -128,20 +140,22 @@ class ShortcutManager: ObservableObject {
         unregisterGlobalHotkeys()
         
         var eventType = EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: UInt32(kEventHotKeyPressed))
+        let target = GetEventDispatcherTarget()
         
         var newHandlerRef: EventHandlerRef?
-        InstallEventHandler(GetEventDispatcherTarget(), { (nextHandler, event, userData) -> OSStatus in
+        InstallEventHandler(target, { (nextHandler, event, userData) -> OSStatus in
             var hotKeyID = EventHotKeyID()
             GetEventParameter(event, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout<EventHotKeyID>.size, nil, &hotKeyID)
             
             DispatchQueue.main.async {
-                if hotKeyID.id == 1 {
+                let id = hotKeyID.id
+                if id == 1 {
                     ShortcutManager.shared.onTriggerMainHotkey?()
-                } else if hotKeyID.id == 2 {
+                } else if id == 2 {
                     ShortcutManager.shared.onTriggerHistoryHotkey?()
-                } else if hotKeyID.id == 3 {
+                } else if id == 3 {
                     ShortcutManager.shared.onTriggerSnippetsHotkey?()
-                } else if hotKeyID.id == 4 {
+                } else if id == 4 {
                     ShortcutManager.shared.onTriggerTextAssistantHotkey?()
                 }
             }
@@ -152,28 +166,30 @@ class ShortcutManager: ObservableObject {
             eventHandlerRefs.append(ref)
         }
         
+        let signature = OSType(0x50535446) // 'PSTF'
+        
         // 1. Main Hotkey (ID 1)
         if mainKeyCode != 0 && mainModifiers != 0 {
-            let mainID = EventHotKeyID(signature: OSType(1111), id: 1)
-            RegisterEventHotKey(UInt32(mainKeyCode), carbonModifiers(from: mainModifiers), mainID, GetEventDispatcherTarget(), 0, &mainHotKeyRef)
+            let mainID = EventHotKeyID(signature: signature, id: 1)
+            RegisterEventHotKey(UInt32(mainKeyCode), carbonModifiers(from: mainModifiers), mainID, target, 0, &mainHotKeyRef)
         }
         
         // 2. History / Preferences Hotkey (ID 2)
         if historyKeyCode != 0 && historyModifiers != 0 {
-            let historyID = EventHotKeyID(signature: OSType(2222), id: 2)
-            RegisterEventHotKey(UInt32(historyKeyCode), carbonModifiers(from: historyModifiers), historyID, GetEventDispatcherTarget(), 0, &historyHotKeyRef)
+            let historyID = EventHotKeyID(signature: signature, id: 2)
+            RegisterEventHotKey(UInt32(historyKeyCode), carbonModifiers(from: historyModifiers), historyID, target, 0, &historyHotKeyRef)
         }
         
         // 3. Snippets Hotkey (ID 3)
         if snippetsKeyCode != 0 && snippetsModifiers != 0 {
-            let snippetsID = EventHotKeyID(signature: OSType(3333), id: 3)
-            RegisterEventHotKey(UInt32(snippetsKeyCode), carbonModifiers(from: snippetsModifiers), snippetsID, GetEventDispatcherTarget(), 0, &snippetsHotKeyRef)
+            let snippetsID = EventHotKeyID(signature: signature, id: 3)
+            RegisterEventHotKey(UInt32(snippetsKeyCode), carbonModifiers(from: snippetsModifiers), snippetsID, target, 0, &snippetsHotKeyRef)
         }
         
         // 4. Text Assistant Hotkey (ID 4)
         if textAssistantKeyCode != 0 && textAssistantModifiers != 0 {
-            let textAssistantID = EventHotKeyID(signature: OSType(4444), id: 4)
-            RegisterEventHotKey(UInt32(textAssistantKeyCode), carbonModifiers(from: textAssistantModifiers), textAssistantID, GetEventDispatcherTarget(), 0, &textAssistantHotKeyRef)
+            let textAssistantID = EventHotKeyID(signature: signature, id: 4)
+            RegisterEventHotKey(UInt32(textAssistantKeyCode), carbonModifiers(from: textAssistantModifiers), textAssistantID, target, 0, &textAssistantHotKeyRef)
         }
     }
     
@@ -194,7 +210,6 @@ class ShortcutManager: ObservableObject {
             UnregisterEventHotKey(ref)
             textAssistantHotKeyRef = nil
         }
-        // Снять ВСЕ EventHandler-ы, предотвращая утечки
         eventHandlerRefs.forEach { RemoveEventHandler($0) }
         eventHandlerRefs.removeAll()
     }

@@ -52,12 +52,14 @@ struct TextAssistantWindowView: View {
     @State private var paragraphs: [TextDiffParagraph] = []
     @State private var rejectedSegmentIDs: Set<UUID> = []
     @State private var showCopiedToast: Bool = false
+    @State private var isProcessing: Bool = false
     
     @AppStorage("PasteFlow.ClearTextAssistantOnClose") private var clearOnClose = false
     @AppStorage("PasteFlow.LastAssistantInputText") private var savedInputText = ""
     
     var onClose: () -> Void
     var onRegisterCopyHandler: ((@escaping () -> Void) -> Void)?
+    var onRegisterCheckHandler: ((@escaping () -> Void) -> Void)?
     
     @ObservedObject private var langManager = LanguageManager.shared
     
@@ -127,7 +129,7 @@ struct TextAssistantWindowView: View {
                     .font(.system(size: 11))
                     .foregroundColor(.orange)
                 
-                Text("💡 Кликните на исправление, чтобы вернуть слово • Нажмите ⌘↵ (Cmd+Enter) для копирования результата")
+                Text("💡 Нажмите Enter (↵) для проверки • Shift+Enter для переноса • ⌘↵ для копирования")
                     .font(.system(size: 11))
                     .foregroundColor(.secondary)
                 
@@ -175,12 +177,15 @@ struct TextAssistantWindowView: View {
                                 .padding(.vertical, 8)
                         }
                         
-                        TextEditor(text: $inputText)
-                            .font(.system(size: 13, design: .default))
-                            .lineSpacing(3)
-                            .onChange(of: inputText) { newValue in
-                                runSpellCheck(text: newValue)
+                        CustomTextEditor(
+                            text: $inputText,
+                            onEnter: {
+                                runSpellCheck(text: inputText)
+                            },
+                            onCmdEnter: {
+                                copyResult()
                             }
+                        )
                     }
                     .padding(4)
                     .background(RoundedRectangle(cornerRadius: 8).fill(Color(NSColor.controlBackgroundColor)))
@@ -189,7 +194,28 @@ struct TextAssistantWindowView: View {
                         Text("\(inputText.count) симв. • \(wordCount(inputText)) слов")
                             .font(.system(size: 10))
                             .foregroundColor(.secondary)
+                        
                         Spacer()
+                    }
+                    
+                    // Button Bar for Panel 1
+                    HStack {
+                        Button(action: { runSpellCheck(text: inputText) }) {
+                            HStack(spacing: 6) {
+                                if isProcessing {
+                                    ProgressView()
+                                        .scaleEffect(0.6)
+                                        .frame(width: 12, height: 12)
+                                }
+                                Text(isProcessing ? "Проверка..." : "Проверить текст (↵)")
+                                    .font(.system(size: 12, weight: .bold))
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 24)
+                            .padding(.vertical, 4)
+                        }
+                        .buttonStyle(BorderedProminentButtonStyle())
+                        .tint(Color.accentColor)
+                        .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isProcessing)
                     }
                 }
                 .padding(14)
@@ -205,7 +231,11 @@ struct TextAssistantWindowView: View {
                         
                         Spacer()
                         
-                        if fixCount > 0 {
+                        if isProcessing {
+                            ProgressView()
+                                .scaleEffect(0.6)
+                                .frame(width: 14, height: 14)
+                        } else if fixCount > 0 {
                             let activeFixes = max(0, fixCount - rejectedSegmentIDs.count)
                             Text("\(activeFixes) из \(fixCount) испр.")
                                 .font(.system(size: 10, weight: .bold))
@@ -218,7 +248,19 @@ struct TextAssistantWindowView: View {
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: 6) {
-                            if rawResultText.isEmpty {
+                            if isProcessing {
+                                HStack {
+                                    Spacer()
+                                    VStack(spacing: 8) {
+                                        ProgressView()
+                                        Text("Проверяем орфографию и пунктуацию...")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.top, 40)
+                                    Spacer()
+                                }
+                            } else if rawResultText.isEmpty {
                                 Text("text_assistant.result_placeholder".localized)
                                     .font(.system(size: 13))
                                     .foregroundColor(.secondary.opacity(0.6))
@@ -238,7 +280,7 @@ struct TextAssistantWindowView: View {
                     }
                     .background(RoundedRectangle(cornerRadius: 8).fill(Color(NSColor.controlBackgroundColor)))
                     
-                    // Action Buttons Bar
+                    // Action Buttons Bar for Panel 2
                     HStack {
                         Button(action: copyResult) {
                             HStack(spacing: 6) {
@@ -246,15 +288,13 @@ struct TextAssistantWindowView: View {
                                 Text(showCopiedToast ? "✓ Скопировано в буфер!" : "Скопировать результат (⌘↵)")
                                     .font(.system(size: 12, weight: .bold))
                             }
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 6)
+                            .frame(maxWidth: .infinity, minHeight: 24)
+                            .padding(.vertical, 4)
                         }
                         .buttonStyle(BorderedProminentButtonStyle())
                         .tint(showCopiedToast ? Color.green : Color.accentColor)
-                        .disabled(effectiveResultText.isEmpty)
+                        .disabled(effectiveResultText.isEmpty || isProcessing)
                         .keyboardShortcut(.return, modifiers: [.command])
-                        
-                        Spacer()
                     }
                 }
                 .padding(14)
@@ -264,7 +304,7 @@ struct TextAssistantWindowView: View {
             
             // Footer Bar
             HStack {
-                Text("100% Локальная проверка • Для быстрого копирования нажмите ⌘↵ (Cmd+Enter)")
+                Text("Hunspell + 10 правил пунктуации • 100% Локальная проверка (без интернета)")
                     .font(.system(size: 10))
                     .foregroundColor(.secondary)
                 
@@ -299,6 +339,10 @@ struct TextAssistantWindowView: View {
             onRegisterCopyHandler?({
                 copyResult()
             })
+            
+            onRegisterCheckHandler?({
+                runSpellCheck(text: inputText)
+            })
         }
     }
     
@@ -310,14 +354,24 @@ struct TextAssistantWindowView: View {
     }
     
     private func runSpellCheck(text: String) {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        
+        isProcessing = true
         rejectedSegmentIDs.removeAll()
         if !clearOnClose {
             savedInputText = text
         }
-        let res = TextAssistantEngine.shared.processText(text)
-        self.rawResultText = res.correctedText
-        self.fixCount = res.fixCount
-        self.paragraphs = res.paragraphs
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let res = TextAssistantEngine.shared.processText(text)
+            DispatchQueue.main.async {
+                self.rawResultText = res.correctedText
+                self.fixCount = res.fixCount
+                self.paragraphs = res.paragraphs
+                self.isProcessing = false
+            }
+        }
     }
     
     private func toggleSegmentRejection(id: UUID) {

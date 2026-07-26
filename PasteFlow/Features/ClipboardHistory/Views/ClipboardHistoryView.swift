@@ -97,7 +97,6 @@ struct ClipboardHistoryView: View {
                     }
                     .listStyle(PlainListStyle())
                 }
-                
             }
         }
         .onDisappear {
@@ -130,11 +129,22 @@ struct ClipboardHistoryView: View {
         return chunks
     }
     
+    private func shortcutKey(for index: Int) -> String? {
+        if index >= 0 && index < 9 {
+            return "\(index + 1)"
+        } else if index == 9 {
+            return "0"
+        }
+        return nil
+    }
+    
     @ViewBuilder
     private func rowForEntry(_ entry: CDClipboardEntry, absoluteIndex: Int) -> some View {
+        let shortcutKeyStr = shortcutKey(for: absoluteIndex)
+        
         ClipboardEntryRow(
             entry: entry,
-            shortcutIndex: absoluteIndex < 9 ? absoluteIndex + 1 : nil,
+            shortcutDisplay: shortcutKeyStr,
             isHovered: hoveredIndex == absoluteIndex
         )
         .contentShape(Rectangle())
@@ -162,9 +172,9 @@ struct ClipboardHistoryView: View {
             }
         }
         .background(
-            // Скрытая кнопка для шорткатов Cmd+1...Cmd+9
+            // Скрытая кнопка для шорткатов Cmd+1...Cmd+9 и Cmd+0 для 10-й записи
             Group {
-                if let keyIndex = absoluteIndex < 9 ? absoluteIndex + 1 : nil {
+                if let keyStr = shortcutKeyStr, let char = keyStr.first {
                     Button("") {
                         let flags = NSEvent.modifierFlags
                         let asPlainText = flags.contains(.shift)
@@ -173,7 +183,7 @@ struct ClipboardHistoryView: View {
                             ClipboardHistoryManager.shared.deleteEntry(entry)
                         }
                     }
-                    .keyboardShortcut(KeyEquivalent(Character(String(keyIndex))), modifiers: .command)
+                    .keyboardShortcut(KeyEquivalent(char), modifiers: .command)
                     .opacity(0)
                 }
             }
@@ -200,7 +210,7 @@ struct ClipboardHistoryView: View {
     
     struct ClipboardEntryRow: View {
         @ObservedObject var entry: CDClipboardEntry
-        let shortcutIndex: Int?
+        let shortcutDisplay: String?
         let isHovered: Bool
         
         var body: some View {
@@ -238,7 +248,7 @@ struct ClipboardHistoryView: View {
                             .foregroundColor(.orange)
                     }
                     
-                    if let key = shortcutIndex {
+                    if let key = shortcutDisplay {
                         Text("⌘\(key)")
                             .font(.system(size: 10, weight: .bold, design: .monospaced))
                             .padding(.horizontal, 5)

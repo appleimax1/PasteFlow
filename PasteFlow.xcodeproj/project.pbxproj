@@ -7,20 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01735EC478098B2ACDC0572E /* ru_RU.aff in Resources */ = {isa = PBXBuildFile; fileRef = 442F8E2BA20BDB831BFF6ADA /* ru_RU.aff */; };
 		028266742B73DF0FD38F536B /* AppExclusionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BDA2002A546FDA7C52CD29 /* AppExclusionFilter.swift */; };
+		061B211E3421E146E48B9792 /* suggestmgr.cxx in Sources */ = {isa = PBXBuildFile; fileRef = DAC94BC09203FB9B7A7887F1 /* suggestmgr.cxx */; };
 		06F406B3BCFE5085D4D6406A /* HoverPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB9F98EC27011F941F1DBA /* HoverPreviewView.swift */; };
+		093C171FA658186BBCF3B3B0 /* snippets.xml in Resources */ = {isa = PBXBuildFile; fileRef = 16F029A9837B9621653EA529 /* snippets.xml */; };
+		0B41AD90593125C37824C208 /* ru_RU.dic in Resources */ = {isa = PBXBuildFile; fileRef = 9368A4B1CFE22B64F3C10393 /* ru_RU.dic */; };
+		0CE5C99AC1CDBB9E767F6D9E /* affixmgr.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 8741E9F5C714275CD4EACC00 /* affixmgr.cxx */; };
 		1D2E7B8D7D7C3E03CEF33D42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BBF0BE7D5F91BF821E708 /* AppDelegate.swift */; };
 		2775E51E626868E3097FE8FA /* ExportImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611755D125A92D7E70D109E0 /* ExportImportService.swift */; };
 		29F346A539C404D8F145B8B6 /* SnippetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488C7DA7A97C8EDFFD22673 /* SnippetManager.swift */; };
+		2F4342B5325A53148A549D24 /* replist.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 2323EC65CB99D6B351E3A696 /* replist.cxx */; };
 		31D381A7D0D33168FFBDC657 /* SnippetLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B13912FFC89BF725D4922 /* SnippetLibraryView.swift */; };
 		3B4E2CBFDB3B10F1314DA2F2 /* PasteFlow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51894FCD1114305C48DB28DD /* PasteFlow.xcdatamodeld */; };
 		3DC13E5527C68DDAF0916F5A /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */; };
 		46276E122A30E55AF33CF5B8 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9328CECAC63B41C34C5096B /* ClipboardHistoryView.swift */; };
 		4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D567CE49720903DDBC7AE73 /* LanguageManager.swift */; };
+		59E40153383FDD8C7EA77F60 /* affentry.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C2184348A3139053A7890259 /* affentry.cxx */; };
 		5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */; };
+		5DB6A4A3856E2E8DFED67E29 /* HunspellWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6B7D6D6667C14EDB4D0ECD /* HunspellWrapper.mm */; };
+		6B4BBF623F21C9C9540B3A65 /* csutil.cxx in Sources */ = {isa = PBXBuildFile; fileRef = E4C0476038A101A26F91096F /* csutil.cxx */; };
 		6F803702254E0FFBA9DF6456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F1665E3AD3BE8FFF57C4CE /* Assets.xcassets */; };
 		70C5616CB544DBC55E862E12 /* PopupRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F34A6D836F405BE4E7097 /* PopupRootView.swift */; };
+		74EC9D659AE8C0256C4F7CC3 /* hunzip.cxx in Sources */ = {isa = PBXBuildFile; fileRef = A3A1837162D1A8769258FF25 /* hunzip.cxx */; };
+		854769170951076477245408 /* hunversion.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 6357605677173B4450731E99 /* hunversion.h.in */; };
+		931654B51DC92C650FF78B7D /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C4C7CB2B6E74D9DCE57AA /* CustomTextEditor.swift */; };
 		94418B4158166C1D6D4F1333 /* SnippetMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EA678045512A2F5028BC74 /* SnippetMenuView.swift */; };
+		9730CD58E2DB5C630C75E65A /* hashmgr.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 969678335E3AF8CAD17F9B17 /* hashmgr.cxx */; };
 		981D7E2122F326CBFC673D30 /* PasteFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26288973F883827DF724DF35 /* PasteFlowApp.swift */; };
 		98A3A486A16FDAA61183EE74 /* TextAssistantWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357E4BD3210584B3A3C819D2 /* TextAssistantWindowView.swift */; };
 		9B672CD98B53C176359DEA8B /* CDSnippetFolder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0007E81E3EF2672DBE559A /* CDSnippetFolder+Extensions.swift */; };
@@ -29,48 +42,138 @@
 		B6A5AEE35B567647B72F7CBE /* CDClipboardEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D92D3ECA8D5FCF9554FEE1 /* CDClipboardEntry+Extensions.swift */; };
 		B81E49A8DA2BEF66B4CEE472 /* ClipboardHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8CD40788224142787FB90C /* ClipboardHistoryManager.swift */; };
 		BBDCDE254242BDB9A9362240 /* TextAssistantEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C140E7418C83852CF91F98AB /* TextAssistantEngine.swift */; };
+		CCC1834EEB24D0F998A7C6C4 /* hunspell.cxx in Sources */ = {isa = PBXBuildFile; fileRef = DFA4F006E6643E1EEEFFF0E2 /* hunspell.cxx */; };
 		D0F28C952589C672AAF53401 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8C6C7C404EC056E0A1F2E /* ShortcutManager.swift */; };
 		D83CD6461023E3436DC3F81E /* SnippetEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0531E157B682EC5A4A4DCD0 /* SnippetEditorView.swift */; };
 		D947D918A749F13CBD24D97B /* PasteEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEA5D549C0387A56B7E314A /* PasteEngine.swift */; };
+		DD508046C5BD21B3A5FC9DF6 /* phonet.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 8AA01CC6F99927FDEE44B3E1 /* phonet.cxx */; };
+		E09302BC0E5914A235DECF15 /* filemgr.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A5A802B9AB097BBB6F9C /* filemgr.cxx */; };
 		EBB77402D96FDFA15FCA350F /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B712FCF09A502616397B4 /* PreferencesView.swift */; };
 		EE31DC52935D4E29D5C7455C /* CDSnippet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BEEFEB20BD6DBA3A0945D /* CDSnippet+Extensions.swift */; };
 		FA888E199D06C4A841F4357E /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7DE3743A4E0F38D8677A7A /* MenuBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08FCE828601FBCCE62420C36 /* hashmgr.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hashmgr.hxx; sourceTree = "<group>"; };
 		09EA678045512A2F5028BC74 /* SnippetMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetMenuView.swift; sourceTree = "<group>"; };
 		09F1665E3AD3BE8FFF57C4CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FFB9F98EC27011F941F1DBA /* HoverPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverPreviewView.swift; sourceTree = "<group>"; };
+		1536A8E537E9F6247F8C077B /* filemgr.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = filemgr.hxx; sourceTree = "<group>"; };
+		165790158BC2D4FDDA10BAA0 /* utf_info.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = utf_info.hxx; sourceTree = "<group>"; };
+		16F029A9837B9621653EA529 /* snippets.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = snippets.xml; sourceTree = "<group>"; };
 		188B712FCF09A502616397B4 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		202D8C9B883D389C197E0E32 /* HunspellWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HunspellWrapper.h; sourceTree = "<group>"; };
+		2323EC65CB99D6B351E3A696 /* replist.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = replist.cxx; sourceTree = "<group>"; };
 		2488C7DA7A97C8EDFFD22673 /* SnippetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetManager.swift; sourceTree = "<group>"; };
 		26288973F883827DF724DF35 /* PasteFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteFlowApp.swift; sourceTree = "<group>"; };
 		2E6F34A6D836F405BE4E7097 /* PopupRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupRootView.swift; sourceTree = "<group>"; };
 		357E4BD3210584B3A3C819D2 /* TextAssistantWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAssistantWindowView.swift; sourceTree = "<group>"; };
 		3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
+		3EB2ABF9340792D1DA7AD83B /* htypes.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = htypes.hxx; sourceTree = "<group>"; };
+		442F8E2BA20BDB831BFF6ADA /* ru_RU.aff */ = {isa = PBXFileReference; path = ru_RU.aff; sourceTree = "<group>"; };
+		51CF67DBFFB758924D0AA402 /* w_char.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = w_char.hxx; sourceTree = "<group>"; };
 		574B13912FFC89BF725D4922 /* SnippetLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetLibraryView.swift; sourceTree = "<group>"; };
 		5BEA5D549C0387A56B7E314A /* PasteEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteEngine.swift; sourceTree = "<group>"; };
+		60AE8DB000B26AE3000C34D4 /* phonet.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = phonet.hxx; sourceTree = "<group>"; };
 		60CD511EE891EFC16B01BD7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		611755D125A92D7E70D109E0 /* ExportImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportService.swift; sourceTree = "<group>"; };
+		6357605677173B4450731E99 /* hunversion.h.in */ = {isa = PBXFileReference; path = hunversion.h.in; sourceTree = "<group>"; };
+		6445634A4AC8C70EED4336D4 /* affixmgr.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = affixmgr.hxx; sourceTree = "<group>"; };
+		65386A83C01BB04B98B812C6 /* hunversion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hunversion.h; sourceTree = "<group>"; };
+		68B9A5A802B9AB097BBB6F9C /* filemgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = filemgr.cxx; sourceTree = "<group>"; };
 		6B0007E81E3EF2672DBE559A /* CDSnippetFolder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSnippetFolder+Extensions.swift"; sourceTree = "<group>"; };
 		6F7DE3743A4E0F38D8677A7A /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		76FEF25C6AB3BABA47B61B54 /* replist.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = replist.hxx; sourceTree = "<group>"; };
+		7969AD130073712531DFD9D5 /* baseaffix.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = baseaffix.hxx; sourceTree = "<group>"; };
 		7D567CE49720903DDBC7AE73 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		8741E9F5C714275CD4EACC00 /* affixmgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = affixmgr.cxx; sourceTree = "<group>"; };
+		8AA01CC6F99927FDEE44B3E1 /* phonet.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = phonet.cxx; sourceTree = "<group>"; };
+		8E9C2FD3CE0E4EF685A2A9D8 /* csutil.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = csutil.hxx; sourceTree = "<group>"; };
+		9368A4B1CFE22B64F3C10393 /* ru_RU.dic */ = {isa = PBXFileReference; path = ru_RU.dic; sourceTree = "<group>"; };
 		93D92D3ECA8D5FCF9554FEE1 /* CDClipboardEntry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDClipboardEntry+Extensions.swift"; sourceTree = "<group>"; };
+		948E76BB284BB6FD4A293B42 /* hunvisapi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hunvisapi.h; sourceTree = "<group>"; };
+		969678335E3AF8CAD17F9B17 /* hashmgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hashmgr.cxx; sourceTree = "<group>"; };
 		997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9C94BED93640CF06A72B669C /* suggestmgr.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = suggestmgr.hxx; sourceTree = "<group>"; };
+		9C9DE94065A2AE80256F6544 /* langnum.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = langnum.hxx; sourceTree = "<group>"; };
 		A0531E157B682EC5A4A4DCD0 /* SnippetEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetEditorView.swift; sourceTree = "<group>"; };
 		A07BBF0BE7D5F91BF821E708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A3A1837162D1A8769258FF25 /* hunzip.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hunzip.cxx; sourceTree = "<group>"; };
+		A3C522E205C48DDEDBDF35B2 /* affentry.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = affentry.hxx; sourceTree = "<group>"; };
 		A6A8C6C7C404EC056E0A1F2E /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
+		B0CC8A22012993FD26F8CFA0 /* hunzip.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hunzip.hxx; sourceTree = "<group>"; };
 		B30BEEFEB20BD6DBA3A0945D /* CDSnippet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSnippet+Extensions.swift"; sourceTree = "<group>"; };
 		C140E7418C83852CF91F98AB /* TextAssistantEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAssistantEngine.swift; sourceTree = "<group>"; };
+		C2184348A3139053A7890259 /* affentry.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = affentry.cxx; sourceTree = "<group>"; };
 		C36E9B02E90CE4D24E544FE9 /* TextAssistantWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAssistantWindowController.swift; sourceTree = "<group>"; };
+		C405117A72714D3F43BEAA8B /* hunspell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hunspell.h; sourceTree = "<group>"; };
 		C7BF1FF1E70E5EC4B29B2BB8 /* PasteFlow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PasteFlow.xcdatamodel; sourceTree = "<group>"; };
+		C806D4B4A5F24F151A9DA50B /* hunspell.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hunspell.hxx; sourceTree = "<group>"; };
 		C9328CECAC63B41C34C5096B /* ClipboardHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryView.swift; sourceTree = "<group>"; };
 		CBF5EF7958CCE4A5297DAD2E /* PlaceholderProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderProcessor.swift; sourceTree = "<group>"; };
+		CE1C4C7CB2B6E74D9DCE57AA /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
+		D027859E4EE4A7C666BE9169 /* hunspell.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hunspell.hxx; sourceTree = "<group>"; };
 		D7BDA2002A546FDA7C52CD29 /* AppExclusionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExclusionFilter.swift; sourceTree = "<group>"; };
+		DAC94BC09203FB9B7A7887F1 /* suggestmgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = suggestmgr.cxx; sourceTree = "<group>"; };
+		DD85E2C235FC9B7F08B14E5C /* atypes.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = atypes.hxx; sourceTree = "<group>"; };
+		DFA4F006E6643E1EEEFFF0E2 /* hunspell.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hunspell.cxx; sourceTree = "<group>"; };
+		E4C0476038A101A26F91096F /* csutil.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = csutil.cxx; sourceTree = "<group>"; };
+		EEAE8AC5F8B2C7F26656C8B2 /* PasteFlow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PasteFlow-Bridging-Header.h"; sourceTree = "<group>"; };
 		F2EAE25F3312C8104F94FD9A /* PasteFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasteFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6B7D6D6667C14EDB4D0ECD /* HunspellWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HunspellWrapper.mm; sourceTree = "<group>"; };
 		FB8CD40788224142787FB90C /* ClipboardHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		318FA585DDB0CA7F5170D801 /* Hunspell */ = {
+			isa = PBXGroup;
+			children = (
+				C806D4B4A5F24F151A9DA50B /* hunspell.hxx */,
+				202D8C9B883D389C197E0E32 /* HunspellWrapper.h */,
+				FA6B7D6D6667C14EDB4D0ECD /* HunspellWrapper.mm */,
+				EEAE8AC5F8B2C7F26656C8B2 /* PasteFlow-Bridging-Header.h */,
+				32281DF7C2B41297F08B5BA3 /* src */,
+			);
+			path = Hunspell;
+			sourceTree = "<group>";
+		};
+		32281DF7C2B41297F08B5BA3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C2184348A3139053A7890259 /* affentry.cxx */,
+				A3C522E205C48DDEDBDF35B2 /* affentry.hxx */,
+				8741E9F5C714275CD4EACC00 /* affixmgr.cxx */,
+				6445634A4AC8C70EED4336D4 /* affixmgr.hxx */,
+				DD85E2C235FC9B7F08B14E5C /* atypes.hxx */,
+				7969AD130073712531DFD9D5 /* baseaffix.hxx */,
+				E4C0476038A101A26F91096F /* csutil.cxx */,
+				8E9C2FD3CE0E4EF685A2A9D8 /* csutil.hxx */,
+				68B9A5A802B9AB097BBB6F9C /* filemgr.cxx */,
+				1536A8E537E9F6247F8C077B /* filemgr.hxx */,
+				969678335E3AF8CAD17F9B17 /* hashmgr.cxx */,
+				08FCE828601FBCCE62420C36 /* hashmgr.hxx */,
+				3EB2ABF9340792D1DA7AD83B /* htypes.hxx */,
+				DFA4F006E6643E1EEEFFF0E2 /* hunspell.cxx */,
+				C405117A72714D3F43BEAA8B /* hunspell.h */,
+				D027859E4EE4A7C666BE9169 /* hunspell.hxx */,
+				65386A83C01BB04B98B812C6 /* hunversion.h */,
+				6357605677173B4450731E99 /* hunversion.h.in */,
+				948E76BB284BB6FD4A293B42 /* hunvisapi.h */,
+				A3A1837162D1A8769258FF25 /* hunzip.cxx */,
+				B0CC8A22012993FD26F8CFA0 /* hunzip.hxx */,
+				9C9DE94065A2AE80256F6544 /* langnum.hxx */,
+				8AA01CC6F99927FDEE44B3E1 /* phonet.cxx */,
+				60AE8DB000B26AE3000C34D4 /* phonet.hxx */,
+				2323EC65CB99D6B351E3A696 /* replist.cxx */,
+				76FEF25C6AB3BABA47B61B54 /* replist.hxx */,
+				DAC94BC09203FB9B7A7887F1 /* suggestmgr.cxx */,
+				9C94BED93640CF06A72B669C /* suggestmgr.hxx */,
+				165790158BC2D4FDDA10BAA0 /* utf_info.hxx */,
+				51CF67DBFFB758924D0AA402 /* w_char.hxx */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		37222D94692BDAF1844AA032 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,8 +251,17 @@
 				C48CF4CB2E49BEBD3A1B7C4F /* Features */,
 				C268746399708985AB161BAA /* Infrastructure */,
 				D5C681950C17B832823DA367 /* MenuBar */,
+				A856D04FEF257EA6709741F0 /* Resources */,
 			);
 			path = PasteFlow;
+			sourceTree = "<group>";
+		};
+		A856D04FEF257EA6709741F0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F7974665B834DFDA19EAF89C /* Dictionaries */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		BBD0CEEBEF5548E3E9FAD6A5 /* Views */ = {
@@ -172,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				611755D125A92D7E70D109E0 /* ExportImportService.swift */,
+				318FA585DDB0CA7F5170D801 /* Hunspell */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -210,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				2488C7DA7A97C8EDFFD22673 /* SnippetManager.swift */,
+				16F029A9837B9621653EA529 /* snippets.xml */,
 				D830B3A4F81B909A18C2FA81 /* Views */,
 			);
 			path = Snippets;
@@ -254,9 +368,19 @@
 		F73F137D3F38C595971CCD49 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE1C4C7CB2B6E74D9DCE57AA /* CustomTextEditor.swift */,
 				357E4BD3210584B3A3C819D2 /* TextAssistantWindowView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F7974665B834DFDA19EAF89C /* Dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				442F8E2BA20BDB831BFF6ADA /* ru_RU.aff */,
+				9368A4B1CFE22B64F3C10393 /* ru_RU.dic */,
+			);
+			path = Dictionaries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +443,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F803702254E0FFBA9DF6456 /* Assets.xcassets in Resources */,
+				854769170951076477245408 /* hunversion.h.in in Resources */,
+				01735EC478098B2ACDC0572E /* ru_RU.aff in Resources */,
+				0B41AD90593125C37824C208 /* ru_RU.dic in Resources */,
+				093C171FA658186BBCF3B3B0 /* snippets.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,8 +466,10 @@
 				46276E122A30E55AF33CF5B8 /* ClipboardHistoryView.swift in Sources */,
 				3DC13E5527C68DDAF0916F5A /* ClipboardMonitor.swift in Sources */,
 				5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */,
+				931654B51DC92C650FF78B7D /* CustomTextEditor.swift in Sources */,
 				2775E51E626868E3097FE8FA /* ExportImportService.swift in Sources */,
 				06F406B3BCFE5085D4D6406A /* HoverPreviewView.swift in Sources */,
+				5DB6A4A3856E2E8DFED67E29 /* HunspellWrapper.mm in Sources */,
 				4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */,
 				FA888E199D06C4A841F4357E /* MenuBarController.swift in Sources */,
 				D947D918A749F13CBD24D97B /* PasteEngine.swift in Sources */,
@@ -356,6 +486,16 @@
 				BBDCDE254242BDB9A9362240 /* TextAssistantEngine.swift in Sources */,
 				AAA03388380605DC323924F8 /* TextAssistantWindowController.swift in Sources */,
 				98A3A486A16FDAA61183EE74 /* TextAssistantWindowView.swift in Sources */,
+				59E40153383FDD8C7EA77F60 /* affentry.cxx in Sources */,
+				0CE5C99AC1CDBB9E767F6D9E /* affixmgr.cxx in Sources */,
+				6B4BBF623F21C9C9540B3A65 /* csutil.cxx in Sources */,
+				E09302BC0E5914A235DECF15 /* filemgr.cxx in Sources */,
+				9730CD58E2DB5C630C75E65A /* hashmgr.cxx in Sources */,
+				CCC1834EEB24D0F998A7C6C4 /* hunspell.cxx in Sources */,
+				74EC9D659AE8C0256C4F7CC3 /* hunzip.cxx in Sources */,
+				DD508046C5BD21B3A5FC9DF6 /* phonet.cxx in Sources */,
+				2F4342B5325A53148A549D24 /* replist.cxx in Sources */,
+				061B211E3421E146E48B9792 /* suggestmgr.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,10 +506,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = PasteFlow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/PasteFlow/Infrastructure/Hunspell $(SRCROOT)/PasteFlow/Infrastructure/Hunspell/src";
 				INFOPLIST_FILE = PasteFlow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -378,6 +521,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pasteflow.PasteFlow;
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "PasteFlow/Infrastructure/Hunspell/PasteFlow-Bridging-Header.h";
 				SWIFT_VERSION = 5.9;
 			};
 			name = Release;
@@ -503,10 +647,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = PasteFlow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/PasteFlow/Infrastructure/Hunspell $(SRCROOT)/PasteFlow/Infrastructure/Hunspell/src";
 				INFOPLIST_FILE = PasteFlow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -515,6 +662,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pasteflow.PasteFlow;
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "PasteFlow/Infrastructure/Hunspell/PasteFlow-Bridging-Header.h";
 				SWIFT_VERSION = 5.9;
 			};
 			name = Debug;
