@@ -1,0 +1,2 @@
+# Mark Hunspell C++ library as vendored code so GitHub Linguist correctly reports PasteFlow as a Swift project
+PasteFlow/Infrastructure/Hunspell/** linguist-vendored
