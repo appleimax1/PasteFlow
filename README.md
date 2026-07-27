@@ -10,14 +10,24 @@ PasteFlow is a lightweight, powerful, and convenient clipboard manager and text 
 
 ## Download & Installation
 
-1. Download the latest version of the app from this link:
-   👉 [**Download PasteFlow (Google Drive Folder)**](https://drive.google.com/drive/folders/1VSYy-SQL9Ki0fQ7HM7v-K-Q0Ux-MfcyU?usp=sharing)
+### Option 1: Via Homebrew (Recommended)
+
+You can easily install PasteFlow via Homebrew Cask:
+
+```bash
+brew tap appleimax1/pasteflow
+brew install --cask pasteflow
+```
+
+### Option 2: Direct Download (.dmg)
+
+1. Download the latest version from [GitHub Releases](https://github.com/appleimax1/PasteFlow/releases/latest) or [Google Drive Folder](https://drive.google.com/drive/folders/1VSYy-SQL9Ki0fQ7HM7v-K-Q0Ux-MfcyU?usp=sharing).
 2. Open the downloaded `.dmg` file and drag the application to your **Applications** folder.
 
 ### Bypassing macOS Gatekeeper (Security Warning)
-Since the application is built without a paid Apple Developer ID certificate, macOS might block its execution with an "unidentified developer" warning.
+Since the application is built without a paid Apple Developer ID certificate, macOS might block its execution with an "unidentified developer" warning upon first manual run.
 
-To allow launching the application, open the **Terminal** app (Terminal.app) and run the following command:
+To allow launching the application, open the **Terminal** app (Terminal.app) and run:
 
 ```bash
 sudo xattr -cr /Applications/PasteFlow.app
@@ -64,8 +74,18 @@ PasteFlow — это легкий, мощный и удобный менедже
 
 ## Скачивание и установка
 
-1. Скачайте последнюю версию приложения по ссылке:
-   👉 [**Скачать PasteFlow (Папка Google Диск)**](https://drive.google.com/drive/folders/1VSYy-SQL9Ki0fQ7HM7v-K-Q0Ux-MfcyU?usp=sharing)
+### Способ 1: Через Homebrew (Рекомендуется)
+
+Вы можете легко установить PasteFlow с помощью Homebrew Cask:
+
+```bash
+brew tap appleimax1/pasteflow
+brew install --cask pasteflow
+```
+
+### Способ 2: Прямая загрузка (.dmg)
+
+1. Скачайте последнюю версию со страницы [GitHub Releases](https://github.com/appleimax1/PasteFlow/releases/latest) или из [папки Google Диск](https://drive.google.com/drive/folders/1VSYy-SQL9Ki0fQ7HM7v-K-Q0Ux-MfcyU?usp=sharing).
 2. Откройте загруженный файл `.dmg` и перетащите приложение в папку **Программы** (`Applications`).
 
 ### Обход предупреждения безопасности macOS (Gatekeeper)
