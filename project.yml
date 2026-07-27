@@ -11,6 +11,8 @@ targets:
         resources:
           - PasteFlow/Resources/Dictionaries/ru_RU.dic
           - PasteFlow/Resources/Dictionaries/ru_RU.aff
+          - PasteFlow/Resources/Dictionaries/en_US.dic
+          - PasteFlow/Resources/Dictionaries/en_US.aff
     info:
       path: PasteFlow/Info.plist
       properties:

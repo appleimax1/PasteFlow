@@ -94,24 +94,22 @@ class ClipboardHistoryManager: ObservableObject {
     
     private func saveAndDeduplicate(_ newEntry: CDClipboardEntry, in context: NSManagedObjectContext) {
         let hash = newEntry.generateHash()
+        newEntry.contentHash = hash
         guard !hash.isEmpty else {
             try? context.save()
             enforceLimit(in: context)
             return
         }
         
-        // Проверять дубликат по всей базе
         let fetchRequest: NSFetchRequest<CDClipboardEntry> = NSFetchRequest(entityName: "CDClipboardEntry")
-        fetchRequest.predicate = NSPredicate(format: "self != %@", newEntry)
+        fetchRequest.predicate = NSPredicate(format: "contentHash == %@ AND self != %@", hash, newEntry)
+        fetchRequest.fetchLimit = 1
         
-        if let existing = try? context.fetch(fetchRequest) {
-            let duplicate = existing.first { $0.generateHash() == hash }
-            if duplicate != nil {
-                duplicate?.createdAt = Date()
-                context.delete(newEntry)
-                try? context.save()
-                return
-            }
+        if let existing = try? context.fetch(fetchRequest), let duplicate = existing.first {
+            duplicate.createdAt = Date()
+            context.delete(newEntry)
+            try? context.save()
+            return
         }
         
         try? context.save()

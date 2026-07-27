@@ -43,10 +43,13 @@ You can customize or clear hotkeys at any time:
 ## Key Features
 
 * **Bilingual Interface**: Fully supports both **English** (default) and **Russian** languages. The interface language can be changed easily in the app preferences under the General tab.
-* **Clipboard History**: Stores history of text, links, RTF, PDF, and images. Fast search and instant paste with **`⌘1`**...**`⌘9`**, **`⌘0`** hotkeys for items 1–10.
+* **Clipboard History**: Stores history of text, links, RTF, PDF, images, and **files/folders**. Fast search and instant paste with **`⌘1`**...**`⌘9`**, **`⌘0`** hotkeys for items 1–10.
+* **Incognito Mode (Pause)**: Temporarily pause clipboard recording via the popup to protect sensitive passwords and data.
+* **Auto-hiding**: The popup automatically hides after 15 seconds of inactivity.
 * **Snippet Library**: Create folders and templates for frequently used text, commands, or links with macro support.
 * **Text Assistant (Spellcheck & Punctuation)**: 
-  * **Hunspell Engine**: Powered by Hunspell morphological spellchecker with bundled Russian dictionary files (`ru_RU.dic` and `ru_RU.aff`).
+  * **Hunspell Engine**: Powered by Hunspell morphological spellchecker with bundled English and Russian dictionary files (`en_US` and `ru_RU`).
+  * **Smart Typo Correction**: Uses advanced shape-matching algorithms and common word frequencies for accurate suggestions.
   * **Extended Punctuation & Typography**: Rules for conjunctions, introductory words, addresses, quotes («...»), em-dashes (—), and spacing.
   * 100% local, offline text checking engine.
   * **Interactive Corrections**: Click any highlighted fix in the result pane to revert that specific word to the original text ("keep as is").
@@ -93,10 +96,13 @@ sudo xattr -cr /Applications/PasteFlow.app
 ## Ключевой функционал приложения
 
 * **Двуязычный интерфейс**: Полная поддержка **английского** (по умолчанию) и **русского** языков. Язык интерфейса переключается во вкладке «Основные».
-* **История копирования**: Хранение истории текстовых данных, ссылок, форматированного текста и изображений. Быстрый поиск и мгновенная вставка по горячим клавишам **`⌘1`**...**`⌘9`**, **`⌘0`** для записей с 1-й по 10-ю.
+* **История копирования**: Хранение истории текстовых данных, ссылок, форматированного текста, изображений и **файлов**. Быстрый поиск и мгновенная вставка по горячим клавишам **`⌘1`**...**`⌘9`**, **`⌘0`** для записей с 1-й по 10-ю.
+* **Режим Инкогнито (Пауза)**: Приостанавливайте запись истории прямо из меню, чтобы безопасно копировать пароли.
+* **Умное скрытие**: Окно истории автоматически исчезает при отсутствии активности в течение 15 секунд.
 * **Библиотека сниппетов**: Создание папок и шаблонов для часто используемых текстов, команд или ссылок с поддержкой макросов.
 * **Проверка текста (Орфография и Пунктуация)**:
-  * **Движок Hunspell**: Полноценная локальная проверка орфографии на базе морфологического движка Hunspell со встроенными словарями русского языка (`ru_RU.dic` и `ru_RU.aff`).
+  * **Движок Hunspell**: Полноценная локальная проверка орфографии на базе морфологического движка Hunspell со встроенными словарями английского и русского языков (`en_US` и `ru_RU`).
+  * **Умные алгоритмы**: Улучшенный алгоритм подбора слов на основе формы слова и частотных словарей для исправления опечаток.
   * **Расширенная пунктуация и типографика**: Поддержка правил для союзов, вводных слов, обращений, парных кавычек («...»), длинного тире (—) и коррекции пробелов.
   * 100% локальный движок проверки текста, работающий без интернета.
   * **Интерактивная отмена правок**: Кликните на любое подсвеченное исправление в правом окне, чтобы вернуть исходное слово («оставить как есть»).

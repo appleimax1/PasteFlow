@@ -81,12 +81,16 @@ struct PreferencesView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("PasteFlow v1.5")
+                    Text("PasteFlow v1.6")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.secondary)
                     Text("app.smart_clipboard_manager".localized)
                         .font(.system(size: 9))
                         .foregroundColor(.secondary.opacity(0.8))
+                    Link("GitHub", destination: URL(string: "https://github.com/appleimax1/PasteFlow")!)
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.accentColor)
+                        .padding(.top, 2)
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 16)
@@ -789,6 +793,30 @@ struct HelpPrefsTab: View {
                         icon: "checkmark.bubble.fill",
                         title: "help.feat_text_title".localized,
                         description: "help.feat_text_desc".localized
+                    )
+                    
+                    Divider()
+                    
+                    HelpFeatureRow(
+                        icon: "doc.on.doc.fill",
+                        title: "help.feat_files_title".localized,
+                        description: "help.feat_files_desc".localized
+                    )
+                    
+                    Divider()
+                    
+                    HelpFeatureRow(
+                        icon: "eye.slash.fill",
+                        title: "help.feat_pause_title".localized,
+                        description: "help.feat_pause_desc".localized
+                    )
+                    
+                    Divider()
+                    
+                    HelpFeatureRow(
+                        icon: "timer",
+                        title: "help.feat_autohide_title".localized,
+                        description: "help.feat_autohide_desc".localized
                     )
                 }
             }

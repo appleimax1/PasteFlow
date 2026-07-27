@@ -46,7 +46,7 @@ cp -R "$APP_PATH" "$DMG_TEMP/"
 ln -s /Applications "$DMG_TEMP/Applications"
 
 echo "=== 5. Создание DMG образа ==="
-hdiutil create -volname "PasteFlow v1.5" -srcfolder "$DMG_TEMP" -ov -format UDZO ./PasteFlow.dmg
+hdiutil create -volname "PasteFlow v1.6" -srcfolder "$DMG_TEMP" -ov -format UDZO ./PasteFlow.dmg
 echo "========================================="
 echo "Готово! Образ успешно создан: $(pwd)/PasteFlow.dmg"
 

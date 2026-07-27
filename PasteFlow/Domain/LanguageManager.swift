@@ -111,6 +111,12 @@ class LanguageManager: ObservableObject {
             "help.feat_group_desc": "Items are automatically split into history folders (e.g., 10 or 20 items per folder) to save screen space.",
             "help.feat_snip_title": "Snippet Library",
             "help.feat_snip_desc": "Create templates for frequently used texts and paste them with a single click via the snippets menu.",
+            "help.feat_files_title": "Files & Images",
+            "help.feat_files_desc": "Copy and paste files and images directly from Finder or other apps. PasteFlow automatically distinguishes them.",
+            "help.feat_pause_title": "Incognito Mode",
+            "help.feat_pause_desc": "Pause the clipboard history recording to protect sensitive data like passwords.",
+            "help.feat_autohide_title": "Auto-hiding",
+            "help.feat_autohide_desc": "The popup automatically hides after 15 seconds of inactivity so it doesn't get in your way.",
             
             // Main / Popup UI
             "popup.history": "History",
@@ -129,6 +135,12 @@ class LanguageManager: ObservableObject {
             "popup.search_snippets": "Search snippets...",
             "popup.snippets_empty": "No Snippets",
             "popup.snippets_empty_desc": "Use the Snippet Manager in the settings window to create templates or import them from XML.",
+            "popup.filter_all": "All",
+            "popup.filter_text": "Text",
+            "popup.filter_images": "Images",
+            "popup.filter_files": "Files",
+            "popup.pause_monitoring": "Pause History (Incognito)",
+            "popup.resume_monitoring": "Resume History",
             
             // Snippets Library
             "snippets.untitled": "Untitled",
@@ -294,6 +306,12 @@ class LanguageManager: ObservableObject {
             "help.feat_group_desc": "Элементы автоматически разбиваются на папки истории (например, по 10 или 20 элементов) для экономии места на экране.",
             "help.feat_snip_title": "Библиотека сниппетов",
             "help.feat_snip_desc": "Создавайте шаблоны часто используемых текстов и вставляйте их в один клик через меню сниппетов.",
+            "help.feat_files_title": "Файлы и Картинки",
+            "help.feat_files_desc": "Копируйте и вставляйте файлы и картинки прямо из Finder или других приложений. PasteFlow автоматически различает их форматы.",
+            "help.feat_pause_title": "Режим Инкогнито",
+            "help.feat_pause_desc": "Приостановите запись истории буфера обмена для работы с паролями или конфиденциальными данными.",
+            "help.feat_autohide_title": "Автоматическое скрытие",
+            "help.feat_autohide_desc": "Окно автоматически скрывается после 15 секунд бездействия, чтобы не мешать работе.",
             
             // Main / Popup UI
             "popup.history": "История",
@@ -312,6 +330,12 @@ class LanguageManager: ObservableObject {
             "popup.search_snippets": "Поиск в сниппетах...",
             "popup.snippets_empty": "Сниппеты отсутствуют",
             "popup.snippets_empty_desc": "Используйте Менеджер сниппетов в окне настроек для создания шаблонов или импорта из XML.",
+            "popup.filter_all": "Все",
+            "popup.filter_text": "Текст",
+            "popup.filter_images": "Картинки",
+            "popup.filter_files": "Файлы",
+            "popup.pause_monitoring": "Приостановить запись (Инкогнито)",
+            "popup.resume_monitoring": "Возобновить запись истории",
             
             // Snippets Library
             "snippets.untitled": "Без названия",

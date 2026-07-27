@@ -56,7 +56,10 @@ class PasteEngine {
                 case "file":
                     let urls = entry.fileURLs
                     if !urls.isEmpty {
+                        let paths = urls.map { $0.path }
                         pasteboard.writeObjects(urls as [NSURL])
+                        pasteboard.setPropertyList(paths, forType: NSPasteboard.PasteboardType("NSFilenamesPboardType"))
+                        pasteboard.setString(paths.joined(separator: "\n"), forType: .string)
                     }
                 default:
                     if let string = entry.rawString {

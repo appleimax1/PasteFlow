@@ -1,7 +1,7 @@
 import Cocoa
 import SwiftUI
 
-class MenuBarController: ObservableObject {
+class MenuBarController: NSObject, ObservableObject, NSPopoverDelegate {
     @Published var selectedTab: Int = 0
     
     private var statusItem: NSStatusItem
@@ -15,13 +15,16 @@ class MenuBarController: ObservableObject {
     private var preferencesWindow: NSWindow?
     private var snippetManagerWindow: NSWindow?
 
-    init() {
+    override init() {
         popover = NSPopover()
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        super.init()
+        
+        popover.delegate = self
         popover.contentSize = NSSize(width: 350, height: 470)
         popover.behavior = .semitransient
         popover.animates = true
 
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {
             let symbolImage = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "PasteFlow")
                            ?? NSImage(systemSymbolName: "clipboard", accessibilityDescription: "PasteFlow")
@@ -60,6 +63,9 @@ class MenuBarController: ObservableObject {
         previousApplication = NSWorkspace.shared.frontmostApplication
     }
 
+    private var inactivityTimer: Timer?
+    private var localEventMonitor: Any?
+
     @objc func togglePopoverAction(_ sender: AnyObject?) {
         if popover.isShown {
             closePopover(sender)
@@ -87,20 +93,53 @@ class MenuBarController: ObservableObject {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             NSApp.activate(ignoringOtherApps: true)
             
+            if eventMonitor != nil {
+                NSEvent.removeMonitor(eventMonitor!)
+                eventMonitor = nil
+            }
             eventMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
                 if let strongSelf = self, strongSelf.popover.isShown {
                     strongSelf.closePopover(event)
                 }
+            }
+            
+            if localEventMonitor != nil {
+                NSEvent.removeMonitor(localEventMonitor!)
+                localEventMonitor = nil
+            }
+            localEventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved, .leftMouseDown, .rightMouseDown, .keyDown, .scrollWheel]) { [weak self] event in
+                self?.resetInactivityTimer()
+                return event
+            }
+            resetInactivityTimer()
+        }
+    }
+
+    private func resetInactivityTimer() {
+        inactivityTimer?.invalidate()
+        inactivityTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false) { [weak self] _ in
+            if let strongSelf = self, strongSelf.popover.isShown {
+                strongSelf.closePopover(nil)
             }
         }
     }
 
     func closePopover(_ sender: AnyObject?) {
         popover.performClose(sender)
+        // Monitor removal is now handled in popoverDidClose
+    }
+    
+    func popoverDidClose(_ notification: Notification) {
         if let eventMonitor = eventMonitor {
             NSEvent.removeMonitor(eventMonitor)
             self.eventMonitor = nil
         }
+        if let localMonitor = localEventMonitor {
+            NSEvent.removeMonitor(localMonitor)
+            self.localEventMonitor = nil
+        }
+        inactivityTimer?.invalidate()
+        inactivityTimer = nil
     }
     
     func openPreferences() {

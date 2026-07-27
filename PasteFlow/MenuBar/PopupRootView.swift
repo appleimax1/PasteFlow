@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PopupRootView: View {
     @ObservedObject var controller: MenuBarController
+    @State private var isPaused: Bool = ClipboardMonitor.shared.isPaused
     
     var body: some View {
         VStack(spacing: 0) {
@@ -12,6 +13,24 @@ struct PopupRootView: View {
                     Label("popup.snippets".localized, systemImage: "square.grid.2x2").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                
+                Spacer()
+                
+                Button(action: {
+                    isPaused.toggle()
+                    ClipboardMonitor.shared.isPaused = isPaused
+                }) {
+                    Image(systemName: isPaused ? "eye.slash.fill" : "eye")
+                        .foregroundColor(isPaused ? .orange : .secondary)
+                        .font(.system(size: 15))
+                        .frame(width: 24, height: 24)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(PlainButtonStyle())
+                .help(isPaused ? "popup.resume_monitoring".localized : "popup.pause_monitoring".localized)
+                .onAppear {
+                    isPaused = ClipboardMonitor.shared.isPaused
+                }
             }
             .padding(.horizontal, 12)
             .padding(.top, 10)

@@ -29,34 +29,43 @@ struct TextDiffSegment: Identifiable {
 class TextAssistantEngine {
     static let shared = TextAssistantEngine()
     
-    private lazy var hunspell: HunspellWrapper? = {
+    private lazy var hunspellEngines: [HunspellWrapper] = {
+        var engines: [HunspellWrapper] = []
         let fileManager = FileManager.default
         let bundlePath = Bundle.main.bundlePath
         let resourcePath = Bundle.main.resourcePath ?? (bundlePath + "/Contents/Resources")
         
-        let possiblePaths: [(dic: String, aff: String)] = [
-            (resourcePath + "/ru_RU.dic", resourcePath + "/ru_RU.aff"),
-            (resourcePath + "/Dictionaries/ru_RU.dic", resourcePath + "/Dictionaries/ru_RU.aff"),
-            (resourcePath + "/Resources/Dictionaries/ru_RU.dic", resourcePath + "/Resources/Dictionaries/ru_RU.aff"),
-            (
-                Bundle.main.path(forResource: "ru_RU", ofType: "dic") ?? "",
-                Bundle.main.path(forResource: "ru_RU", ofType: "aff") ?? ""
-            ),
-            (
-                fileManager.currentDirectoryPath + "/PasteFlow/Resources/Dictionaries/ru_RU.dic",
-                fileManager.currentDirectoryPath + "/PasteFlow/Resources/Dictionaries/ru_RU.aff"
-            )
-        ]
-        
-        for p in possiblePaths {
-            if !p.dic.isEmpty && !p.aff.isEmpty && fileManager.fileExists(atPath: p.dic) && fileManager.fileExists(atPath: p.aff) {
-                NSLog("[TextAssistantEngine] Successfully loaded Hunspell dictionary from: %@", p.dic)
-                return HunspellWrapper(dicPath: p.dic, affPath: p.aff)
+        let languages = ["ru_RU", "en_US"]
+        for lang in languages {
+            let possiblePaths: [(dic: String, aff: String)] = [
+                (resourcePath + "/\(lang).dic", resourcePath + "/\(lang).aff"),
+                (resourcePath + "/Dictionaries/\(lang).dic", resourcePath + "/Dictionaries/\(lang).aff"),
+                (resourcePath + "/Resources/Dictionaries/\(lang).dic", resourcePath + "/Resources/Dictionaries/\(lang).aff"),
+                (
+                    Bundle.main.path(forResource: lang, ofType: "dic") ?? "",
+                    Bundle.main.path(forResource: lang, ofType: "aff") ?? ""
+                ),
+                (
+                    fileManager.currentDirectoryPath + "/PasteFlow/Resources/Dictionaries/\(lang).dic",
+                    fileManager.currentDirectoryPath + "/PasteFlow/Resources/Dictionaries/\(lang).aff"
+                )
+            ]
+            
+            for p in possiblePaths {
+                if !p.dic.isEmpty && !p.aff.isEmpty && fileManager.fileExists(atPath: p.dic) && fileManager.fileExists(atPath: p.aff) {
+                    NSLog("[TextAssistantEngine] Successfully loaded Hunspell dictionary from: %@", p.dic)
+                    if let engine = HunspellWrapper(dicPath: p.dic, affPath: p.aff) {
+                        engines.append(engine)
+                    }
+                    break
+                }
             }
         }
         
-        NSLog("[TextAssistantEngine] WARNING: Could not find ru_RU.dic / ru_RU.aff in bundle!")
-        return nil
+        if engines.isEmpty {
+            NSLog("[TextAssistantEngine] WARNING: Could not find any dictionaries in bundle!")
+        }
+        return engines
     }()
     
     /// Основной метод проверки текста (100% локальный, Hunspell + Безопасное ранжирование + Слитные опечатки + Пунктуация)
@@ -156,7 +165,8 @@ class TextAssistantEngine {
         var text = input
         var fixes = 0
         
-        guard let hunspellEngine = self.hunspell else {
+        let engines = self.hunspellEngines
+        guard !engines.isEmpty else {
             NSLog("[TextAssistantEngine] Hunspell engine unavailable")
             return (input, 0)
         }
@@ -168,17 +178,17 @@ class TextAssistantEngine {
             let word = item.word
             
             // Пропускаем однобуквенные слова, числа и аббревиатуры из ВСЕХ заглавных букв (США, РФ, API, JSON)
-            if word.count < 2 || containsNonRussianOrDigits(word) || isAllCapsAcronym(word) {
+            if word.count < 2 || word.contains(where: { $0.isNumber }) || isAllCapsAcronym(word) {
                 continue
             }
             
             // 1. Проверяем корректность слова в оригинальном и нижнем регистре
-            var isWordCorrect = hunspellEngine.isCorrect(word) || hunspellEngine.isCorrect(word.lowercased())
+            let isWordCorrect = engines.contains(where: { $0.isCorrect(word) || $0.isCorrect(word.lowercased()) })
             
             // 2. Проверка гипотезы буквы Ё (если слово пишется через "е", проверяем вариант через "ё")
             if !isWordCorrect && word.contains("е") {
                 let yoWord = word.replacingOccurrences(of: "е", with: "ё")
-                if hunspellEngine.isCorrect(yoWord) {
+                if engines.contains(where: { $0.isCorrect(yoWord) }) {
                     mutable.replaceCharacters(in: item.range, with: yoWord)
                     fixes += 1
                     continue
@@ -186,9 +196,14 @@ class TextAssistantEngine {
             }
             
             if !isWordCorrect {
-                var suggestions = hunspellEngine.suggest(word)
+                var suggestions: [String] = []
+                for engine in engines {
+                    suggestions.append(contentsOf: engine.suggest(word))
+                }
                 if suggestions.isEmpty && word.first?.isUppercase == true {
-                    suggestions = hunspellEngine.suggest(word.lowercased())
+                    for engine in engines {
+                        suggestions.append(contentsOf: engine.suggest(word.lowercased()))
+                    }
                 }
                 
                 if let best = selectBestCandidate(for: word, from: suggestions), !best.isEmpty, best.lowercased() != word.lowercased() {
@@ -254,6 +269,23 @@ class TextAssistantEngine {
         
         guard !suggestions.isEmpty else { return nil }
         
+        let commonWords: Set<String> = [
+            "the", "be", "to", "of", "and", "a", "in", "that", "have", "i",
+            "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
+            "this", "but", "his", "by", "from", "they", "we", "say", "her", "she",
+            "or", "an", "will", "my", "one", "all", "would", "there", "their", "what",
+            "so", "up", "out", "if", "about", "who", "get", "which", "go", "me",
+            "is", "are", "was", "were", "am", "has", "had", "been", "can", "could",
+            "should", "here", "where", "when", "why", "how", "men", "women", "got", "his",
+            "и", "в", "не", "на", "я", "быть", "с", "он", "что", "а",
+            "по", "это", "она", "этот", "к", "но", "они", "мы", "как", "из",
+            "у", "который", "то", "за", "свой", "чтобы", "весь", "год", "от", "так",
+            "о", "для", "ты", "же", "все", "тот", "мочь", "вы", "человек", "такой",
+            "его", "сказать", "только", "или", "еще", "бы", "себя", "один", "уже",
+            "до", "время", "если", "сам", "когда", "другой", "вот", "говорить", "наш", "мой",
+            "знать", "стать", "при", "да", "нет", "здесь", "там", "где"
+        ]
+        
         // Ранжирование по минимальному дистанционному расстоянию Левенштейна и совпадению начального префикса
         var bestCandidate = suggestions.first!
         var minScore = Int.max
@@ -262,12 +294,21 @@ class TextAssistantEngine {
             let lowerCand = cand.lowercased()
             let dist = levenshteinDistance(lowerWord, lowerCand)
             
-            var prefixBonus = 0
-            if lowerWord.prefix(1) == lowerCand.prefix(1) { prefixBonus += 2 }
-            if lowerWord.prefix(2) == lowerCand.prefix(2) { prefixBonus += 3 }
-            if lowerWord.prefix(3) == lowerCand.prefix(3) { prefixBonus += 4 }
+            var shapeBonus = 0
+            if lowerWord.count == lowerCand.count {
+                shapeBonus += 3
+            }
+            if lowerWord.prefix(1) == lowerCand.prefix(1) {
+                shapeBonus += 2
+            }
+            if lowerWord.suffix(1) == lowerCand.suffix(1) && lowerWord.count > 2 {
+                shapeBonus += 2
+            }
+            if commonWords.contains(lowerCand) {
+                shapeBonus += 5
+            }
             
-            let score = dist * 10 - prefixBonus
+            let score = dist * 10 - shapeBonus
             if score < minScore {
                 minScore = score
                 bestCandidate = cand
@@ -491,7 +532,7 @@ class TextAssistantEngine {
         var items: [WordItem] = []
         let range = NSRange(location: 0, length: text.utf16.count)
         
-        if let regex = try? NSRegularExpression(pattern: "[А-Яа-яЁё]+(?:-[А-Яа-яЁё]+)*", options: []) {
+        if let regex = try? NSRegularExpression(pattern: "[А-Яа-яЁёA-Za-z]+(?:-[А-Яа-яЁёA-Za-z]+)*", options: []) {
             let matches = regex.matches(in: text, options: [], range: range)
             for match in matches {
                 if let r = Range(match.range, in: text) {
@@ -501,15 +542,6 @@ class TextAssistantEngine {
             }
         }
         return items
-    }
-    
-    private func containsNonRussianOrDigits(_ word: String) -> Bool {
-        for char in word {
-            if char.isASCII || char.isNumber {
-                return true
-            }
-        }
-        return false
     }
     
     private func matchCase(original: String, suggestion: String) -> String {

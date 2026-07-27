@@ -23,6 +23,7 @@
 		3DC13E5527C68DDAF0916F5A /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */; };
 		46276E122A30E55AF33CF5B8 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9328CECAC63B41C34C5096B /* ClipboardHistoryView.swift */; };
 		4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D567CE49720903DDBC7AE73 /* LanguageManager.swift */; };
+		57664EDA19B6BD804FC02F5B /* en_US.aff in Resources */ = {isa = PBXBuildFile; fileRef = 405A275D348906FBADE9DA12 /* en_US.aff */; };
 		59E40153383FDD8C7EA77F60 /* affentry.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C2184348A3139053A7890259 /* affentry.cxx */; };
 		5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */; };
 		5DB6A4A3856E2E8DFED67E29 /* HunspellWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6B7D6D6667C14EDB4D0ECD /* HunspellWrapper.mm */; };
@@ -31,6 +32,7 @@
 		70C5616CB544DBC55E862E12 /* PopupRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F34A6D836F405BE4E7097 /* PopupRootView.swift */; };
 		74EC9D659AE8C0256C4F7CC3 /* hunzip.cxx in Sources */ = {isa = PBXBuildFile; fileRef = A3A1837162D1A8769258FF25 /* hunzip.cxx */; };
 		854769170951076477245408 /* hunversion.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 6357605677173B4450731E99 /* hunversion.h.in */; };
+		8644F446F55B76369519B5C8 /* en_US.dic in Resources */ = {isa = PBXBuildFile; fileRef = 85275618B57A0E6012E4F0ED /* en_US.dic */; };
 		931654B51DC92C650FF78B7D /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C4C7CB2B6E74D9DCE57AA /* CustomTextEditor.swift */; };
 		94418B4158166C1D6D4F1333 /* SnippetMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EA678045512A2F5028BC74 /* SnippetMenuView.swift */; };
 		9730CD58E2DB5C630C75E65A /* hashmgr.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 969678335E3AF8CAD17F9B17 /* hashmgr.cxx */; };
@@ -70,6 +72,7 @@
 		357E4BD3210584B3A3C819D2 /* TextAssistantWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAssistantWindowView.swift; sourceTree = "<group>"; };
 		3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		3EB2ABF9340792D1DA7AD83B /* htypes.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = htypes.hxx; sourceTree = "<group>"; };
+		405A275D348906FBADE9DA12 /* en_US.aff */ = {isa = PBXFileReference; path = en_US.aff; sourceTree = "<group>"; };
 		442F8E2BA20BDB831BFF6ADA /* ru_RU.aff */ = {isa = PBXFileReference; path = ru_RU.aff; sourceTree = "<group>"; };
 		51CF67DBFFB758924D0AA402 /* w_char.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = w_char.hxx; sourceTree = "<group>"; };
 		574B13912FFC89BF725D4922 /* SnippetLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetLibraryView.swift; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 		76FEF25C6AB3BABA47B61B54 /* replist.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = replist.hxx; sourceTree = "<group>"; };
 		7969AD130073712531DFD9D5 /* baseaffix.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = baseaffix.hxx; sourceTree = "<group>"; };
 		7D567CE49720903DDBC7AE73 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		85275618B57A0E6012E4F0ED /* en_US.dic */ = {isa = PBXFileReference; path = en_US.dic; sourceTree = "<group>"; };
 		8741E9F5C714275CD4EACC00 /* affixmgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = affixmgr.cxx; sourceTree = "<group>"; };
 		8AA01CC6F99927FDEE44B3E1 /* phonet.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = phonet.cxx; sourceTree = "<group>"; };
 		8E9C2FD3CE0E4EF685A2A9D8 /* csutil.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = csutil.hxx; sourceTree = "<group>"; };
@@ -377,6 +381,8 @@
 		F7974665B834DFDA19EAF89C /* Dictionaries */ = {
 			isa = PBXGroup;
 			children = (
+				405A275D348906FBADE9DA12 /* en_US.aff */,
+				85275618B57A0E6012E4F0ED /* en_US.dic */,
 				442F8E2BA20BDB831BFF6ADA /* ru_RU.aff */,
 				9368A4B1CFE22B64F3C10393 /* ru_RU.dic */,
 			);
@@ -443,6 +449,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F803702254E0FFBA9DF6456 /* Assets.xcassets in Resources */,
+				57664EDA19B6BD804FC02F5B /* en_US.aff in Resources */,
+				8644F446F55B76369519B5C8 /* en_US.dic in Resources */,
 				854769170951076477245408 /* hunversion.h.in in Resources */,
 				01735EC478098B2ACDC0572E /* ru_RU.aff in Resources */,
 				0B41AD90593125C37824C208 /* ru_RU.dic in Resources */,

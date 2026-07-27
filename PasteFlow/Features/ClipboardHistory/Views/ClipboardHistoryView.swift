@@ -12,7 +12,17 @@ struct ClipboardHistoryView: View {
         animation: .easeInOut)
     private var entries: FetchedResults<CDClipboardEntry>
     
+    enum CategoryFilter: String, CaseIterable, Identifiable {
+        case all = "popup.filter_all"
+        case text = "popup.filter_text"
+        case images = "popup.filter_images"
+        case files = "popup.filter_files"
+        var id: String { self.rawValue }
+        var localizedName: String { self.rawValue.localized }
+    }
+    
     @State private var searchText = ""
+    @State private var selectedCategory: CategoryFilter = .all
     @State private var hoveredEntry: CDClipboardEntry?
     @State private var hoveredIndex: Int?
     @State private var expandedGroups: Set<Int> = [0]
@@ -44,6 +54,26 @@ struct ClipboardHistoryView: View {
             .background(RoundedRectangle(cornerRadius: 8).fill(Color(NSColor.controlBackgroundColor)))
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
+            
+            HStack(spacing: 8) {
+                ForEach(CategoryFilter.allCases) { filter in
+                    Button(action: {
+                        selectedCategory = filter
+                    }) {
+                        Text(filter.localizedName)
+                            .font(.system(size: 11, weight: .medium))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 5)
+                            .background(selectedCategory == filter ? Color.accentColor : Color.secondary.opacity(0.15))
+                            .foregroundColor(selectedCategory == filter ? .white : .primary)
+                            .cornerRadius(14)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 12)
+            .padding(.bottom, 10)
             
             Divider()
             
@@ -105,15 +135,24 @@ struct ClipboardHistoryView: View {
     }
     
     var filteredEntries: [CDClipboardEntry] {
-        if searchText.isEmpty {
-            return Array(entries)
-        } else {
-            return entries.filter { entry in
+        var result = Array(entries)
+        
+        switch selectedCategory {
+        case .all: break
+        case .text: result = result.filter { $0.contentType == "plainText" || $0.contentType == "rtf" }
+        case .images: result = result.filter { $0.contentType == "image" }
+        case .files: result = result.filter { $0.contentType == "file" || $0.contentType == "pdf" }
+        }
+        
+        if !searchText.isEmpty {
+            result = result.filter { entry in
                 entry.displayTitle.localizedCaseInsensitiveContains(searchText) ||
                 (entry.rawString?.localizedCaseInsensitiveContains(searchText) ?? false) ||
                 (entry.sourceAppName?.localizedCaseInsensitiveContains(searchText) ?? false)
             }
         }
+        
+        return result
     }
     
     var groupedEntries: [[CDClipboardEntry]] {
@@ -192,8 +231,29 @@ struct ClipboardHistoryView: View {
             Button(action: { PasteEngine.shared.paste(entry: entry) }) {
                 Label("popup.paste".localized, systemImage: "doc.on.clipboard")
             }
-            Button(action: { PasteEngine.shared.paste(entry: entry, asPlainText: true) }) {
-                Label("popup.paste_plain".localized, systemImage: "text.quote")
+            if entry.contentType == "plainText" || entry.contentType == "rtf" {
+                Button(action: { PasteEngine.shared.paste(entry: entry, asPlainText: true) }) {
+                    Label("popup.paste_plain".localized, systemImage: "text.quote")
+                }
+                Divider()
+                Button(action: {
+                    if let text = entry.rawString {
+                        PasteEngine.shared.paste(text: text.uppercased())
+                    }
+                }) {
+                    Label("popup.paste_uppercase".localized, systemImage: "textformat.size")
+                }
+                Button(action: {
+                    if let text = entry.rawString {
+                        PasteEngine.shared.paste(text: text.trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                }) {
+                    Label("popup.paste_trimmed".localized, systemImage: "scissors")
+                }
+            } else {
+                Button(action: { PasteEngine.shared.paste(entry: entry, asPlainText: true) }) {
+                    Label("popup.paste_plain".localized, systemImage: "text.quote")
+                }
             }
             Divider()
             Button(action: { ClipboardHistoryManager.shared.togglePin(entry) }) {

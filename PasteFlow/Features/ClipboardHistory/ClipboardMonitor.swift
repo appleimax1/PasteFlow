@@ -3,6 +3,7 @@ import Cocoa
 class ClipboardMonitor {
     static let shared = ClipboardMonitor()
     
+    var isPaused: Bool = false
     private var timer: Timer?
     private let pasteboard = NSPasteboard.general
     private var lastChangeCount = 0
@@ -26,6 +27,8 @@ class ClipboardMonitor {
         let currentChangeCount = pasteboard.changeCount
         guard currentChangeCount != lastChangeCount else { return }
         lastChangeCount = currentChangeCount
+        
+        guard !isPaused else { return }
         
         let types = pasteboard.types ?? []
         
@@ -59,14 +62,13 @@ class ClipboardMonitor {
         let enablePDF = UserDefaults.standard.object(forKey: "PasteFlow.EnablePDF") as? Bool ?? true
         let enableFiles = UserDefaults.standard.object(forKey: "PasteFlow.EnableFiles") as? Bool ?? true
         
-        // 1. Text & Rich Text (most common)
-        if enableText, let text = pasteboard.string(forType: .string), !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            if enableRTF, let rtfData = pasteboard.data(forType: .rtf) {
-                ClipboardHistoryManager.shared.addRTFEntry(rtfData: rtfData, plainText: text, appName: appName, appBundleID: appBundleID)
-            } else {
-                ClipboardHistoryManager.shared.addTextEntry(text: text, appName: appName, appBundleID: appBundleID)
+        // 1. Files (Should be checked first because Finder puts BOTH fileURL and string in pasteboard)
+        if enableFiles, let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL], !urls.isEmpty {
+            let fileUrls = urls.filter { $0.isFileURL }
+            if !fileUrls.isEmpty {
+                ClipboardHistoryManager.shared.addFileEntry(urls: fileUrls, appName: appName, appBundleID: appBundleID)
+                return
             }
-            return
         }
         
         // 2. Images
@@ -82,13 +84,14 @@ class ClipboardMonitor {
             return
         }
         
-        // 4. Files
-        if enableFiles, let urls = pasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL], !urls.isEmpty {
-            let fileUrls = urls.filter { $0.isFileURL }
-            if !fileUrls.isEmpty {
-                ClipboardHistoryManager.shared.addFileEntry(urls: fileUrls, appName: appName, appBundleID: appBundleID)
-                return
+        // 4. Text & Rich Text (most common, but fallback)
+        if enableText, let text = pasteboard.string(forType: .string), !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if enableRTF, let rtfData = pasteboard.data(forType: .rtf) {
+                ClipboardHistoryManager.shared.addRTFEntry(rtfData: rtfData, plainText: text, appName: appName, appBundleID: appBundleID)
+            } else {
+                ClipboardHistoryManager.shared.addTextEntry(text: text, appName: appName, appBundleID: appBundleID)
             }
+            return
         }
     }
 }
