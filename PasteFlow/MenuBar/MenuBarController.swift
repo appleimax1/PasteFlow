@@ -14,8 +14,10 @@ class MenuBarController: NSObject, ObservableObject, NSPopoverDelegate {
     
     private var preferencesWindow: NSWindow?
     private var snippetManagerWindow: NSWindow?
+    private let appEnvironment: AppEnvironment
 
-    override init() {
+    init(appEnvironment: AppEnvironment) {
+        self.appEnvironment = appEnvironment
         popover = NSPopover()
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         super.init()
@@ -43,7 +45,8 @@ class MenuBarController: NSObject, ObservableObject, NSPopoverDelegate {
         }
         
         let contentView = PopupRootView(controller: self)
-            .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
+            .environment(\.managedObjectContext, appEnvironment.coreDataStack.viewContext)
+            .environmentObject(appEnvironment)
         
         let hostingController = NSHostingController(rootView: contentView)
         popover.contentViewController = hostingController
@@ -162,7 +165,8 @@ class MenuBarController: NSObject, ObservableObject, NSPopoverDelegate {
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(
             rootView: PreferencesView()
-                .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
+                .environment(\.managedObjectContext, appEnvironment.coreDataStack.viewContext)
+                .environmentObject(appEnvironment)
         )
         self.preferencesWindow = window
         window.makeKeyAndOrderFront(nil)
@@ -189,7 +193,8 @@ class MenuBarController: NSObject, ObservableObject, NSPopoverDelegate {
         window.isReleasedWhenClosed = false
         window.contentView = NSHostingView(
             rootView: SnippetLibraryView()
-                .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
+                .environment(\.managedObjectContext, appEnvironment.coreDataStack.viewContext)
+                .environmentObject(appEnvironment)
         )
         self.snippetManagerWindow = window
         window.makeKeyAndOrderFront(nil)

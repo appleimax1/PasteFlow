@@ -18,6 +18,14 @@ extension CDClipboardEntry {
         return NSImage(data: data)
     }
     
+    var thumbnailImage: NSImage? {
+        guard contentType == "image" else { return nil }
+        if let thumbData = self.value(forKey: "thumbnailData") as? Data {
+            return NSImage(data: thumbData)
+        }
+        return image
+    }
+    
     var fileURLs: [URL] {
         guard let data = fileURLsData,
               let paths = try? JSONDecoder().decode([String].self, from: data) else {

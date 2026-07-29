@@ -9,6 +9,11 @@ extension CDSnippetFolder {
     
     var snippetsArray: [CDSnippet] {
         let set = snippets as? Set<CDSnippet> ?? []
-        return set.sorted { ($0.title ?? "") < ($1.title ?? "") }
+        return set.sorted { 
+            if $0.sortOrder != $1.sortOrder {
+                return $0.sortOrder < $1.sortOrder
+            }
+            return ($0.title ?? "") < ($1.title ?? "") 
+        }
     }
 }

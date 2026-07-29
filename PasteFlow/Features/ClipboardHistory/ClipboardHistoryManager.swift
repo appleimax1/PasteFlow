@@ -27,12 +27,15 @@ class ClipboardHistoryManager: ObservableObject {
     }
     
     func addImageEntry(image: NSImage, tiffData: Data, appName: String, appBundleID: String) {
+        let thumbData = image.generateThumbnailData()
+        
         CoreDataStack.shared.persistentContainer.performBackgroundTask { context in
             let entry = CDClipboardEntry(context: context)
             entry.uuid = UUID()
             entry.createdAt = Date()
             entry.contentType = "image"
             entry.rawContent = tiffData
+            entry.setValue(thumbData, forKey: "thumbnailData")
             entry.plainTextPreview = "Изображение (\(Int(image.size.width))×\(Int(image.size.height)))"
             entry.imageWidth = Double(image.size.width)
             entry.imageHeight = Double(image.size.height)
@@ -96,7 +99,7 @@ class ClipboardHistoryManager: ObservableObject {
         let hash = newEntry.generateHash()
         newEntry.contentHash = hash
         guard !hash.isEmpty else {
-            try? context.save()
+            context.safeSave()
             enforceLimit(in: context)
             return
         }
@@ -108,58 +111,62 @@ class ClipboardHistoryManager: ObservableObject {
         if let existing = try? context.fetch(fetchRequest), let duplicate = existing.first {
             duplicate.createdAt = Date()
             context.delete(newEntry)
-            try? context.save()
+            context.safeSave()
             return
         }
         
-        try? context.save()
+        context.safeSave()
         enforceLimit(in: context)
     }
     
     func togglePin(_ entry: CDClipboardEntry) {
-        entry.isPinned.toggle()
-        CoreDataStack.shared.saveContext()
+        context.perform {
+            entry.isPinned.toggle()
+            self.context.safeSave()
+        }
     }
     
     func deleteEntry(_ entry: CDClipboardEntry) {
-        context.delete(entry)
-        CoreDataStack.shared.saveContext()
+        context.perform {
+            self.context.delete(entry)
+            self.context.safeSave()
+        }
     }
     
     func clearHistory() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "CDClipboardEntry")
-        fetchRequest.predicate = NSPredicate(format: "isPinned == NO")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(deleteRequest)
-            CoreDataStack.shared.saveContext()
-        } catch {
-            print("Failed to clear history: \(error)")
+        context.perform {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "CDClipboardEntry")
+            fetchRequest.predicate = NSPredicate(format: "isPinned == NO")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try self.context.execute(deleteRequest)
+                self.context.safeSave()
+            } catch {
+                print("Failed to clear history: \(error)")
+            }
         }
     }
     
     func enforceLimit(in context: NSManagedObjectContext? = nil) {
         let ctx = context ?? self.context
-        let limit = maxHistorySize
-        let fetchRequest: NSFetchRequest<CDClipboardEntry> = NSFetchRequest(entityName: "CDClipboardEntry")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \CDClipboardEntry.createdAt, ascending: false)]
-        
-        do {
-            let entries = try ctx.fetch(fetchRequest)
-            if entries.count > limit {
-                let entriesToDelete = entries.suffix(from: limit).filter { !$0.isPinned }
-                for entry in entriesToDelete {
-                    ctx.delete(entry)
+        ctx.perform {
+            let limit = self.maxHistorySize
+            let fetchRequest: NSFetchRequest<CDClipboardEntry> = NSFetchRequest(entityName: "CDClipboardEntry")
+            fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \CDClipboardEntry.createdAt, ascending: false)]
+            
+            do {
+                let entries = try ctx.fetch(fetchRequest)
+                if entries.count > limit {
+                    let entriesToDelete = entries.suffix(from: limit).filter { !$0.isPinned }
+                    for entry in entriesToDelete {
+                        ctx.delete(entry)
+                    }
+                    ctx.safeSave()
                 }
-                if ctx == self.context {
-                    CoreDataStack.shared.saveContext()
-                } else {
-                    try? ctx.save()
-                }
+            } catch {
+                print("Failed to enforce history limit: \(error)")
             }
-        } catch {
-            print("Failed to enforce history limit: \(error)")
         }
     }
 }

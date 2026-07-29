@@ -4,6 +4,10 @@ import ApplicationServices
 class PasteEngine {
     static let shared = PasteEngine()
     
+    private var activationObserver: NSObjectProtocol?
+    private var fallbackTimer: Timer?
+    private var pendingAction: (() -> Void)?
+    
     /// Возвращает приложение, в которое нужно вставить текст.
     /// Приоритет: previousApplication из MenuBarController (захваченный ДО открытия попапа).
     /// Именно там был фокус, когда пользователь нажал горячую клавишу.
@@ -24,11 +28,7 @@ class PasteEngine {
             delegate.menuBarController?.closePopover(nil)
         }
         
-        // Активировать целевое приложение
-        target?.activate(options: .activateIgnoringOtherApps)
-        
-        // Дать системе время вернуть фокус (150 мс), затем записать данные и нажать Cmd+V
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+        executeWhenAppActivated(targetApp: target) {
             let pasteboard = NSPasteboard.general
             pasteboard.clearContents()
             
@@ -85,9 +85,7 @@ class PasteEngine {
             delegate.menuBarController?.closePopover(nil)
         }
         
-        target?.activate(options: .activateIgnoringOtherApps)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+        executeWhenAppActivated(targetApp: target) {
             let pasteboard = NSPasteboard.general
             pasteboard.clearContents()
             pasteboard.setString(text, forType: .string)
@@ -119,5 +117,64 @@ class PasteEngine {
         // cgAnnotatedSessionEventTap надёжнее для вставки в другие приложения
         keyDown?.post(tap: .cgAnnotatedSessionEventTap)
         keyUp?.post(tap: .cgAnnotatedSessionEventTap)
+    }
+    
+    // MARK: - Adaptive Activation Logic
+    
+    private func executeWhenAppActivated(targetApp: NSRunningApplication?, action: @escaping () -> Void) {
+        cleanupPendingPaste()
+        
+        guard let target = targetApp else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                action()
+            }
+            return
+        }
+        
+        if NSWorkspace.shared.frontmostApplication == target {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                action()
+            }
+            return
+        }
+        
+        self.pendingAction = action
+        
+        activationObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didActivateApplicationNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            guard let self = self,
+                  let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else { return }
+            
+            if app == target {
+                self.performPendingPaste()
+            }
+        }
+        
+        fallbackTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { [weak self] _ in
+            self?.performPendingPaste()
+        }
+        
+        target.activate(options: .activateIgnoringOtherApps)
+    }
+    
+    private func performPendingPaste() {
+        guard let action = pendingAction else { return }
+        cleanupPendingPaste()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            action()
+        }
+    }
+    
+    private func cleanupPendingPaste() {
+        if let observer = activationObserver {
+            NSWorkspace.shared.notificationCenter.removeObserver(observer)
+            activationObserver = nil
+        }
+        fallbackTimer?.invalidate()
+        fallbackTimer = nil
+        pendingAction = nil
     }
 }

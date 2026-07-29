@@ -11,6 +11,7 @@ struct SnippetMenuView: View {
     
     @State private var searchText = ""
     @State private var refreshToggle = false
+    @State private var expandedFolders: Set<ObjectIdentifier> = []
     
     var body: some View {
         VStack(spacing: 0) {
@@ -64,7 +65,18 @@ struct SnippetMenuView: View {
                         }
                         
                         if !matchingSnippets.isEmpty {
-                            DisclosureGroup {
+                            let folderId = ObjectIdentifier(folder)
+                            let isExpanded = expandedFolders.contains(folderId)
+
+                            DisclosureGroup(
+                                isExpanded: Binding(
+                                    get: { isExpanded },
+                                    set: { expanded in
+                                        if expanded { expandedFolders.insert(folderId) }
+                                        else { expandedFolders.remove(folderId) }
+                                    }
+                                )
+                            ) {
                                 ForEach(matchingSnippets) { snippet in
                                     SnippetRow(snippet: snippet)
                                         .contentShape(Rectangle())
@@ -74,15 +86,34 @@ struct SnippetMenuView: View {
                                 }
                             } label: {
                                 HStack(spacing: 6) {
-                                    Image(systemName: folder.sfSymbolName ?? "folder.fill")
-                                        .foregroundColor(.accentColor)
+                                    Button(action: {
+                                        if expandedFolders.contains(folderId) {
+                                            expandedFolders.remove(folderId)
+                                        } else {
+                                            expandedFolders.insert(folderId)
+                                        }
+                                    }) {
+                                        Image(systemName: folder.sfSymbolName ?? "folder.fill")
+                                            .foregroundColor(.accentColor)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .help(isExpanded ? "Свернуть папку" : "Раскрыть папку")
+
                                     Text(folder.name ?? "popup.snippets".localized)
                                         .font(.system(size: 13, weight: .bold))
+                                        .onTapGesture {
+                                            if expandedFolders.contains(folderId) {
+                                                expandedFolders.remove(folderId)
+                                            } else {
+                                                expandedFolders.insert(folderId)
+                                            }
+                                        }
                                 }
                                 .foregroundColor(.primary)
                                 .padding(.vertical, 4)
                             }
                             .tint(.secondary)
+                            .animation(.easeInOut(duration: 0.2), value: expandedFolders.contains(folderId))
                         }
                     }
                 }

@@ -68,7 +68,7 @@ class ExportImportService {
                 }
             }
             
-            CoreDataStack.shared.saveContext()
+            context.safeSave()
             context.processPendingChanges()
             success = true
         }
@@ -119,7 +119,7 @@ class ExportImportService {
                 }
             }
             
-            CoreDataStack.shared.saveContext()
+            context.safeSave()
             context.processPendingChanges()
         }
         

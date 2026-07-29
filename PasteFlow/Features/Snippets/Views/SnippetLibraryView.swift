@@ -35,6 +35,7 @@ struct SnippetLibraryView: View {
                             }
                         }
                     }
+                    .onMove(perform: moveFolders)
                 }
             }
             .listStyle(SidebarListStyle())
@@ -67,6 +68,9 @@ struct SnippetLibraryView: View {
                                     Label("snippets.delete_snippet".localized, systemImage: "trash")
                                 }
                             }
+                        }
+                        .onMove { indices, newOffset in
+                            moveSnippets(in: folder, from: indices, to: newOffset)
                         }
                     }
                 }
@@ -143,6 +147,36 @@ struct SnippetLibraryView: View {
         SnippetManager.shared.delete(object: snippet)
         if selectedSnippet == snippet {
             selectedSnippet = nil
+        }
+    }
+    
+    private func moveFolders(from source: IndexSet, to destination: Int) {
+        var revisedItems: [CDSnippetFolder] = folders.map { $0 }
+        revisedItems.move(fromOffsets: source, toOffset: destination)
+        
+        for reverseIndex in stride(from: revisedItems.count - 1, through: 0, by: -1) {
+            revisedItems[reverseIndex].sortOrder = Int32(reverseIndex)
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving folder reorder: \(error)")
+        }
+    }
+    
+    private func moveSnippets(in folder: CDSnippetFolder, from source: IndexSet, to destination: Int) {
+        var revisedItems = folder.snippetsArray
+        revisedItems.move(fromOffsets: source, toOffset: destination)
+        
+        for reverseIndex in stride(from: revisedItems.count - 1, through: 0, by: -1) {
+            revisedItems[reverseIndex].sortOrder = Int32(reverseIndex)
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving snippet reorder: \(error)")
         }
     }
 }

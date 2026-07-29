@@ -13,7 +13,7 @@ class SnippetManager {
         folder.createdAt = Date()
         folder.updatedAt = Date()
         folder.sortOrder = 0
-        CoreDataStack.shared.saveContext()
+        context.safeSave()
         return folder
     }
     
@@ -25,12 +25,14 @@ class SnippetManager {
         snippet.createdAt = Date()
         snippet.updatedAt = Date()
         snippet.folder = folder
-        CoreDataStack.shared.saveContext()
+        context.safeSave()
         return snippet
     }
     
     func delete(object: NSManagedObject) {
-        context.delete(object)
-        CoreDataStack.shared.saveContext()
+        context.perform {
+            self.context.delete(object)
+            self.context.safeSave()
+        }
     }
 }

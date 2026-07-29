@@ -3,12 +3,13 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     var menuBarController: MenuBarController?
     private var historyTrimTimer: Timer?
+    let appEnvironment = AppEnvironment()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Как в Clipy: скрыть из Cmd+Tab и Dock — только статус-бар
         NSApp.setActivationPolicy(.accessory)
         
-        menuBarController = MenuBarController()
+        menuBarController = MenuBarController(appEnvironment: appEnvironment)
         
         ClipboardMonitor.shared.startMonitoring()
         

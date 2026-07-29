@@ -62,9 +62,15 @@ You can customize or clear hotkeys at any time:
   * **Smart Typo Correction**: Uses advanced shape-matching algorithms and common word frequencies for accurate suggestions.
   * **Extended Punctuation & Typography**: Rules for conjunctions, introductory words, addresses, quotes («...»), em-dashes (—), and spacing.
   * 100% local, offline text checking engine.
-  * **Interactive Corrections**: Click any highlighted fix in the result pane to revert that specific word to the original text ("keep as is").
+  * **Interactive Corrections**: Left-click any highlighted fix to revert to the original word, or Right-click to view and select alternative dictionary suggestions.
   * **In-Window Shortcuts**: Press **`Cmd + Enter`** (`⌘↵`) to copy the result instantly with visual green feedback, or press **`Esc`** to close the window.
   * **Flexible Close Settings**: Configure in Preferences whether to keep the entered text across window calls or automatically clear it when closing via `Esc`.
+
+---
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ---
 
@@ -125,6 +131,12 @@ sudo xattr -cr /Applications/PasteFlow.app
   * **Умные алгоритмы**: Улучшенный алгоритм подбора слов на основе формы слова и частотных словарей для исправления опечаток.
   * **Расширенная пунктуация и типографика**: Поддержка правил для союзов, вводных слов, обращений, парных кавычек («...»), длинного тире (—) и коррекции пробелов.
   * 100% локальный движок проверки текста, работающий без интернета.
-  * **Интерактивная отмена правок**: Кликните на любое подсвеченное исправление в правом окне, чтобы вернуть исходное слово («оставить как есть»).
+  * **Интерактивная отмена правок**: Кликните Левой Кнопкой Мыши (ЛКМ) на любое подсвеченное исправление, чтобы быстро вернуть исходное слово, или Правой Кнопкой Мыши (ПКМ) для выбора альтернативных вариантов из словаря.
   * **Навигация и горячие клавиши**: Нажмите **`Cmd + Enter`** (`⌘↵`) для мгновенного копирования результата в буфер обмена с визуальной индикацией или клавишу **`Esc`** для закрытия окна.
   * **Гибкие настройки сценария**: В настройках можно выбрать: сохранять ли введенный текст при каждом вызове окна или автоматически очищать его при закрытии окна клавишей `Esc`.
+
+---
+
+## Лицензия
+
+Распространяется под лицензией MIT. Смотрите файл [LICENSE](LICENSE) для получения дополнительной информации.

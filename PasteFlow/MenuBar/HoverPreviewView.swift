@@ -39,7 +39,7 @@ struct HoverPreviewView: View {
             Divider()
             
             // Содержимое
-            if entry.contentType == "image", let nsImage = entry.image {
+            if entry.contentType == "image", let nsImage = entry.thumbnailImage ?? entry.image {
                 Image(nsImage: nsImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)

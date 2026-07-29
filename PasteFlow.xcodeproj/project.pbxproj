@@ -21,8 +21,10 @@
 		31D381A7D0D33168FFBDC657 /* SnippetLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B13912FFC89BF725D4922 /* SnippetLibraryView.swift */; };
 		3B4E2CBFDB3B10F1314DA2F2 /* PasteFlow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51894FCD1114305C48DB28DD /* PasteFlow.xcdatamodeld */; };
 		3DC13E5527C68DDAF0916F5A /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */; };
+		3FF9763099B4E397891865D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F532960430E43CFCE162E851 /* Localizable.strings */; };
 		46276E122A30E55AF33CF5B8 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9328CECAC63B41C34C5096B /* ClipboardHistoryView.swift */; };
 		4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D567CE49720903DDBC7AE73 /* LanguageManager.swift */; };
+		4EE0DBCA84007985C0AFD7BA /* ExportImportServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103275D0B1291DEDA04B3139 /* ExportImportServiceTests.swift */; };
 		57664EDA19B6BD804FC02F5B /* en_US.aff in Resources */ = {isa = PBXBuildFile; fileRef = 405A275D348906FBADE9DA12 /* en_US.aff */; };
 		59E40153383FDD8C7EA77F60 /* affentry.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C2184348A3139053A7890259 /* affentry.cxx */; };
 		5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */; };
@@ -31,6 +33,7 @@
 		6F803702254E0FFBA9DF6456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F1665E3AD3BE8FFF57C4CE /* Assets.xcassets */; };
 		70C5616CB544DBC55E862E12 /* PopupRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F34A6D836F405BE4E7097 /* PopupRootView.swift */; };
 		74EC9D659AE8C0256C4F7CC3 /* hunzip.cxx in Sources */ = {isa = PBXBuildFile; fileRef = A3A1837162D1A8769258FF25 /* hunzip.cxx */; };
+		774FD17F332202F446483E28 /* ClipboardHistoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D289F3278501113E1BFC7E23 /* ClipboardHistoryManagerTests.swift */; };
 		854769170951076477245408 /* hunversion.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 6357605677173B4450731E99 /* hunversion.h.in */; };
 		8644F446F55B76369519B5C8 /* en_US.dic in Resources */ = {isa = PBXBuildFile; fileRef = 85275618B57A0E6012E4F0ED /* en_US.dic */; };
 		931654B51DC92C650FF78B7D /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C4C7CB2B6E74D9DCE57AA /* CustomTextEditor.swift */; };
@@ -39,10 +42,14 @@
 		981D7E2122F326CBFC673D30 /* PasteFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26288973F883827DF724DF35 /* PasteFlowApp.swift */; };
 		98A3A486A16FDAA61183EE74 /* TextAssistantWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357E4BD3210584B3A3C819D2 /* TextAssistantWindowView.swift */; };
 		9B672CD98B53C176359DEA8B /* CDSnippetFolder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0007E81E3EF2672DBE559A /* CDSnippetFolder+Extensions.swift */; };
+		9B6DC0645490C1EF51365353 /* NSImage+Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E524D51DC07368BF87B7CD82 /* NSImage+Thumbnail.swift */; };
+		9DB57D56FB19AA3069A7A0D0 /* TextAssistantEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD25DC1C83AA964D1873D00 /* TextAssistantEngineTests.swift */; };
+		A0FE6A657D7D3E5D2F449B25 /* PlaceholderProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F90E586B6DFAE5C34ED35B /* PlaceholderProcessorTests.swift */; };
 		AAA03388380605DC323924F8 /* TextAssistantWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36E9B02E90CE4D24E544FE9 /* TextAssistantWindowController.swift */; };
 		B080938AF05DFACE5A8DE644 /* PlaceholderProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF5EF7958CCE4A5297DAD2E /* PlaceholderProcessor.swift */; };
 		B6A5AEE35B567647B72F7CBE /* CDClipboardEntry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D92D3ECA8D5FCF9554FEE1 /* CDClipboardEntry+Extensions.swift */; };
 		B81E49A8DA2BEF66B4CEE472 /* ClipboardHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8CD40788224142787FB90C /* ClipboardHistoryManager.swift */; };
+		BB9C881D43F4C2FAE834D3E9 /* CoreData+SafeSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2547CF270761E721D204C1B1 /* CoreData+SafeSave.swift */; };
 		BBDCDE254242BDB9A9362240 /* TextAssistantEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C140E7418C83852CF91F98AB /* TextAssistantEngine.swift */; };
 		CCC1834EEB24D0F998A7C6C4 /* hunspell.cxx in Sources */ = {isa = PBXBuildFile; fileRef = DFA4F006E6643E1EEEFFF0E2 /* hunspell.cxx */; };
 		D0F28C952589C672AAF53401 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8C6C7C404EC056E0A1F2E /* ShortcutManager.swift */; };
@@ -50,27 +57,47 @@
 		D947D918A749F13CBD24D97B /* PasteEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEA5D549C0387A56B7E314A /* PasteEngine.swift */; };
 		DD508046C5BD21B3A5FC9DF6 /* phonet.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 8AA01CC6F99927FDEE44B3E1 /* phonet.cxx */; };
 		E09302BC0E5914A235DECF15 /* filemgr.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 68B9A5A802B9AB097BBB6F9C /* filemgr.cxx */; };
+		E6B24864249281BC4476773C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EBD8A6D7A2F37508F4B58 /* AppEnvironment.swift */; };
 		EBB77402D96FDFA15FCA350F /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B712FCF09A502616397B4 /* PreferencesView.swift */; };
 		EE31DC52935D4E29D5C7455C /* CDSnippet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BEEFEB20BD6DBA3A0945D /* CDSnippet+Extensions.swift */; };
 		FA888E199D06C4A841F4357E /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7DE3743A4E0F38D8677A7A /* MenuBarController.swift */; };
+		FFBA06CDAEDBE86458E19ED3 /* SymspellIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF160460BF5B5B32D6D2E02 /* SymspellIndex.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21AFACA936A80674D755DE89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F247D246BE705EB5B6EA05B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48FE9A8635B4C72A9D186707;
+			remoteInfo = PasteFlow;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		08FCE828601FBCCE62420C36 /* hashmgr.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hashmgr.hxx; sourceTree = "<group>"; };
 		09EA678045512A2F5028BC74 /* SnippetMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetMenuView.swift; sourceTree = "<group>"; };
 		09F1665E3AD3BE8FFF57C4CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0CCD0712D586F2BD3279F6AE /* PasteFlow 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PasteFlow 2.xcdatamodel"; sourceTree = "<group>"; };
 		0FFB9F98EC27011F941F1DBA /* HoverPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverPreviewView.swift; sourceTree = "<group>"; };
+		103275D0B1291DEDA04B3139 /* ExportImportServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportImportServiceTests.swift; sourceTree = "<group>"; };
 		1536A8E537E9F6247F8C077B /* filemgr.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = filemgr.hxx; sourceTree = "<group>"; };
 		165790158BC2D4FDDA10BAA0 /* utf_info.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = utf_info.hxx; sourceTree = "<group>"; };
+		16C2CFA5D0FDF8F6BCBD9029 /* PasteFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasteFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16F029A9837B9621653EA529 /* snippets.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = snippets.xml; sourceTree = "<group>"; };
 		188B712FCF09A502616397B4 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		202D8C9B883D389C197E0E32 /* HunspellWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HunspellWrapper.h; sourceTree = "<group>"; };
 		2323EC65CB99D6B351E3A696 /* replist.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = replist.cxx; sourceTree = "<group>"; };
 		2488C7DA7A97C8EDFFD22673 /* SnippetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetManager.swift; sourceTree = "<group>"; };
+		2547CF270761E721D204C1B1 /* CoreData+SafeSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+SafeSave.swift"; sourceTree = "<group>"; };
 		26288973F883827DF724DF35 /* PasteFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteFlowApp.swift; sourceTree = "<group>"; };
+		2CB446B89DAD2E6A77B43798 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2E6F34A6D836F405BE4E7097 /* PopupRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupRootView.swift; sourceTree = "<group>"; };
+		33223E13867D9CE44528019D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		33F90E586B6DFAE5C34ED35B /* PlaceholderProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderProcessorTests.swift; sourceTree = "<group>"; };
 		357E4BD3210584B3A3C819D2 /* TextAssistantWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAssistantWindowView.swift; sourceTree = "<group>"; };
 		3B6EBBEA75B7D14E745D49F2 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
+		3BD25DC1C83AA964D1873D00 /* TextAssistantEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAssistantEngineTests.swift; sourceTree = "<group>"; };
 		3EB2ABF9340792D1DA7AD83B /* htypes.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = htypes.hxx; sourceTree = "<group>"; };
 		405A275D348906FBADE9DA12 /* en_US.aff */ = {isa = PBXFileReference; path = en_US.aff; sourceTree = "<group>"; };
 		442F8E2BA20BDB831BFF6ADA /* ru_RU.aff */ = {isa = PBXFileReference; path = ru_RU.aff; sourceTree = "<group>"; };
@@ -88,6 +115,7 @@
 		6F7DE3743A4E0F38D8677A7A /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
 		76FEF25C6AB3BABA47B61B54 /* replist.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = replist.hxx; sourceTree = "<group>"; };
 		7969AD130073712531DFD9D5 /* baseaffix.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = baseaffix.hxx; sourceTree = "<group>"; };
+		7BF160460BF5B5B32D6D2E02 /* SymspellIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymspellIndex.swift; sourceTree = "<group>"; };
 		7D567CE49720903DDBC7AE73 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		85275618B57A0E6012E4F0ED /* en_US.dic */ = {isa = PBXFileReference; path = en_US.dic; sourceTree = "<group>"; };
 		8741E9F5C714275CD4EACC00 /* affixmgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = affixmgr.cxx; sourceTree = "<group>"; };
@@ -117,11 +145,14 @@
 		CBF5EF7958CCE4A5297DAD2E /* PlaceholderProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderProcessor.swift; sourceTree = "<group>"; };
 		CE1C4C7CB2B6E74D9DCE57AA /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		D027859E4EE4A7C666BE9169 /* hunspell.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hunspell.hxx; sourceTree = "<group>"; };
+		D289F3278501113E1BFC7E23 /* ClipboardHistoryManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryManagerTests.swift; sourceTree = "<group>"; };
 		D7BDA2002A546FDA7C52CD29 /* AppExclusionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExclusionFilter.swift; sourceTree = "<group>"; };
+		DA7EBD8A6D7A2F37508F4B58 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		DAC94BC09203FB9B7A7887F1 /* suggestmgr.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = suggestmgr.cxx; sourceTree = "<group>"; };
 		DD85E2C235FC9B7F08B14E5C /* atypes.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = atypes.hxx; sourceTree = "<group>"; };
 		DFA4F006E6643E1EEEFFF0E2 /* hunspell.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hunspell.cxx; sourceTree = "<group>"; };
 		E4C0476038A101A26F91096F /* csutil.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = csutil.cxx; sourceTree = "<group>"; };
+		E524D51DC07368BF87B7CD82 /* NSImage+Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Thumbnail.swift"; sourceTree = "<group>"; };
 		EEAE8AC5F8B2C7F26656C8B2 /* PasteFlow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PasteFlow-Bridging-Header.h"; sourceTree = "<group>"; };
 		F2EAE25F3312C8104F94FD9A /* PasteFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasteFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6B7D6D6667C14EDB4D0ECD /* HunspellWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HunspellWrapper.mm; sourceTree = "<group>"; };
@@ -178,6 +209,17 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		33E29F30C36157F03081AD1C /* PasteFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				D289F3278501113E1BFC7E23 /* ClipboardHistoryManagerTests.swift */,
+				103275D0B1291DEDA04B3139 /* ExportImportServiceTests.swift */,
+				33F90E586B6DFAE5C34ED35B /* PlaceholderProcessorTests.swift */,
+				3BD25DC1C83AA964D1873D00 /* TextAssistantEngineTests.swift */,
+			);
+			path = PasteFlowTests;
+			sourceTree = "<group>";
+		};
 		37222D94692BDAF1844AA032 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +234,7 @@
 				93D92D3ECA8D5FCF9554FEE1 /* CDClipboardEntry+Extensions.swift */,
 				B30BEEFEB20BD6DBA3A0945D /* CDSnippet+Extensions.swift */,
 				6B0007E81E3EF2672DBE559A /* CDSnippetFolder+Extensions.swift */,
+				2547CF270761E721D204C1B1 /* CoreData+SafeSave.swift */,
 				997E1ED0F7BBC27C3DEEA668 /* CoreDataStack.swift */,
 				51894FCD1114305C48DB28DD /* PasteFlow.xcdatamodeld */,
 			);
@@ -232,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				965A2200F92110B0253AFBD8 /* PasteFlow */,
+				33E29F30C36157F03081AD1C /* PasteFlowTests */,
 				E4344241DB3206ABFB0C2C51 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -244,6 +288,14 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		8ED584DACCC8F9D27E9BE36B /* Symspell */ = {
+			isa = PBXGroup;
+			children = (
+				7BF160460BF5B5B32D6D2E02 /* SymspellIndex.swift */,
+			);
+			path = Symspell;
+			sourceTree = "<group>";
+		};
 		965A2200F92110B0253AFBD8 /* PasteFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +304,7 @@
 				C5418BFC0A4FBDB94B5EC076 /* App */,
 				80CBDEC26FEB757DDF60F089 /* Data */,
 				49BE8817FF36418141D99432 /* Domain */,
+				D54D899539DE878DF2EC4FDD /* Extensions */,
 				C48CF4CB2E49BEBD3A1B7C4F /* Features */,
 				C268746399708985AB161BAA /* Infrastructure */,
 				D5C681950C17B832823DA367 /* MenuBar */,
@@ -264,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				F7974665B834DFDA19EAF89C /* Dictionaries */,
+				F532960430E43CFCE162E851 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -287,8 +341,10 @@
 		C268746399708985AB161BAA /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				DA7EBD8A6D7A2F37508F4B58 /* AppEnvironment.swift */,
 				611755D125A92D7E70D109E0 /* ExportImportService.swift */,
 				318FA585DDB0CA7F5170D801 /* Hunspell */,
+				8ED584DACCC8F9D27E9BE36B /* Symspell */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -333,6 +389,14 @@
 			path = Snippets;
 			sourceTree = "<group>";
 		};
+		D54D899539DE878DF2EC4FDD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E524D51DC07368BF87B7CD82 /* NSImage+Thumbnail.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D5C681950C17B832823DA367 /* MenuBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				F2EAE25F3312C8104F94FD9A /* PasteFlow.app */,
+				16C2CFA5D0FDF8F6BCBD9029 /* PasteFlowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -410,6 +475,24 @@
 			productReference = F2EAE25F3312C8104F94FD9A /* PasteFlow.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AA7A6747814D78DE09C4AA3E /* PasteFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F998BA83B80CE633239386AD /* Build configuration list for PBXNativeTarget "PasteFlowTests" */;
+			buildPhases = (
+				8F1B431B1880E495DF57D365 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFC374D35E5D829B408A5055 /* PBXTargetDependency */,
+			);
+			name = PasteFlowTests;
+			packageProductDependencies = (
+			);
+			productName = PasteFlowTests;
+			productReference = 16C2CFA5D0FDF8F6BCBD9029 /* PasteFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -430,6 +513,7 @@
 			knownRegions = (
 				Base,
 				en,
+				ru,
 			);
 			mainGroup = 7F7F5641988532D73E5070E3;
 			minimizedProjectReferenceProxies = 1;
@@ -439,6 +523,7 @@
 			projectRoot = "";
 			targets = (
 				48FE9A8635B4C72A9D186707 /* PasteFlow */,
+				AA7A6747814D78DE09C4AA3E /* PasteFlowTests */,
 			);
 		};
 /* End PBXProject section */
@@ -449,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F803702254E0FFBA9DF6456 /* Assets.xcassets in Resources */,
+				3FF9763099B4E397891865D8 /* Localizable.strings in Resources */,
 				57664EDA19B6BD804FC02F5B /* en_US.aff in Resources */,
 				8644F446F55B76369519B5C8 /* en_US.dic in Resources */,
 				854769170951076477245408 /* hunversion.h.in in Resources */,
@@ -461,11 +547,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8F1B431B1880E495DF57D365 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				774FD17F332202F446483E28 /* ClipboardHistoryManagerTests.swift in Sources */,
+				4EE0DBCA84007985C0AFD7BA /* ExportImportServiceTests.swift in Sources */,
+				A0FE6A657D7D3E5D2F449B25 /* PlaceholderProcessorTests.swift in Sources */,
+				9DB57D56FB19AA3069A7A0D0 /* TextAssistantEngineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8A23DDF2BE8D926B1304775 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1D2E7B8D7D7C3E03CEF33D42 /* AppDelegate.swift in Sources */,
+				E6B24864249281BC4476773C /* AppEnvironment.swift in Sources */,
 				028266742B73DF0FD38F536B /* AppExclusionFilter.swift in Sources */,
 				B6A5AEE35B567647B72F7CBE /* CDClipboardEntry+Extensions.swift in Sources */,
 				EE31DC52935D4E29D5C7455C /* CDSnippet+Extensions.swift in Sources */,
@@ -473,6 +571,7 @@
 				B81E49A8DA2BEF66B4CEE472 /* ClipboardHistoryManager.swift in Sources */,
 				46276E122A30E55AF33CF5B8 /* ClipboardHistoryView.swift in Sources */,
 				3DC13E5527C68DDAF0916F5A /* ClipboardMonitor.swift in Sources */,
+				BB9C881D43F4C2FAE834D3E9 /* CoreData+SafeSave.swift in Sources */,
 				5AFFA82888BADF0E51BED649 /* CoreDataStack.swift in Sources */,
 				931654B51DC92C650FF78B7D /* CustomTextEditor.swift in Sources */,
 				2775E51E626868E3097FE8FA /* ExportImportService.swift in Sources */,
@@ -480,6 +579,7 @@
 				5DB6A4A3856E2E8DFED67E29 /* HunspellWrapper.mm in Sources */,
 				4AAA736E7B4EAA59F3B73C85 /* LanguageManager.swift in Sources */,
 				FA888E199D06C4A841F4357E /* MenuBarController.swift in Sources */,
+				9B6DC0645490C1EF51365353 /* NSImage+Thumbnail.swift in Sources */,
 				D947D918A749F13CBD24D97B /* PasteEngine.swift in Sources */,
 				3B4E2CBFDB3B10F1314DA2F2 /* PasteFlow.xcdatamodeld in Sources */,
 				981D7E2122F326CBFC673D30 /* PasteFlowApp.swift in Sources */,
@@ -491,6 +591,7 @@
 				31D381A7D0D33168FFBDC657 /* SnippetLibraryView.swift in Sources */,
 				29F346A539C404D8F145B8B6 /* SnippetManager.swift in Sources */,
 				94418B4158166C1D6D4F1333 /* SnippetMenuView.swift in Sources */,
+				FFBA06CDAEDBE86458E19ED3 /* SymspellIndex.swift in Sources */,
 				BBDCDE254242BDB9A9362240 /* TextAssistantEngine.swift in Sources */,
 				AAA03388380605DC323924F8 /* TextAssistantWindowController.swift in Sources */,
 				98A3A486A16FDAA61183EE74 /* TextAssistantWindowView.swift in Sources */,
@@ -509,7 +610,45 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AFC374D35E5D829B408A5055 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48FE9A8635B4C72A9D186707 /* PasteFlow */;
+			targetProxy = 21AFACA936A80674D755DE89 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F532960430E43CFCE162E851 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CB446B89DAD2E6A77B43798 /* en */,
+				33223E13867D9CE44528019D /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		3C3CAFCE6B3454866CCAF366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pasteflow.PasteFlowTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PasteFlow.app/Contents/MacOS/PasteFlow";
+			};
+			name = Debug;
+		};
 		481C13B0F0D29F37F203E532 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -651,6 +790,24 @@
 			};
 			name = Debug;
 		};
+		8BF9A11E4F058B9AEDA4075A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pasteflow.PasteFlowTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PasteFlow.app/Contents/MacOS/PasteFlow";
+			};
+			name = Release;
+		};
 		D9E9685EEDD84AA68B33B674 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -696,15 +853,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		F998BA83B80CE633239386AD /* Build configuration list for PBXNativeTarget "PasteFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C3CAFCE6B3454866CCAF366 /* Debug */,
+				8BF9A11E4F058B9AEDA4075A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
 		51894FCD1114305C48DB28DD /* PasteFlow.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0CCD0712D586F2BD3279F6AE /* PasteFlow 2.xcdatamodel */,
 				C7BF1FF1E70E5EC4B29B2BB8 /* PasteFlow.xcdatamodel */,
 			);
-			currentVersion = C7BF1FF1E70E5EC4B29B2BB8 /* PasteFlow.xcdatamodel */;
+			currentVersion = 0CCD0712D586F2BD3279F6AE /* PasteFlow 2.xcdatamodel */;
 			path = PasteFlow.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

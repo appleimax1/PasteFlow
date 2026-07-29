@@ -51,6 +51,7 @@ struct TextAssistantWindowView: View {
     @State private var fixCount: Int = 0
     @State private var paragraphs: [TextDiffParagraph] = []
     @State private var rejectedSegmentIDs: Set<UUID> = []
+    @State private var selectedAlternatives: [UUID: String] = [:]
     @State private var showCopiedToast: Bool = false
     @State private var isProcessing: Bool = false
     
@@ -63,7 +64,6 @@ struct TextAssistantWindowView: View {
     
     @ObservedObject private var langManager = LanguageManager.shared
     
-    /// Динамический итоговый текст с сохранением абзацев и учетом отмененных пользователем правок
     var effectiveResultText: String {
         if paragraphs.isEmpty { return rawResultText }
         var lineResults: [String] = []
@@ -82,9 +82,9 @@ struct TextAssistantWindowView: View {
                     if isRejected {
                         wordParts.append(seg.text)
                     }
-                case .modified(let original, let new):
-                    if isRejected {
-                        wordParts.append(original)
+                case .modified(_, let new, _):
+                    if let selection = selectedAlternatives[seg.id] {
+                        wordParts.append(selection)
                     } else {
                         wordParts.append(new)
                     }
@@ -93,6 +93,19 @@ struct TextAssistantWindowView: View {
             lineResults.append(wordParts.joined(separator: " "))
         }
         return lineResults.joined(separator: "\n")
+    }
+    
+    var activeFixes: Int {
+        var active = fixCount
+        for _ in rejectedSegmentIDs { active -= 1 }
+        for p in paragraphs {
+            for s in p.segments {
+                if case .modified(let orig, _, _) = s.type, selectedAlternatives[s.id] == orig {
+                    active -= 1
+                }
+            }
+        }
+        return max(0, active)
     }
     
     var body: some View {
@@ -129,7 +142,7 @@ struct TextAssistantWindowView: View {
                     .font(.system(size: 11))
                     .foregroundColor(.orange)
                 
-                Text("💡 Нажмите Enter (↵) для проверки • Shift+Enter для переноса • ⌘↵ для копирования")
+                Text("text_assistant.hints".localized)
                     .font(.system(size: 11))
                     .foregroundColor(.secondary)
                 
@@ -236,7 +249,6 @@ struct TextAssistantWindowView: View {
                                 .scaleEffect(0.6)
                                 .frame(width: 14, height: 14)
                         } else if fixCount > 0 {
-                            let activeFixes = max(0, fixCount - rejectedSegmentIDs.count)
                             Text("\(activeFixes) из \(fixCount) испр.")
                                 .font(.system(size: 10, weight: .bold))
                                 .padding(.horizontal, 6)
@@ -269,6 +281,7 @@ struct TextAssistantWindowView: View {
                                 InteractiveDiffView(
                                     paragraphs: paragraphs,
                                     rejectedIDs: rejectedSegmentIDs,
+                                    selectedAlternatives: $selectedAlternatives,
                                     onToggleSegment: { id in
                                         toggleSegmentRejection(id: id)
                                     }
@@ -359,6 +372,7 @@ struct TextAssistantWindowView: View {
         
         isProcessing = true
         rejectedSegmentIDs.removeAll()
+        selectedAlternatives.removeAll()
         if !clearOnClose {
             savedInputText = text
         }
@@ -395,6 +409,7 @@ struct TextAssistantWindowView: View {
         self.fixCount = 0
         self.paragraphs = []
         self.rejectedSegmentIDs.removeAll()
+        self.selectedAlternatives.removeAll()
         self.savedInputText = ""
     }
     
@@ -425,6 +440,7 @@ struct TextAssistantWindowView: View {
 struct InteractiveDiffView: View {
     let paragraphs: [TextDiffParagraph]
     let rejectedIDs: Set<UUID>
+    @Binding var selectedAlternatives: [UUID: String]
     let onToggleSegment: (UUID) -> Void
     
     var body: some View {
@@ -491,10 +507,20 @@ struct InteractiveDiffView: View {
                                 .buttonStyle(PlainButtonStyle())
                                 .help(isRejected ? "Кликните, чтобы удалить" : "Кликните, чтобы оставить оригинал")
                                 
-                            case .modified(let original, let new):
-                                Button(action: { onToggleSegment(seg.id) }) {
+                            case .modified(let original, let new, let alternatives):
+                                let currentSelection = selectedAlternatives[seg.id] ?? new
+                                
+                                Button(action: {
+                                    DispatchQueue.main.async {
+                                        if currentSelection == original {
+                                            selectedAlternatives[seg.id] = new
+                                        } else {
+                                            selectedAlternatives[seg.id] = original
+                                        }
+                                    }
+                                }) {
                                     HStack(spacing: 3) {
-                                        if isRejected {
+                                        if currentSelection == original {
                                             Text(original)
                                                 .font(.system(size: 13, weight: .bold))
                                                 .foregroundColor(.primary)
@@ -517,17 +543,36 @@ struct InteractiveDiffView: View {
                                                 .font(.system(size: 9))
                                                 .foregroundColor(.secondary)
                                             
-                                            Text(new)
+                                            Text(currentSelection)
                                                 .font(.system(size: 13, weight: .bold))
-                                                .foregroundColor(.green)
+                                                .foregroundColor(currentSelection == new ? .green : .orange)
                                                 .padding(.horizontal, 3)
-                                                .background(RoundedRectangle(cornerRadius: 3).fill(Color.green.opacity(0.15)))
+                                                .background(RoundedRectangle(cornerRadius: 3).fill(currentSelection == new ? Color.green.opacity(0.15) : Color.orange.opacity(0.15)))
                                         }
                                     }
                                     .padding(.vertical, 1)
                                 }
                                 .buttonStyle(PlainButtonStyle())
-                                .help(isRejected ? "Кликните, чтобы применить правку" : "Кликните, чтобы оставить исходное слово (\(original))")
+                                .help(currentSelection == original ? "Кликните, чтобы применить (ПКМ для вариантов)" : "Кликните, чтобы отменить (ПКМ для вариантов)")
+                                .contextMenu {
+                                    Button(action: {
+                                        DispatchQueue.main.async { selectedAlternatives[seg.id] = original }
+                                    }) { Text("Оригинал: \(original)") }
+                                    
+                                    Button(action: {
+                                        DispatchQueue.main.async { selectedAlternatives[seg.id] = new }
+                                    }) { Text("Лучший вариант: \(new)") }
+                                    
+                                    if !alternatives.isEmpty {
+                                        Divider()
+                                        Text("Другие варианты:")
+                                        ForEach(alternatives, id: \.self) { alt in
+                                            Button(action: {
+                                                DispatchQueue.main.async { selectedAlternatives[seg.id] = alt }
+                                            }) { Text(alt) }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

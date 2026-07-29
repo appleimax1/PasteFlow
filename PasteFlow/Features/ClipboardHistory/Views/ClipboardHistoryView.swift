@@ -3,6 +3,7 @@ import CoreData
 
 struct ClipboardHistoryView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var appEnv: AppEnvironment
     
     @FetchRequest(
         sortDescriptors: [
@@ -113,15 +114,34 @@ struct ClipboardHistoryView: View {
                                     }
                                 } label: {
                                     HStack(spacing: 6) {
-                                        Image(systemName: "folder.fill")
-                                            .foregroundColor(.accentColor)
+                                        Button(action: {
+                                            if expandedGroups.contains(groupIndex) {
+                                                expandedGroups.remove(groupIndex)
+                                            } else {
+                                                expandedGroups.insert(groupIndex)
+                                            }
+                                        }) {
+                                            Image(systemName: "folder.fill")
+                                                .foregroundColor(.accentColor)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                        .help(expandedGroups.contains(groupIndex) ? "Свернуть папку" : "Раскрыть папку")
+
                                         Text(String(format: "popup.history_folder_range".localized, groupIndex * folderGroupingSize + 1, min((groupIndex + 1) * folderGroupingSize, filteredEntries.count)))
                                             .font(.system(size: 13, weight: .bold))
+                                            .onTapGesture {
+                                                if expandedGroups.contains(groupIndex) {
+                                                    expandedGroups.remove(groupIndex)
+                                                } else {
+                                                    expandedGroups.insert(groupIndex)
+                                                }
+                                            }
                                     }
                                     .foregroundColor(.primary)
                                     .padding(.vertical, 4)
                                 }
                                 .tint(.secondary)
+                                .animation(.easeInOut(duration: 0.2), value: expandedGroups.contains(groupIndex))
                             }
                         }
                     }
@@ -204,10 +224,9 @@ struct ClipboardHistoryView: View {
             let flags = NSEvent.modifierFlags
             let asPlainText = flags.contains(.shift)
             
-            PasteEngine.shared.paste(entry: entry, asPlainText: asPlainText)
-            
-            if flags.contains(.option) {
-                ClipboardHistoryManager.shared.deleteEntry(entry)
+            appEnv.pasteEngine.paste(entry: entry, asPlainText: asPlainText)
+            if UserDefaults.standard.bool(forKey: "PasteFlow.DeleteAfterPaste") {
+                appEnv.clipboardHistoryManager.deleteEntry(entry)
             }
         }
         .background(
@@ -217,9 +236,9 @@ struct ClipboardHistoryView: View {
                     Button("") {
                         let flags = NSEvent.modifierFlags
                         let asPlainText = flags.contains(.shift)
-                        PasteEngine.shared.paste(entry: entry, asPlainText: asPlainText)
-                        if flags.contains(.option) {
-                            ClipboardHistoryManager.shared.deleteEntry(entry)
+                        appEnv.pasteEngine.paste(entry: entry, asPlainText: asPlainText)
+                        if UserDefaults.standard.bool(forKey: "PasteFlow.DeleteAfterPaste") {
+                            appEnv.clipboardHistoryManager.deleteEntry(entry)
                         }
                     }
                     .keyboardShortcut(KeyEquivalent(char), modifiers: .command)
@@ -228,38 +247,40 @@ struct ClipboardHistoryView: View {
             }
         )
         .contextMenu {
-            Button(action: { PasteEngine.shared.paste(entry: entry) }) {
-                Label("popup.paste".localized, systemImage: "doc.on.clipboard")
+            Button(action: { appEnv.pasteEngine.paste(entry: entry) }) {
+                Label("popup.paste".localized, systemImage: "return")
             }
-            if entry.contentType == "plainText" || entry.contentType == "rtf" {
-                Button(action: { PasteEngine.shared.paste(entry: entry, asPlainText: true) }) {
-                    Label("popup.paste_plain".localized, systemImage: "text.quote")
-                }
-                Divider()
-                Button(action: {
-                    if let text = entry.rawString {
-                        PasteEngine.shared.paste(text: text.uppercased())
-                    }
-                }) {
-                    Label("popup.paste_uppercase".localized, systemImage: "textformat.size")
-                }
-                Button(action: {
-                    if let text = entry.rawString {
-                        PasteEngine.shared.paste(text: text.trimmingCharacters(in: .whitespacesAndNewlines))
-                    }
-                }) {
-                    Label("popup.paste_trimmed".localized, systemImage: "scissors")
-                }
-            } else {
-                Button(action: { PasteEngine.shared.paste(entry: entry, asPlainText: true) }) {
-                    Label("popup.paste_plain".localized, systemImage: "text.quote")
-                }
+            
+            Button(action: { appEnv.pasteEngine.paste(entry: entry, asPlainText: true) }) {
+                Label("popup.paste_plain".localized, systemImage: "text.quote")
             }
+            
+            if entry.contentType == "plainText", let text = entry.rawString {
+                Button(action: {
+                        appEnv.pasteEngine.paste(text: text.uppercased())
+                }) { Label("popup.paste_uppercase".localized, systemImage: "textformat.size") }
+                
+                Button(action: {
+                        appEnv.pasteEngine.paste(text: text.lowercased())
+                }) { Label("popup.paste_lowercase".localized, systemImage: "textformat.size") }
+                
+                Button(action: {
+                        appEnv.pasteEngine.paste(text: text.trimmingCharacters(in: .whitespacesAndNewlines))
+                }) { Label("popup.paste_trimmed".localized, systemImage: "scissors") }
+            }
+            
             Divider()
-            Button(action: { ClipboardHistoryManager.shared.togglePin(entry) }) {
+            
+            Button(action: { appEnv.pasteEngine.paste(entry: entry, asPlainText: true) }) {
+                Label("popup.extract_text".localized, systemImage: "doc.text.magnifyingglass")
+            }
+            
+            Divider()
+            
+            Button(action: { appEnv.clipboardHistoryManager.togglePin(entry) }) {
                 Label(entry.isPinned ? "popup.unpin".localized : "popup.pin".localized, systemImage: entry.isPinned ? "pin.slash" : "pin")
             }
-            Button(role: .destructive, action: { ClipboardHistoryManager.shared.deleteEntry(entry) }) {
+            Button(role: .destructive, action: { appEnv.clipboardHistoryManager.deleteEntry(entry) }) {
                 Label("popup.delete".localized, systemImage: "trash")
             }
         }
@@ -275,10 +296,18 @@ struct ClipboardHistoryView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                Image(systemName: entry.sfSymbolName)
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(entry.isPinned ? .orange : .accentColor)
-                    .frame(width: 20)
+                if let thumb = entry.thumbnailImage {
+                    Image(nsImage: thumb)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 20, height: 20)
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                } else {
+                    Image(systemName: entry.sfSymbolName)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(entry.isPinned ? .orange : .accentColor)
+                        .frame(width: 20)
+                }
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(entry.displayTitle)

@@ -16,9 +16,14 @@ class PlaceholderProcessor {
         PlaceholderItem(tag: "{YEAR}", description: "Current year (e.g. 2026)"),
         PlaceholderItem(tag: "{MONTH}", description: "Current month (e.g. 07)"),
         PlaceholderItem(tag: "{DAY}", description: "Current day (e.g. 24)"),
+        PlaceholderItem(tag: "{WEEKDAY}", description: "Day of the week"),
         PlaceholderItem(tag: "{HOUR}", description: "Current hour (e.g. 14)"),
         PlaceholderItem(tag: "{MINUTE}", description: "Current minute (e.g. 30)"),
-        PlaceholderItem(tag: "{SECOND}", description: "Current second (e.g. 05)")
+        PlaceholderItem(tag: "{SECOND}", description: "Current second (e.g. 05)"),
+        PlaceholderItem(tag: "{UUID}", description: "Random UUID"),
+        PlaceholderItem(tag: "{HOSTNAME}", description: "Computer name"),
+        PlaceholderItem(tag: "{USERNAME}", description: "Account username"),
+        PlaceholderItem(tag: "{FULLNAME}", description: "Account full name")
     ]
     
     func process(_ content: String) -> String {
@@ -43,7 +48,16 @@ class PlaceholderProcessor {
         timeFormatter.timeStyle = .short
         let timeStr = timeFormatter.string(from: now)
         
+        let weekdayFormatter = DateFormatter()
+        weekdayFormatter.locale = Locale(identifier: LanguageManager.shared.currentLanguage == "ru" ? "ru_RU" : "en_US")
+        weekdayFormatter.dateFormat = "EEEE"
+        let weekdayStr = weekdayFormatter.string(from: now)
+        
         let clipboardText = NSPasteboard.general.string(forType: .string) ?? ""
+        let uuidStr = UUID().uuidString
+        let hostname = Host.current().localizedName ?? "Mac"
+        let username = NSUserName()
+        let fullname = NSFullUserName()
         
         let replacements: [(String, String)] = [
             ("{CLIPBOARD}", clipboardText),
@@ -58,12 +72,22 @@ class PlaceholderProcessor {
             ("{month}", month),
             ("{DAY}", day),
             ("{day}", day),
+            ("{WEEKDAY}", weekdayStr),
+            ("{weekday}", weekdayStr),
             ("{HOUR}", hour),
             ("{hour}", hour),
             ("{MINUTE}", minute),
             ("{minute}", minute),
             ("{SECOND}", second),
             ("{second}", second),
+            ("{UUID}", uuidStr),
+            ("{uuid}", uuidStr),
+            ("{HOSTNAME}", hostname),
+            ("{hostname}", hostname),
+            ("{USERNAME}", username),
+            ("{username}", username),
+            ("{FULLNAME}", fullname),
+            ("{fullname}", fullname),
             ("{CURSOR}", ""),
             ("{cursor}", "")
         ]

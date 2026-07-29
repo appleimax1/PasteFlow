@@ -1,0 +1,192 @@
+
+/* Tabs */
+"tab.general" = "General";
+"tab.menu" = "Menu & View";
+"tab.types" = "Data Types";
+"tab.exclusions" = "Exclusions";
+"tab.hotkeys" = "Hotkeys";
+"tab.text_assistant" = "Text Assistant";
+"tab.backup" = "Backups";
+"tab.help" = "Help";
+"settings" = "Settings";
+"app.smart_clipboard_manager" = "Smart Clipboard Manager";
+
+/* General */
+"general.app_behavior" = "App Behavior";
+"general.play_sound" = "Play sound on paste";
+"general.launch_at_login" = "Launch PasteFlow at login";
+"general.history_storage" = "Clipboard History Storage";
+"general.max_items" = "Maximum number of items:";
+"general.items_10" = "10 items";
+"general.items_20" = "20 items";
+"general.items_40" = "40 items";
+"general.items_50" = "50 items";
+"general.items_100" = "100 items";
+"general.items_200" = "200 items";
+"general.limit_desc" = "The oldest unpinned clipboard entries will be automatically deleted when the limit is exceeded.";
+"general.data_management" = "Data Management";
+"general.clear_history_title" = "Clear clipboard history";
+"general.clear_history_desc" = "Deletes all unpinned items from the clipboard history. Pinned items will be preserved.";
+"general.clear_history_btn" = "Clear history";
+"general.clear_history_confirm_title" = "Clear clipboard history?";
+"general.clear_history_confirm_desc" = "Are you sure you want to delete all unpinned items from the history? This action cannot be undone.";
+"general.clear" = "Clear";
+"general.cancel" = "Cancel";
+"general.language" = "Language";
+"general.interface_language" = "Interface Language";
+
+/* Menu */
+"menu.list_appearance" = "List Appearance";
+"menu.group_subfolders" = "Group items into subfolders:";
+"menu.group_disabled" = "Disabled (flat list)";
+"menu.group_10" = "10 items per folder";
+"menu.group_20" = "20 items per folder";
+"menu.group_30" = "30 items per folder";
+"menu.show_preview" = "Show preview popup on hover";
+
+/* Data Types */
+"types.supported_types" = "Supported Clipboard Data Types";
+"types.plain_text" = "Plain Text";
+"types.rich_text" = "Rich Text (RTF / HTML)";
+"types.images" = "Images (PNG / JPEG / TIFF)";
+"types.pdf" = "PDF Documents";
+"types.files" = "Files and Folders (Finder)";
+
+/* Exclusions */
+"exclusions.blacklist" = "Application Blacklist";
+"exclusions.desc" = "Copied content from specified applications will be automatically ignored to protect passwords and confidential data.";
+"exclusions.bundle_placeholder" = "Bundle Identifier (e.g., com.1password.1password)";
+"exclusions.add" = "Add";
+
+/* Hotkeys */
+"hotkeys.global_shortcuts" = "Global Hotkeys";
+"hotkeys.history_popup" = "Clipboard history (popup menu):";
+"hotkeys.app_settings" = "App settings (preferences window):";
+"hotkeys.snippets_popup" = "Snippets library (popup menu):";
+"hotkeys.record_desc" = "Click on a shortcut and press the desired combination on your keyboard.";
+"hotkeys.press_keys" = "Press keys...";
+"hotkeys.reset_tooltip" = "Reset to default";
+
+/* Backup */
+"backup.import_xml" = "Import from XML";
+"backup.import_xml_desc" = "Select the XML file of your snippet export. All folders and snippets will be automatically added to your PasteFlow library.";
+"backup.import_xml_btn" = "Import snippets (XML)...";
+"backup.backup_json" = "PasteFlow Backup (JSON)";
+"backup.backup_json_desc" = "Export your PasteFlow snippet library to a JSON file or restore it from a backup.";
+"backup.export_json_btn" = "Export to JSON...";
+"backup.import_json_btn" = "Import from JSON...";
+"backup.success_xml" = "Snippets successfully imported!";
+"backup.error_xml" = "Error reading XML format.";
+"backup.error_no_snippets" = "No snippets found for export.";
+"backup.success_export_json" = "Snippets successfully exported to ";
+"backup.success_import_json" = "Snippets successfully imported.";
+"backup.error_json" = "Error reading JSON file.";
+"backup.select_xml_msg" = "Select snippets XML export file";
+
+/* Help */
+"help.problem_title" = "What problem does PasteFlow solve?";
+"help.problem_desc1" = "The standard macOS clipboard can only store a single copied entry. With every new copy action (Cmd+C), the old data is lost forever. This is highly inconvenient when working with multiple text fragments, code, images, or links.";
+"help.problem_desc2" = "PasteFlow solves this problem by saving your clipboard history in the background and providing instant access to it at any time.";
+"help.features_title" = "Key Features:";
+"help.feat_hist_title" = "Clipboard History";
+"help.feat_hist_desc" = "Stores text, images, rich text, and files. The history size is easily customized in the \"General\" tab.";
+"help.feat_prev_title" = "Intelligent Preview";
+"help.feat_prev_desc" = "Hovering over a history item opens a floating preview panel showing its full content.";
+"help.feat_group_title" = "Smart Grouping";
+"help.feat_group_desc" = "Items are automatically split into history folders (e.g., 10 or 20 items per folder) to save screen space.";
+"help.feat_snip_title" = "Snippet Library";
+"help.feat_snip_desc" = "Create templates for frequently used texts and paste them with a single click via the snippets menu.";
+"help.feat_files_title" = "Files & Images";
+"help.feat_files_desc" = "Copy and paste files and images directly from Finder or other apps. PasteFlow automatically distinguishes them.";
+"help.feat_pause_title" = "Incognito Mode";
+"help.feat_pause_desc" = "Pause the clipboard history recording to protect sensitive data like passwords.";
+"help.feat_autohide_title" = "Auto-hiding";
+"help.feat_autohide_desc" = "The popup automatically hides after 15 seconds of inactivity so it doesn't get in your way.";
+
+/* Main / Popup UI */
+"popup.history" = "History";
+"popup.snippets" = "Snippets";
+"popup.settings" = "Settings";
+"popup.quit_tooltip" = "Quit PasteFlow";
+"popup.search_history" = "Search history...";
+"popup.history_empty" = "History is empty";
+"popup.nothing_found" = "Nothing found";
+"popup.history_folder_range" = "History %d - %d";
+"popup.paste" = "Paste";
+"popup.paste_plain" = "Paste as Plain Text";
+"popup.unpin" = "Unpin";
+"popup.pin" = "Pin to Top";
+"popup.delete" = "Delete";
+"popup.search_snippets" = "Search snippets...";
+"popup.snippets_empty" = "No Snippets";
+"popup.snippets_empty_desc" = "Use the Snippet Manager in the settings window to create templates or import them from XML.";
+"popup.filter_all" = "All";
+"popup.filter_text" = "Text";
+"popup.filter_images" = "Images";
+"popup.filter_files" = "Files";
+"popup.pause_monitoring" = "Pause History (Incognito)";
+"popup.resume_monitoring" = "Resume History";
+
+/* Snippets Library */
+"snippets.untitled" = "Untitled";
+"snippets.folders" = "Folders";
+"snippets.new_folder" = "New Folder";
+"snippets.delete_folder" = "Delete Folder";
+"snippets.folders_title" = "Snippet Folders";
+"snippets.snippets_in_folder" = "Snippets in Folder";
+"snippets.delete_snippet" = "Delete Snippet";
+"snippets.new_snippet" = "New Snippet";
+"snippets.select_folder_prompt" = "Select or Create a Folder";
+"snippets.select_snippet_prompt" = "Select a Snippet to Edit";
+"snippets.snippet_name" = "Snippet Name";
+"snippets.name_placeholder" = "e.g., Greeting";
+"snippets.keyword" = "Keyword";
+"snippets.keyword_placeholder" = "e.g., ;;email";
+"snippets.insert_tag" = "Insert dynamic tag:";
+"snippets.template_text" = "Template Text";
+"snippets.live_preview" = "Live Preview";
+"snippets.empty_snippet" = "(Empty snippet)";
+"snippets.default_folder_name" = "New Folder %d";
+"snippets.default_snippet_name" = "New Snippet";
+"snippets.default_snippet_content" = "Hello {CLIPBOARD}";
+
+/* Hover preview */
+"hover.chars" = "chars";
+"hover.paste" = "Enter — paste";
+"hover.plain_text" = "Shift+Enter — plain text";
+
+/* CoreData items */
+"core.image" = "Image";
+"core.file" = "File";
+"core.files" = "%d Files (%@, ...)";
+"core.clipboard_item" = "Clipboard Item";
+
+/* MenuBar controller */
+"menu.title_preferences" = "PasteFlow Preferences";
+"menu.title_snippets" = "Snippet Manager";
+
+/* Text Assistant & Hotkeys */
+"hotkeys.text_assistant" = "Spellcheck & Punctuation assistant:";
+"hotkeys.unassigned" = "Unassigned";
+"hotkeys.clear_tooltip" = "Clear shortcut";
+"menu.text_assistant" = "Spellcheck & Punctuation...";
+"text_assistant.title" = "Spellcheck & Punctuation";
+"text_assistant.title_short" = "Spellcheck";
+"text_assistant.input_placeholder" = "Enter or paste text here...";
+"text_assistant.result_placeholder" = "Corrected text will appear here...";
+"text_assistant.check_btn" = "Check Text";
+"text_assistant.copy_btn" = "Copy Result";
+"text_assistant.paste_input_btn" = "Paste from Clipboard";
+"text_assistant.replace_active_btn" = "Replace in App";
+"text_assistant.clear_btn" = "Clear";
+"text_assistant.stats" = "%d chars • %d words • %d fixes";
+"text_assistant.hints" = "Check (↵) • Copy (⌘↵) • Click word to revert • Right-click for alternatives";
+"text_assistant.replaced_toast" = "✓ Inserted into active app!";
+"text_assistant.pref_title" = "Text Assistant Settings";
+"text_assistant.pref_behavior_label" = "Behavior of input text on closing window:";
+"text_assistant.pref_option_keep" = "Keep entered text across window calls";
+"text_assistant.pref_option_clear" = "Clear input text upon closing window (Esc)";
+"text_assistant.pref_desc" = "Select whether PasteFlow should remember previously entered text or clear it when closing the window with Esc.";
+"text_assistant.pref_alt_desc" = "💡 Hint: Right-click on any corrected word to view and select alternative suggestions from the dictionary.";
+"help.feat_text_title" = "Spellcheck & Punctuation";
+"help.feat_text_desc" = "Quick spellcheck & punctuation analysis. You can assign your custom hotkey to trigger this feature in the Hotkeys tab in Settings. 100% local checking, interactive edit reverting on click, and fast copying via Cmd+Enter.";

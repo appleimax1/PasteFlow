@@ -81,7 +81,7 @@ struct PreferencesView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("PasteFlow v1.6")
+                    Text("PasteFlow v1.7")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.secondary)
                     Text("app.smart_clipboard_manager".localized)
@@ -599,6 +599,12 @@ struct TextAssistantPrefsTab: View {
                 }
                 
                 Text("text_assistant.pref_desc".localized)
+                    .font(.system(size: 11))
+                    .foregroundColor(.secondary)
+                    .lineSpacing(3)
+                    .padding(.top, 4)
+                
+                Text("text_assistant.pref_alt_desc".localized)
                     .font(.system(size: 11))
                     .foregroundColor(.secondary)
                     .lineSpacing(3)

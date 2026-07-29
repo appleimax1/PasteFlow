@@ -1,0 +1,190 @@
+
+/* Tabs */
+"tab.general" = "Основные";
+"tab.menu" = "Меню и Вид";
+"tab.types" = "Типы данных";
+"tab.exclusions" = "Исключения";
+"tab.hotkeys" = "Горячие клавиши";
+"tab.text_assistant" = "Проверка текста";
+"tab.backup" = "Резервные копии";
+"tab.help" = "Инструкция";
+"settings" = "Настройки";
+"app.smart_clipboard_manager" = "Умный менеджер буфера обмена";
+
+/* General */
+"general.app_behavior" = "Поведение приложения";
+"general.play_sound" = "Воспроизводить звук при вставке";
+"general.launch_at_login" = "Запускать PasteFlow при входе в систему";
+"general.history_storage" = "Хранение истории буфера обмена";
+"general.max_items" = "Максимальное количество элементов:";
+"general.items_10" = "10 элементов";
+"general.items_20" = "20 элементов";
+"general.items_40" = "40 элементов";
+"general.items_50" = "50 элементов";
+"general.items_100" = "100 элементов";
+"general.items_200" = "200 элементов";
+"general.limit_desc" = "Самые старые незакреплённые записи буфера будут автоматически удаляться при превышении указанного лимита.";
+"general.data_management" = "Управление данными";
+"general.clear_history_title" = "Очистить историю буфера";
+"general.clear_history_desc" = "Удаляет все незакреплённые элементы из истории буфера обмена. Закреплённые элементы сохранятся.";
+"general.clear_history_btn" = "Очистить историю";
+"general.clear_history_confirm_title" = "Очистить историю буфера обмена?";
+"general.clear_history_confirm_desc" = "Вы уверены, что хотите удалить все незакреплённые элементы из истории буфера? Это действие нельзя будет отменить.";
+"general.clear" = "Очистить";
+"general.cancel" = "Отмена";
+"general.language" = "Выбор языка";
+"general.interface_language" = "Язык интерфейса";
+
+/* Menu */
+"menu.list_appearance" = "Оформление списка элементов";
+"menu.group_subfolders" = "Группировать элементы в подпапки:";
+"menu.group_disabled" = "Отключено (единый список)";
+"menu.group_10" = "По 10 элементов в папке";
+"menu.group_20" = "По 20 элементов в папке";
+"menu.group_30" = "По 30 элементов в папке";
+"menu.show_preview" = "Показывать всплывающую карточку предпросмотра при наведении";
+
+/* Data Types */
+"types.supported_types" = "Поддерживаемые типы данных буфера обмена";
+"types.plain_text" = "Обычный текст (Plain Text)";
+"types.rich_text" = "Форматированный текст (RTF / HTML)";
+"types.images" = "Изображения (PNG / JPEG / TIFF)";
+"types.pdf" = "Документы PDF";
+"types.files" = "Файлы и папки Finder";
+
+/* Exclusions */
+"exclusions.blacklist" = "Черный список приложений";
+"exclusions.desc" = "Скопированный контент из указанных приложений будет автоматически игнорироваться для защиты паролей и конфиденциальных данных.";
+"exclusions.bundle_placeholder" = "Идентификатор (например, com.1password.1password)";
+"exclusions.add" = "Добавить";
+
+/* Hotkeys */
+"hotkeys.global_shortcuts" = "Глобальные комбинации клавиш";
+"hotkeys.history_popup" = "История буфера обмена (всплывающее меню):";
+"hotkeys.app_settings" = "Настройки приложения (окно настроек):";
+"hotkeys.snippets_popup" = "Библиотека сниппетов (всплывающее меню):";
+"hotkeys.text_assistant" = "Проверка орфографии и пунктуации:";
+"hotkeys.unassigned" = "Не назначено";
+"hotkeys.clear_tooltip" = "Очистить сочетание";
+"hotkeys.record_desc" = "Нажмите на сочетание клавиш и зажмите нужную комбинацию на клавиатуре.";
+"hotkeys.press_keys" = "Нажмите клавиши...";
+"hotkeys.reset_tooltip" = "Сбросить на значение по умолчанию";
+
+/* Backup */
+"backup.import_xml" = "Импорт из XML";
+"backup.import_xml_desc" = "Выберите XML-файл экспорта сниппетов. Все папки и сниппеты будут автоматически добавлены в вашу библиотеку PasteFlow.";
+"backup.import_xml_btn" = "Импортировать сниппеты (XML)...";
+"backup.backup_json" = "Резервное копирование PasteFlow (JSON)";
+"backup.backup_json_desc" = "Экспортируйте библиотеку сниппетов PasteFlow в файл JSON или восстановите её из копии.";
+"backup.export_json_btn" = "Экспорт в JSON...";
+"backup.import_json_btn" = "Импорт из JSON...";
+"backup.success_xml" = "Сниппеты успешно импортированы!";
+"backup.error_xml" = "Ошибка чтения формата XML.";
+"backup.error_no_snippets" = "Сниппеты для экспорта не найдены.";
+"backup.success_export_json" = "Сниппеты успешно экспортированы в ";
+"backup.success_import_json" = "Сниппеты успешно импортированы.";
+"backup.error_json" = "Ошибка чтения файла JSON.";
+"backup.select_xml_msg" = "Выберите XML-файл экспорта сниппетов";
+
+/* Help */
+"help.problem_title" = "Какую проблему решает PasteFlow?";
+"help.problem_desc1" = "Стандартный буфер обмена macOS умеет хранить только одну скопированную запись. При каждом новом копировании (Cmd+C) старые данные бесследно стираются. Это крайне неудобно при работе с несколькими фрагментами текста, кодом, изображениями или ссылками.";
+"help.problem_desc2" = "PasteFlow решает эту проблему, сохраняя историю вашего буфера обмена в фоновом режиме и предоставляя к ней мгновенный доступ в любой момент.";
+"help.features_title" = "Ключевой функционал:";
+"help.feat_hist_title" = "История буфера обмена";
+"help.feat_hist_desc" = "Хранит тексты, изображения, форматированный текст и файлы. Размер истории легко настраивается во вкладке «Основные».";
+"help.feat_prev_title" = "Интеллектуальное превью";
+"help.feat_prev_desc" = "При наведении курсора на элемент истории открывается плавающее окно предпросмотра с полным содержимым.";
+"help.feat_group_title" = "Умная группировка";
+"help.feat_group_desc" = "Элементы автоматически разбиваются на папки истории (например, по 10 или 20 элементов) для экономии места на экране.";
+"help.feat_snip_title" = "Библиотека сниппетов";
+"help.feat_snip_desc" = "Создавайте шаблоны часто используемых текстов и вставляйте их в один клик через меню сниппетов.";
+"help.feat_files_title" = "Файлы и Картинки";
+"help.feat_files_desc" = "Копируйте и вставляйте файлы и картинки прямо из Finder или других приложений. PasteFlow автоматически различает их форматы.";
+"help.feat_pause_title" = "Режим Инкогнито";
+"help.feat_pause_desc" = "Приостановите запись истории буфера обмена для работы с паролями или конфиденциальными данными.";
+"help.feat_autohide_title" = "Автоматическое скрытие";
+"help.feat_autohide_desc" = "Окно автоматически скрывается после 15 секунд бездействия, чтобы не мешать работе.";
+
+/* Main / Popup UI */
+"popup.history" = "История";
+"popup.snippets" = "Сниппеты";
+"popup.settings" = "Настройки";
+"popup.quit_tooltip" = "Завершить PasteFlow";
+"popup.search_history" = "Поиск в истории...";
+"popup.history_empty" = "История пуста";
+"popup.nothing_found" = "Ничего не найдено";
+"popup.history_folder_range" = "История %d - %d";
+"popup.paste" = "Вставить";
+"popup.paste_plain" = "Вставить как обычный текст";
+"popup.unpin" = "Открепить";
+"popup.pin" = "Закрепить наверху";
+"popup.delete" = "Удалить";
+"popup.search_snippets" = "Поиск в сниппетах...";
+"popup.snippets_empty" = "Сниппеты отсутствуют";
+"popup.snippets_empty_desc" = "Используйте Менеджер сниппетов в окне настроек для создания шаблонов или импорта из XML.";
+"popup.filter_all" = "Все";
+"popup.filter_text" = "Текст";
+"popup.filter_images" = "Картинки";
+"popup.filter_files" = "Файлы";
+"popup.pause_monitoring" = "Приостановить запись (Инкогнито)";
+"popup.resume_monitoring" = "Возобновить запись истории";
+
+/* Snippets Library */
+"snippets.untitled" = "Без названия";
+"snippets.folders" = "Папки";
+"snippets.new_folder" = "Новая папка";
+"snippets.delete_folder" = "Удалить папку";
+"snippets.folders_title" = "Папки сниппетов";
+"snippets.snippets_in_folder" = "Сниппеты в папке";
+"snippets.delete_snippet" = "Удалить сниппет";
+"snippets.new_snippet" = "Новый сниппет";
+"snippets.select_folder_prompt" = "Выберите или создайте папку";
+"snippets.select_snippet_prompt" = "Выберите сниппет для редактирования";
+"snippets.snippet_name" = "Название сниппета";
+"snippets.name_placeholder" = "Например, Приветствие";
+"snippets.keyword" = "Ключевое слово";
+"snippets.keyword_placeholder" = "например, ;;email";
+"snippets.insert_tag" = "Вставить динамический тег:";
+"snippets.template_text" = "Текст шаблона";
+"snippets.live_preview" = "Живой предпросмотр результата";
+"snippets.empty_snippet" = "(Пустой сниппет)";
+"snippets.default_folder_name" = "Новая папка %d";
+"snippets.default_snippet_name" = "Новый сниппет";
+"snippets.default_snippet_content" = "Привет {CLIPBOARD}";
+
+/* Hover preview */
+"hover.chars" = "симв.";
+"hover.paste" = "Enter — вставить";
+"hover.plain_text" = "Shift+Enter — текст";
+
+/* CoreData items */
+"core.image" = "Изображение";
+"core.file" = "Файл";
+"core.files" = "Файлов: %d (%@, ...)";
+"core.clipboard_item" = "Элемент буфера";
+
+/* MenuBar controller & Text Assistant */
+"menu.title_preferences" = "Настройки PasteFlow";
+"menu.title_snippets" = "Менеджер сниппетов";
+"menu.text_assistant" = "Проверка орфографии и пунктуации...";
+"text_assistant.title" = "Проверка текста";
+"text_assistant.title_short" = "Проверка";
+"text_assistant.input_placeholder" = "Введите или вставьте текст для проверки...";
+"text_assistant.result_placeholder" = "Результат проверки появится здесь...";
+"text_assistant.check_btn" = "Проверить текст";
+"text_assistant.copy_btn" = "Скопировать результат";
+"text_assistant.paste_input_btn" = "Вставить из буфера";
+"text_assistant.replace_active_btn" = "Заменить в приложении";
+"text_assistant.clear_btn" = "Очистить";
+"text_assistant.stats" = "%d симв. • %d слов • %d исправлений";
+"text_assistant.hints" = "Проверка (↵) • Копировать (⌘↵) • ЛКМ по слову: отмена • ПКМ: варианты";
+"text_assistant.replaced_toast" = "✓ Текст вставлен в приложение!";
+"text_assistant.pref_title" = "Настройки проверки текста";
+"text_assistant.pref_behavior_label" = "Поведение исходного текста при закрытии окна:";
+"text_assistant.pref_option_keep" = "Сохранять заполненный текст при каждом вызове окна";
+"text_assistant.pref_option_clear" = "Очищать исходный текст при закрытии окна (через Esc)";
+"text_assistant.pref_desc" = "Выберите, должен ли PasteFlow запоминать ранее введенный текст или очищать его при закрытии окна клавишей Esc.";
+"text_assistant.pref_alt_desc" = "💡 Подсказка: Кликните правой кнопкой мыши (ПКМ) по любому исправленному слову, чтобы просмотреть и выбрать альтернативные варианты из словаря.";
+"help.feat_text_title" = "Проверка орфографии и пунктуации";
+"help.feat_text_desc" = "Быстрый анализ текста на орфографию и пунктуацию. Для запуска вы можете назначить свои горячие клавиши в разделе «Горячие клавиши» в настройках. 100% локальная проверка, интерактивная отмена правок по клику и быстрое копирование по Cmd+Enter.";
